@@ -131,17 +131,18 @@ await seedCollection("works", [
 ]);
 
 // ---------- Partners (Figma "Haqqımızda" logo strip) ----------
-const partners: [string, string][] = [
-  ["Mado", "74f076837ebd51b2aa49f0bf81ba6215b94bf1bd"],
-  ["iSpace", "0b294084cc28ba8c8dc1fd11480dcae651045e68"],
-  ["Starbucks", "a2d51a804c94f222b2ca760e0aaad139831eb619"],
-  ["Baku Electronics", "f6d08a0e8483613b3a104da2e03205f15adf2cfa"],
-  ["Passage 1901", "56223574c43c9244796ef2aa1015512651cb382b"],
-  ["Peynirci Baba", "f930c30856f3c677274ee8d41a15d5ee0781b5aa"],
+// Name, image ref, logo height and width in Figma (desktop px).
+const partners: [string, string, string, string][] = [
+  ["Mado", "74f076837ebd51b2aa49f0bf81ba6215b94bf1bd", "34", "120"],
+  ["iSpace", "0b294084cc28ba8c8dc1fd11480dcae651045e68", "58", "140"],
+  ["Starbucks", "a2d51a804c94f222b2ca760e0aaad139831eb619", "82", "85"],
+  ["Baku Electronics", "f6d08a0e8483613b3a104da2e03205f15adf2cfa", "73", "208"],
+  ["Passage 1901", "56223574c43c9244796ef2aa1015512651cb382b", "81", "124"],
+  ["Peynirci Baba", "f930c30856f3c677274ee8d41a15d5ee0781b5aa", "49", "195"],
 ];
 await seedCollection(
   "partners",
-  await Promise.all(partners.map(async ([name, ref]) => ({ title: t(name), cover: await fig(ref, `${name} loqosu`) }))),
+  await Promise.all(partners.map(async ([name, ref, height, width]) => ({ title: t(name), cover: await fig(ref, `${name} loqosu`), height, width }))),
 );
 
 // ---------- Studios and decors (Figma "Studiyalar", "Dekorlar", "Rezervasiya et") ----------

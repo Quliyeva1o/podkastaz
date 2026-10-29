@@ -7,12 +7,20 @@ test.skip(!hasAdmin, "ADMIN_EMAIL / ADMIN_PASSWORD not set");
 test("admin: edit a section and see it on the site", async ({ page }) => {
   await signIn(page);
   await page.goto("/admin/pages/contact/header");
-  await page.getByRole("textbox").nth(1).fill("E2E alt mətn");
+  const subtitle = page.getByRole("textbox").nth(1);
+  const original = await subtitle.inputValue();
+  await subtitle.fill("E2E alt mətn");
   await page.getByRole("button", { name: /yadda saxla/i }).first().click();
   await expect(page.getByText(/yadda saxlanıldı/i)).toBeVisible();
 
   await page.goto("/elaqe");
   await expect(page.getByText("E2E alt mətn")).toBeVisible();
+
+  // Put the seeded text back so the site keeps matching the design.
+  await page.goto("/admin/pages/contact/header");
+  await page.getByRole("textbox").nth(1).fill(original);
+  await page.getByRole("button", { name: /yadda saxla/i }).first().click();
+  await expect(page.getByText(/yadda saxlanıldı/i)).toBeVisible();
 });
 
 test("admin: seeded collections are listed and a package price must be a number", async ({ page }) => {

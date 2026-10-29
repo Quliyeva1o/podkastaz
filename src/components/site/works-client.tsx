@@ -5,12 +5,35 @@ import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { cx } from "./ui";
 
-export type Labels = { play: string; prev: string; next: string; close: string };
+export type Labels = {
+  play: string;
+  prev: string;
+  next: string;
+  close: string;
+};
 export type Photo = { id: string; thumb: ReactNode; full: string; alt: string };
-export type Video = { id: string; thumb: ReactNode; title: string; youtube?: string; mp4?: string };
+export type Video = {
+  id: string;
+  thumb: ReactNode;
+  title: string;
+  youtube?: string;
+  mp4?: string;
+};
 
 /** Full-screen viewer shared by photos and videos: Escape / arrows / close button. */
-function Viewer({ labels, onClose, onPrev, onNext, children }: { labels: Labels; onClose: () => void; onPrev?: () => void; onNext?: () => void; children: ReactNode }) {
+function Viewer({
+  labels,
+  onClose,
+  onPrev,
+  onNext,
+  children,
+}: {
+  labels: Labels;
+  onClose: () => void;
+  onPrev?: () => void;
+  onNext?: () => void;
+  children: ReactNode;
+}) {
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -26,22 +49,47 @@ function Viewer({ labels, onClose, onPrev, onNext, children }: { labels: Labels;
     };
   }, [onClose, onPrev, onNext]);
 
-  const round = "flex size-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20";
+  const round =
+    "flex size-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20";
   return createPortal(
-    <div role="dialog" aria-modal="true" className="menu-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 desktop:p-15" onClick={onClose}>
-      <div className="relative flex max-h-full max-w-full items-center justify-center" onClick={(e) => e.stopPropagation()}>
+    <div
+      role="dialog"
+      aria-modal="true"
+      className="menu-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 desktop:p-15"
+      onClick={onClose}
+    >
+      <div
+        className="relative flex max-h-full max-w-full items-center justify-center"
+        onClick={(e) => e.stopPropagation()}
+      >
         {children}
       </div>
-      <button type="button" autoFocus aria-label={labels.close} onClick={onClose} className={cx(round, "absolute top-4 right-4")}>
+      <button
+        type="button"
+        autoFocus
+        aria-label={labels.close}
+        onClick={onClose}
+        className={cx(round, "absolute top-4 right-4")}
+      >
         <X aria-hidden className="size-6" />
       </button>
       {onPrev && (
-        <button type="button" aria-label={labels.prev} onClick={(e) => (e.stopPropagation(), onPrev())} className={cx(round, "absolute top-1/2 left-4 -translate-y-1/2")}>
+        <button
+          type="button"
+          aria-label={labels.prev}
+          onClick={(e) => (e.stopPropagation(), onPrev())}
+          className={cx(round, "absolute top-1/2 left-4 -translate-y-1/2")}
+        >
           <CaretLeft aria-hidden className="size-6" />
         </button>
       )}
       {onNext && (
-        <button type="button" aria-label={labels.next} onClick={(e) => (e.stopPropagation(), onNext())} className={cx(round, "absolute top-1/2 right-4 -translate-y-1/2")}>
+        <button
+          type="button"
+          aria-label={labels.next}
+          onClick={(e) => (e.stopPropagation(), onNext())}
+          className={cx(round, "absolute top-1/2 right-4 -translate-y-1/2")}
+        >
           <CaretRight aria-hidden className="size-6" />
         </button>
       )}
@@ -52,27 +100,73 @@ function Viewer({ labels, onClose, onPrev, onNext, children }: { labels: Labels;
 
 const wrap = (i: number, n: number) => (i + n) % n;
 
+/**
+ * Figma's photo box heights (420 px columns on desktop, 288 px list on mobile), in page order and
+ * repeated: the masonry keeps the designed rhythm whatever photos are uploaded (each photo is
+ * cropped to its box). The three desktop columns have equal sums, so the columns break as in Figma.
+ */
+const desktopHeights = [
+  376, 423, 535.6, 376, 535.6, 376, 553.4, 373.6, 484, 268.8, 484, 458.5, 273.9,
+  444.8, 560, 310.8, 560, 472.8,
+];
+const mobileHeights = [
+  293.3, 232.3, 346.9, 313.3, 264.2, 205.6, 364.1, 256.4, 334.4, 268.8, 263.5,
+  337.4, 203.9, 299.9, 324.9, 189.2, 365.8, 308.2,
+];
+
 /** Photo masonry (Figma: 3 columns × 420, gap 30, r10; one column on mobile) + lightbox on click. */
-export function PhotoGallery({ photos, labels }: { photos: Photo[]; labels: Labels }) {
+export function PhotoGallery({
+  photos,
+  labels,
+}: {
+  photos: Photo[];
+  labels: Labels;
+}) {
   const [open, setOpen] = useState<number | null>(null);
   const close = useCallback(() => setOpen(null), []);
-  const prev = useCallback(() => setOpen((i) => (i === null ? i : wrap(i - 1, photos.length))), [photos.length]);
-  const next = useCallback(() => setOpen((i) => (i === null ? i : wrap(i + 1, photos.length))), [photos.length]);
+  const prev = useCallback(
+    () => setOpen((i) => (i === null ? i : wrap(i - 1, photos.length))),
+    [photos.length],
+  );
+  const next = useCallback(
+    () => setOpen((i) => (i === null ? i : wrap(i + 1, photos.length))),
+    [photos.length],
+  );
   return (
     <>
       <ul className="columns-1 gap-7.5 tablet:columns-2 desktop:columns-3">
         {photos.map((p, i) => (
           <li key={p.id} className="mb-7.5 break-inside-avoid">
-            <button type="button" onClick={() => setOpen(i)} aria-label={p.alt} className="block w-full overflow-hidden rounded-[0.625rem] bg-silver">
+            <button
+              type="button"
+              onClick={() => setOpen(i)}
+              aria-label={p.alt}
+              style={
+                {
+                  "--ar-m": `288 / ${mobileHeights[i % mobileHeights.length]}`,
+                  "--ar-d": `420 / ${desktopHeights[i % desktopHeights.length]}`,
+                } as React.CSSProperties
+              }
+              className="relative block aspect-(--ar-m) w-full overflow-hidden rounded-[0.625rem] bg-silver desktop:aspect-(--ar-d)"
+            >
               {p.thumb}
             </button>
           </li>
         ))}
       </ul>
       {open !== null && (
-        <Viewer labels={labels} onClose={close} onPrev={photos.length > 1 ? prev : undefined} onNext={photos.length > 1 ? next : undefined}>
+        <Viewer
+          labels={labels}
+          onClose={close}
+          onPrev={photos.length > 1 ? prev : undefined}
+          onNext={photos.length > 1 ? next : undefined}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element -- pre-generated large rendition */}
-          <img src={photos[open].full} alt={photos[open].alt} className="max-h-[calc(100dvh-8rem)] max-w-full rounded-[0.625rem] object-contain" />
+          <img
+            src={photos[open].full}
+            alt={photos[open].alt}
+            className="max-h-[calc(100dvh-8rem)] max-w-full rounded-[0.625rem] object-contain"
+          />
         </Viewer>
       )}
     </>
@@ -90,7 +184,15 @@ function VideoPlayer({ video }: { video: Video }) {
       />
     );
   }
-  return <video src={video.mp4} controls autoPlay playsInline className="max-h-[calc(100dvh-8rem)] max-w-full rounded-[0.625rem]" />;
+  return (
+    <video
+      src={video.mp4}
+      controls
+      autoPlay
+      playsInline
+      className="max-h-[calc(100dvh-8rem)] max-w-full rounded-[0.625rem]"
+    />
+  );
 }
 
 function PlayBadge({ size }: { size: "sm" | "lg" }) {
@@ -102,7 +204,10 @@ function PlayBadge({ size }: { size: "sm" | "lg" }) {
         size === "lg" ? "size-15 desktop:backdrop-blur-[3.125rem]" : "size-8",
       )}
     >
-      <Play weight="fill" className={size === "lg" ? "size-6" : "size-[0.7rem]"} />
+      <Play
+        weight="fill"
+        className={size === "lg" ? "size-6" : "size-[0.7rem]"}
+      />
     </span>
   );
 }
@@ -112,7 +217,13 @@ function PlayBadge({ size }: { size: "sm" | "lg" }) {
  * the middle (640×432) with the neighbours smaller on both sides, faded into the page, orange
  * arrows at the edges. Mobile: the videos in one column (288×195). Play opens the video.
  */
-export function VideoGallery({ videos, labels }: { videos: Video[]; labels: Labels }) {
+export function VideoGallery({
+  videos,
+  labels,
+}: {
+  videos: Video[];
+  labels: Labels;
+}) {
   const [current, setCurrent] = useState(0);
   const [playing, setPlaying] = useState<number | null>(null);
   const n = videos.length;
@@ -125,7 +236,10 @@ export function VideoGallery({ videos, labels }: { videos: Video[]; labels: Labe
       type="button"
       onClick={() => (playable(v) ? setPlaying(i) : undefined)}
       aria-label={playable(v) ? `${labels.play}: ${v.title}` : v.title}
-      className={cx("relative block overflow-hidden bg-silver after:absolute after:inset-0 after:bg-black/20", className)}
+      className={cx(
+        "relative block overflow-hidden bg-silver after:absolute after:inset-0 after:bg-black/20",
+        className,
+      )}
     >
       {v.thumb}
       {playable(v) && <PlayBadge size={size} />}
@@ -137,14 +251,20 @@ export function VideoGallery({ videos, labels }: { videos: Video[]; labels: Labe
     return (
       <div
         key={`${offset}-${videos[i].id}`}
-        className={cx("works-side absolute top-[7.0625rem] w-[23.8rem]", offset < 0 ? "right-[calc(50%+22.0625rem)]" : "left-[calc(50%+22.0625rem)]")}
+        // Figma: the left neighbour is 381.5 px wide, the right one 408.3 px, both 277.5 px high.
+        className={cx(
+          "works-side absolute top-[7.0625rem]",
+          offset < 0
+            ? "right-[calc(50%+22.0625rem)] w-[23.84rem]"
+            : "left-[calc(50%+22.0625rem)] w-[25.52rem]",
+        )}
       >
         <button
           type="button"
           tabIndex={-1}
           aria-hidden
           onClick={() => setCurrent(i)}
-          className="relative block aspect-[381.5/277.5] w-full overflow-hidden rounded-[0.625rem] bg-silver"
+          className="relative block h-[17.34rem] w-full overflow-hidden rounded-[0.625rem] bg-silver"
         >
           {videos[i].thumb}
         </button>
@@ -152,31 +272,58 @@ export function VideoGallery({ videos, labels }: { videos: Video[]; labels: Labe
     );
   };
 
-  const arrow = "flex size-7.5 items-center justify-center rounded-full bg-primary-600 text-white hover:bg-primary-700";
+  const arrow =
+    "flex size-7.5 items-center justify-center rounded-full bg-primary-600 text-white hover:bg-primary-700";
   return (
     <>
       {/* Mobile and tablet: a plain list. */}
       <ul className="flex flex-col gap-[1.3125rem] desktop:hidden">
         {videos.map((v, i) => (
-          <li key={v.id}>{tile(v, i, "sm", "aspect-[288/194.7] w-full rounded-[0.28rem]")}</li>
+          <li key={v.id}>
+            {tile(v, i, "sm", "aspect-[288/194.7] w-full rounded-[0.28rem]")}
+          </li>
         ))}
       </ul>
 
       {/* Desktop carousel, full bleed. */}
       <div className="works-carousel relative -mx-15 hidden h-[27rem] overflow-hidden desktop:block">
         {n > 1 && side(-1)}
-        <div key={videos[current].id} className="works-current absolute top-0 left-1/2 w-[40rem] -translate-x-1/2">
-          {tile(videos[current], current, "lg", "aspect-[640/432.6] w-full rounded-[0.625rem]")}
+        <div
+          key={videos[current].id}
+          className="works-current absolute top-0 left-1/2 w-[40rem] -translate-x-1/2"
+        >
+          {tile(
+            videos[current],
+            current,
+            "lg",
+            "aspect-[640/432.6] w-full rounded-[0.625rem]",
+          )}
         </div>
         {n > 1 && side(1)}
-        <span aria-hidden className="pointer-events-none absolute inset-y-0 left-0 w-[15.9375rem] bg-linear-to-r from-white to-white/0" />
-        <span aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-[15.9375rem] bg-linear-to-l from-white to-white/0" />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 w-[15.9375rem] bg-linear-to-r from-white to-white/0"
+        />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 w-[15.9375rem] bg-linear-to-l from-white to-white/0"
+        />
         {n > 1 && (
           <div className="absolute inset-x-15 top-[14.8rem] flex justify-between">
-            <button type="button" aria-label={labels.prev} onClick={() => setCurrent((c) => wrap(c - 1, n))} className={arrow}>
+            <button
+              type="button"
+              aria-label={labels.prev}
+              onClick={() => setCurrent((c) => wrap(c - 1, n))}
+              className={arrow}
+            >
               <CaretLeft aria-hidden weight="bold" className="size-[1.2rem]" />
             </button>
-            <button type="button" aria-label={labels.next} onClick={() => setCurrent((c) => wrap(c + 1, n))} className={arrow}>
+            <button
+              type="button"
+              aria-label={labels.next}
+              onClick={() => setCurrent((c) => wrap(c + 1, n))}
+              className={arrow}
+            >
               <CaretRight aria-hidden weight="bold" className="size-[1.2rem]" />
             </button>
           </div>

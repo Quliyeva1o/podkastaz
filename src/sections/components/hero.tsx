@@ -32,10 +32,10 @@ export function HeroSection({ data, lang, media, contacts }: SectionProps<HeroDa
           </h1>
           <p className="text-16 leading-[1.5] desktop:text-24 desktop:leading-none">{tx(data.subtitle, lang)}</p>
           <div className="flex gap-2.5 desktop:gap-5">
-            <ButtonLink href={linkHref(data.primary, lang)} variant="white" className="h-10 flex-1 desktop:h-12 desktop:w-[12.1875rem] desktop:flex-none">
+            <ButtonLink href={linkHref(data.primary, lang)} variant="white" className="h-10 flex-1 text-14! leading-[1.5]! desktop:h-12 desktop:w-[12.1875rem] desktop:flex-none desktop:text-16!">
               {tx(data.primary.label, lang)}
             </ButtonLink>
-            <ButtonLink href={linkHref(data.secondary, lang)} variant="glass" className="h-10 flex-1 desktop:h-12 desktop:w-[12.1875rem] desktop:flex-none">
+            <ButtonLink href={linkHref(data.secondary, lang)} variant="glass" className="h-10 flex-1 text-14! leading-[1.5]! desktop:h-12 desktop:w-[12.1875rem] desktop:flex-none desktop:text-16!">
               {tx(data.secondary.label, lang)}
             </ButtonLink>
           </div>

@@ -83,7 +83,13 @@ export const collections = {
     label: "Tərəfdaşlar",
     itemLabel: "Tərəfdaş",
     routes: ["about"],
-    fields: [text("title", "Şirkət adı"), image("cover", "Loqo"), plain("url", "Sayt (istəyə bağlı)")],
+    fields: [
+      text("title", "Şirkət adı"),
+      image("cover", "Loqo"),
+      plain("height", "Loqonun hündürlüyü (px, desktop; boşdursa bölmənin ümumi ölçüsü)", "56"),
+      plain("width", "Loqonun eni (px, desktop; boşdursa şəklin öz nisbəti)", "120"),
+      plain("url", "Sayt (istəyə bağlı)"),
+    ],
   },
 } as const satisfies Record<string, CollectionDefinition>;
 
@@ -98,4 +104,4 @@ export type ServiceData = { title: L; description: L; cover: ImageRef; includes:
 export type PackageData = { title: L; audience: L; price: string; highlighted: boolean; features: { text: L }[] };
 export type AddonData = { title: L; price: string; customPriceLabel: L };
 export type WorkData = { title: L; kind: "photo" | "video"; cover: ImageRef; youtube: string };
-export type PartnerData = { title: L; cover: ImageRef; url: string };
+export type PartnerData = { title: L; cover: ImageRef; height: string; width: string; url: string };

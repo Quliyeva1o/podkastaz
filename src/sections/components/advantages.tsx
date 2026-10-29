@@ -27,7 +27,7 @@ export function AdvantagesSection({ data, lang, media, variant }: SectionProps<A
   return (
     <section data-section="advantages" className="container-page px-4 pt-[5.625rem] desktop:px-15 desktop:pt-25">
       {title && (
-        <h2 className="mb-6 text-center text-24 leading-[1.05] font-semibold tracking-tight desktop:mb-10 desktop:text-32">{title}</h2>
+        <h2 className="mb-7.5 text-center text-20 leading-[1.32] font-semibold tracking-tight desktop:mb-10 desktop:text-32 desktop:leading-[1.05]">{title}</h2>
       )}
       <ul className="grid grid-cols-1 gap-6 tablet:grid-cols-2 desktop:grid-cols-4 desktop:gap-[1.8125rem]">
         {data.items.map((item, i) => {

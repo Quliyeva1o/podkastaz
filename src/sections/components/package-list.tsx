@@ -21,7 +21,7 @@ export async function PackageListSection({ data, lang }: SectionProps<PackageLis
       <ul className="grid grid-cols-1 gap-7.5 tablet:grid-cols-2 desktop:grid-cols-3">
         {packages.map((p) => {
           const card = (
-            <div className="flex h-full flex-col gap-8 rounded-[0.625rem] border border-neutral-200 bg-white p-5">
+            <div className="flex h-full flex-col gap-8 rounded-[0.625rem] border border-neutral-200 bg-white p-[1.1875rem]">
               <div className="flex flex-col gap-5 desktop:gap-8">
                 <div className="flex flex-col gap-5 desktop:gap-8">
                   <div className="flex flex-col gap-2 desktop:gap-3">
@@ -48,7 +48,7 @@ export async function PackageListSection({ data, lang }: SectionProps<PackageLis
             </div>
           );
           return (
-            <li key={p.id} className={cx(p.data.highlighted ? "desktop:-mx-1 desktop:-mb-1" : "tablet:pt-[2.1875rem]")}>
+            <li key={p.id} className={cx(p.data.highlighted ? "mt-3 tablet:mt-0 desktop:-mx-1 desktop:-mb-1" : "tablet:pt-[2.1875rem]")}>
               {p.data.highlighted ? (
                 // Gradient frame: 1px on mobile, 4px on desktop (Figma stroke outside the card) + the tab on top;
                 // the other cards start below the tab, so all cards are as tall as the tallest one.
@@ -57,7 +57,7 @@ export async function PackageListSection({ data, lang }: SectionProps<PackageLis
                     <Sparkle aria-hidden weight="duotone" className="size-[1.375rem]" />
                     {tx(data.highlightLabel, lang)}
                   </p>
-                  <div className="flex-1 [&>div]:border-0">{card}</div>
+                  <div className="flex-1 [&>div]:border-0 [&>div]:p-5">{card}</div>
                 </div>
               ) : (
                 card
@@ -68,12 +68,12 @@ export async function PackageListSection({ data, lang }: SectionProps<PackageLis
       </ul>
 
       {addons.length > 0 && (
-        <div className="flex flex-col gap-5 rounded-[0.625rem] border border-neutral-300 bg-white p-5 desktop:gap-6">
-          <h2 className="text-18 leading-[1.5] font-semibold tracking-tight desktop:text-center desktop:text-20">{tx(data.addonsTitle, lang)}</h2>
+        <div className="flex flex-col gap-5 rounded-[0.625rem] border border-neutral-300 bg-white p-[1.1875rem] desktop:gap-6">
+          <h2 className="text-18 leading-[1.37] font-semibold tracking-tight desktop:text-center desktop:text-20 desktop:leading-[1.23]">{tx(data.addonsTitle, lang)}</h2>
           <ul className="flex flex-col gap-6 desktop:grid desktop:grid-flow-col desktop:auto-cols-fr desktop:gap-12.5">
             {addons.map((a) => (
               <li key={a.id} className="flex flex-col gap-2.5">
-                <span className="text-16 leading-[1.5] tracking-tight">{tx(a.data.title, lang)}</span>
+                <span className="text-16 leading-[1.5] tracking-tight desktop:whitespace-nowrap">{tx(a.data.title, lang)}</span>
                 <span className="flex items-end gap-1.5 text-primary-600">
                   {a.data.price ? (
                     <>

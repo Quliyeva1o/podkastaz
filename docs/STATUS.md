@@ -232,6 +232,20 @@ and a GitHub repo with the code (nothing is committed yet).
   (legal name, postcode, map coordinates), about draft, studio names "Studiya 1–3" and empty
   descriptions, default opening hours and booking rules, decor descriptions, no YouTube links.
 
+## Figma pass (2026-10-29, deploy paused by the client)
+
+- `node tests/visual/figma-diff.mjs desktop|mobile [page…]` (prod server on :3100): every text
+  and image of the 12 desktop + 12 mobile frames against the page — position, size, font,
+  line height, spacing, colour, radius, opacity. Reads `design/figma-cache/file.json`.
+- Fixed: mobile button sizes, disabled button colours, partner logos (sizes, crop, 50% grey —
+  the class was never generated —, static row on desktop), bordered-card paddings, PRO tab,
+  add-on line wrap, service card height, contact status spacing, legal pages left-aligned,
+  works masonry heights, carousel widths, mobile advantages heading, package-request gap,
+  booking "Studiya" label hidden on mobile. Partners: admin has height/width per logo.
+- The admin E2E test now puts the contact subtitle back after editing it.
+- Left on purpose: Figma lorem / sample names and emails, seeded draft texts, 3 studios
+  (Figma 2), H1 line height 80 vs 84 (same box), under 5 px rounding.
+
 ## Open questions for the client (PLAN.md §17)
 
 1. Domain: podkast.az (logo) or podcast.az (©)?

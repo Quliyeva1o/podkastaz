@@ -150,7 +150,8 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
           <h2 className={heading}>{labels.detailsTitle}</h2>
 
           <fieldset className="flex flex-col gap-4">
-            <legend className={cx(groupTitle, "mb-4")}>{labels.studioLabel}</legend>
+            {/* Figma mobile has no "Studiya" label above the cards (screen readers still get it). */}
+            <legend className={cx(groupTitle, "sr-only mb-4 desktop:not-sr-only")}>{labels.studioLabel}</legend>
             <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2">
               {studios.map((s) => (
                 <label key={s.slug} className={cx(card, "items-start", studio === s.slug ? "border-primary-600" : "border-neutral-200 hover:border-neutral-400")}>
@@ -307,7 +308,7 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
             <button
               type="submit"
               disabled={pending || !accuracy || !terms}
-              className={buttonClass("primary", "h-10 w-full disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-white")}
+              className={buttonClass("primary", "h-10 w-full disabled:cursor-not-allowed disabled:bg-neutral-100 disabled:text-neutral-300")}
             >
               {labels.submit}
             </button>

@@ -13,10 +13,10 @@ const buttonVariants: Record<ButtonVariant, string> = {
   outline: "border border-neutral-300 text-primary-600 hover:border-primary-600",
 };
 
-/** Figma "Button": 6px radius, 8/20 padding, Inter 600 (14/21 on mobile, 16/24 on desktop). */
+/** Figma "Button": 6px radius, 8/20 padding, Inter 600 16/24 (the home buttons are 14/21 on mobile). */
 export const buttonClass = (variant: ButtonVariant = "primary", className?: string) =>
   cx(
-    "inline-flex items-center justify-center gap-2 rounded-[0.375rem] px-2 py-2 text-14 whitespace-nowrap desktop:px-5 leading-[1.5] font-semibold transition-colors desktop:text-16",
+    "inline-flex items-center justify-center gap-2 rounded-[0.375rem] px-2 py-2 text-16 leading-[1.5] font-semibold whitespace-nowrap transition-colors desktop:px-5",
     buttonVariants[variant],
     className,
   );

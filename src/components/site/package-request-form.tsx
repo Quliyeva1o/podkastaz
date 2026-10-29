@@ -156,7 +156,7 @@ export function PackageRequestForm({ packages, addons, labels, lang, links, init
             <button
               type="submit"
               disabled={pending || !accuracy || !terms || !pkg}
-              className={buttonClass("primary", "h-10 w-full disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-white")}
+              className={buttonClass("primary", "h-10 w-full disabled:cursor-not-allowed disabled:bg-neutral-100 disabled:text-neutral-300")}
             >
               {labels.submit}
             </button>

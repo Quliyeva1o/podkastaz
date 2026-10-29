@@ -90,7 +90,7 @@ export async function WorksGallerySection({ data, lang, page }: SectionProps<Wor
                       sizes="(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 100vw"
                       priority={i < 3}
                       alt=""
-                      className="h-auto w-full"
+                      className="absolute inset-0 size-full object-cover"
                     />
                   ),
                 };

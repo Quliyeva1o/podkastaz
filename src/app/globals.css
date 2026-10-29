@@ -170,7 +170,8 @@ main > * + * {
   animation: menu-rise 0.35s cubic-bezier(0.16, 1, 0.3, 1) calc(0.05s + var(--i, 0) * 0.03s) backwards;
 }
 
-/* Partner logos: endless strip (two copies, moves by one copy), faded out at both edges. */
+/* Partner logos: faded out at both edges (Figma: 270 px white gradients over the row); on mobile an
+   endless strip (two copies, moves by one copy), on desktop a still row. */
 @keyframes partners {
   to {
     transform: translateX(calc(-50% - var(--gap) / 2));
@@ -185,7 +186,7 @@ main > * + * {
 }
 @media (min-width: 1024px) {
   .partners-track {
-    --gap: 5.6rem;
+    animation: none;
   }
 }
 .partners-marquee:hover .partners-track {

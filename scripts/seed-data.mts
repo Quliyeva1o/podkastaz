@@ -306,7 +306,7 @@ export const sectionData: Record<string, { type: SectionType; data: Record<strin
       cancelledBody: t("Salam, {ad}!\n\n{tarix}, {saat} üçün {studiya} rezervasiyanız ləğv edildi. Suallarınız olarsa, bizə yazın."),
     },
   },
-  "terms.header": header("İstifadəçi qaydaları", "", "", left),
+  "terms.header": header("İstifadəçi qaydaları", "", "", { mobile: "left", desktop: "left" }),
   "terms.content": {
     type: "legal",
     data: {
@@ -318,7 +318,7 @@ export const sectionData: Record<string, { type: SectionType; data: Record<strin
       ],
     },
   },
-  "privacy.header": header("Məxfilik siyasəti", "", "", left),
+  "privacy.header": header("Məxfilik siyasəti", "", "", { mobile: "left", desktop: "left" }),
   "privacy.content": {
     type: "legal",
     data: {
