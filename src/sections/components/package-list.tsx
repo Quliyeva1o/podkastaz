@@ -48,12 +48,12 @@ export async function PackageListSection({ data, lang }: SectionProps<PackageLis
             </div>
           );
           return (
-            <li key={p.id} className={cx(p.data.highlighted ? "mt-3 tablet:mt-0 desktop:-mx-1 desktop:-mb-1" : "tablet:pt-[2.1875rem]")}>
+            <li key={p.id} className={cx(p.data.highlighted ? "-mx-px -mb-px desktop:-mx-0.5 desktop:-mt-[0.8125rem] desktop:-mb-0.5" : "tablet:pt-12 desktop:pt-[2.1875rem]")}>
               {p.data.highlighted ? (
-                // Gradient frame: 1px on mobile, 4px on desktop (Figma stroke outside the card) + the tab on top;
-                // the other cards start below the tab, so all cards are as tall as the tallest one.
-                <div className="flex h-full flex-col rounded-[0.6875rem] bg-linear-to-br from-[#fd5f04] to-[#dd2501] p-px pt-0 desktop:rounded-[0.875rem] desktop:p-1 desktop:pt-0">
-                  <p className="flex h-[2.25rem] items-center justify-center gap-1.5 text-16 leading-[1.5] font-semibold tracking-tight text-white desktop:h-[2.1875rem]">
+                // Gradient frame outside the card (Figma stroke: 1px mobile, 2px desktop, 48px on top for the tab);
+                // the other cards start below the tab (on desktop Figma lets the tab stick out 13px above the row).
+                <div className="flex h-full flex-col rounded-[0.6875rem] bg-linear-to-br from-[#fd5f04] to-[#dd2501] p-px pt-0 desktop:rounded-[0.75rem] desktop:p-0.5 desktop:pt-0">
+                  <p className="flex h-12 items-center justify-center gap-1.5 text-16 leading-[1.5] font-semibold tracking-tight text-white">
                     <Sparkle aria-hidden weight="duotone" className="size-[1.375rem]" />
                     {tx(data.highlightLabel, lang)}
                   </p>
