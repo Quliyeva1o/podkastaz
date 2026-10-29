@@ -1,0 +1,299 @@
+pages: [ 'Page 1 (0:1) children=34', 'Page 2 (110:178) children=22' ]
+unique image refs: 78
+c180fb7833d1daefa0b896605863a278cd98ec4c 
+    Page 1/Home :: Home [285:697] 1440x900 FILL
+    Page 1/Mob/Home Page :: Home [474:1218] 320x325 STRETCH
+    Page 2/Home :: Home [206:371] 1440x900 FILL 
+2f8c019c3a83b65c326b023a6c5f8216ee552701 
+    Page 1/Home :: Logotype-White 2 [214:830] 183x35 STRETCH
+    Page 1/Mob/Home Page :: Logotype-White 2 [474:1252] 138x26 STRETCH
+    Page 2/Logotype-White 1 :: Logotype-White 1 [110:1264] 597x330 FILL
+    Page 2/Frame 36 :: Logotype-White 2 [110:1340] 123x23 STRETCH
+    Page 2/Frame 38 :: Logotype-White 2 [110:1363] 127x24 STRETCH
+    Page 2/Frame 40 :: Logotype-White 2 [110:1385] 127x24 STRETCH 
+    …+7
+72153309ad7fde19b0147f4a24d46c2594fefcd7 
+    Page 1/Menu :: Frame 1410104243 [214:866] 308x313 FILL
+    Page 1/Xidmətlər :: Frame 1410104243 [576:1041] 308x253 FILL
+    Page 1/Xidmətlər :: Frame 1410104245 [576:1055] 308x252 FILL
+    Page 1/Haqqımızda :: Frame 1410104243 [432:847] 308x253 FILL
+    Page 1/Haqqımızda :: Frame 1410104245 [432:861] 308x252 FILL
+    Page 1/Mob/Menu :: Frame 1410104243 [479:640] 292x67 FILL 
+    …+10
+0077c879dd2a31b6fdf41bc579073ce8e0aa771d 
+    Page 1/Paketlər :: Logotype-White 2 [I221:1226;214:1050] 183x35 STRETCH
+    Page 1/Işlərimiz / Şəkillər :: Logotype-White 2 [I282:322;214:1050] 183x35 STRETCH
+    Page 1/Işlərimiz / Videolar :: Logotype-White 2 [I285:571;214:1050] 183x35 STRETCH
+    Page 1/Studiyalar :: Logotype-White 2 [I307:411;214:1050] 183x35 STRETCH
+    Page 1/Xidmətlər :: Logotype-White 2 [I351:1891;214:1050] 183x35 STRETCH
+    Page 1/Haqqımızda :: Logotype-White 2 [I423:600;214:1050] 183x35 STRETCH 
+    …+27
+0dca5d648a3379b1c315dcf925875d4e7f39e0a1 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 8 [285:548] 420x376 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 8 [507:809] 288x293 FILL 
+823dd7cf2fa1976e039dd4da5982d3c7d5bbde6d 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 9 [285:549] 420x423 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 9 [507:810] 288x232 FILL 
+26ebf86c58ae8aa510ae051ba2ff409c37a81ffe 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 10 [285:559] 420x536 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 10 [507:811] 288x347 FILL 
+42eea70b7b0a63f73d6ee9d9b94327b96ed1f010 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 11 [285:560] 420x376 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 11 [507:812] 288x313 FILL 
+ddf33c7f9d1775c0669feb6f3d29698cfff335a3 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 12 [285:565] 420x536 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 12 [507:813] 288x264 FILL 
+240a26856942fc1d1e422af88eaea9beec9d0dd8 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 13 [285:568] 420x376 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 13 [507:814] 288x206 FILL 
+458f2b487dfb4fbaf5bf238d819b0bec75c5f9c5 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 9 [285:551] 420x553 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 9 [507:816] 288x364 FILL 
+b8c953524ef84fa3091f3476c53a9a963ec15003 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 10 [285:552] 420x374 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 10 [507:817] 288x256 FILL 
+5150adf6acd159cad8891f1deaab67c07822a3cf 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 11 [285:557] 420x484 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 11 [507:818] 288x334 FILL 
+95258736cc08a37c6e3a9febd9734adbca316a4e 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 12 [285:561] 420x269 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 12 [507:819] 288x269 FILL 
+b96d1496b00677319425dfd14be3d1cc2d229df8 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 13 [285:562] 420x484 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 13 [507:820] 288x263 FILL 
+19ee9be19b3d26e9b96b23136d5501a1e272eacb 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 14 [285:566] 420x459 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 14 [507:821] 288x337 FILL 
+790cd39b6422bb19cbb6e5a9c51eedbee1bdf564 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 10 [285:554] 420x274 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 10 [507:823] 288x204 FILL 
+f144dc83a61645b0c0c546a034c01785a44db4a4 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 11 [285:555] 420x445 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 11 [507:824] 288x300 FILL 
+635e2a2c7f58aa340b32b1c447dc6f957aaca35e 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 12 [285:558] 420x560 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 12 [507:825] 288x325 FILL 
+408646e06a7a780b259c5598c5a8e5a6ca98e25d 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 13 [285:563] 420x311 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 13 [507:826] 288x189 FILL 
+901958392892c302f706d4912f77338555d5384e 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 14 [285:564] 420x560 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 14 [507:827] 288x366 FILL 
+68291b2f571ea7e30f9f9abdf692f40748a98c8e 
+    Page 1/Işlərimiz / Şəkillər :: Rectangle 15 [285:567] 420x473 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 15 [507:828] 288x308 FILL 
+efdd2579ce1b2b4eedfe85d6b0390e2923f880f3 
+    Page 1/Işlərimiz / Videolar :: Rectangle 8 [285:616] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1451] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1531] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1611] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1682] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1772] 645x504 STRETCH 
+    …+9
+ea561f10c57c7daed99fb5af73bf96a9149f0341 
+    Page 1/Işlərimiz / Videolar :: Rectangle 8 [285:635] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1470] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1582] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1630] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1701] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1791] 645x504 STRETCH 
+    …+9
+94efb2d595c9e62e8194a65502341f796fd64796 
+    Page 1/Işlərimiz / Videolar :: Rectangle 8 [285:654] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1489] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:2137] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:2286] 645x504 FILL
+    Page 2/Home page :: Rectangle 8 [110:2392] 645x504 FILL
+    Page 2/Home page :: Rectangle 8 [I110:2428;110:1489] 645x504 FILL 
+    …+4
+e95f5791526c5bac3f5f5d99dc38aa6514ce8a17 
+    Page 1/Işlərimiz / Videolar :: Rectangle 12 [285:671] 640x433 FILL
+    Page 1/Mob/İşlərimiz :: Rectangle 12 [510:873] 288x195 FILL
+    Page 2/Home page :: Rectangle 12 [110:2675] 419x391 FILL
+    Page 2/Home page :: Rectangle 12 [110:3075] 419x391 FILL 
+35d6988f437c8ca25cee37e4b17ba46315d65a38 
+    Page 1/Işlərimiz / Videolar :: Rectangle 13 [285:672] 381x278 FILL
+    Page 2/Home page :: Rectangle 13 [110:2676] 307x278 FILL
+    Page 2/Home page :: Rectangle 13 [110:3076] 307x278 FILL 
+8a9be9e63172b1bac9ace3318512b310ee18df7b 
+    Page 1/Işlərimiz / Videolar :: Rectangle 15 [285:673] 408x278 FILL
+    Page 2/Home page :: Rectangle 15 [110:2677] 308x278 FILL
+    Page 2/Home page :: Rectangle 15 [110:3077] 308x278 FILL 
+3c6674530197256d7130e5ee438e667d292783a9 
+    Page 1/Studiyalar :: Frame 2095585332 [514:967] 760x465 FILL
+    Page 1/Dekorlar :: Rectangle 19 [311:771] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 19 [311:765] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 19 [312:843] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 19 [312:849] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 19 [346:1318] 307x278 FILL 
+    …+8
+35d956ee553211eb81a9894c190e4967ade55f67 
+    Page 1/Studiyalar :: Rectangle 23 [310:534] 187x465 STRETCH
+    Page 1/Rezervasiya et :: Rectangle 23 [346:1328] 60x53 FILL
+    Page 1/Rezervasiya et (qəbul olundu) :: Rectangle 23 [351:1853] 60x53 FILL
+    Page 1/Rezervasiya et (ana səhifədən keçid edəndə) :: Rectangle 23 [351:1812] 60x53 FILL
+    Page 1/Dekorlar :: Rectangle 23 [311:772] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 23 [311:766] 307x278 FILL 
+    …+13
+aa07133451eb1e2a6b95d59127a18a1d64b367b0 
+    Page 1/Studiyalar :: Rectangle 24 [310:535] 187x465 FILL
+    Page 1/Dekorlar :: Rectangle 24 [311:773] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 24 [311:767] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 24 [312:844] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 24 [312:850] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 24 [346:1321] 307x278 FILL 
+    …+8
+133a5b032acd947006a34ada1a25487a612e3c5d 
+    Page 1/Studiyalar :: Rectangle 22 [310:533] 187x465 FILL
+    Page 1/Dekorlar :: Rectangle 22 [311:774] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 22 [311:768] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 22 [312:845] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 22 [312:848] 307x278 FILL
+    Page 1/Dekorlar :: Rectangle 22 [346:1320] 307x278 FILL 
+    …+8
+f2015fbe639d7c940086def9e9975ef7b943f5d3 
+    Page 1/Studiyalar :: Rectangle 19 [331:895] 760x465 FILL 
+d4a3573b20b79fae66d93c845b43b8b85c547e6c 
+    Page 1/Studiyalar :: Rectangle 26 [331:896] 187x465 FILL 
+10a1dfd6f37c82234edda6b689bb53617c144b31 
+    Page 1/Studiyalar :: Rectangle 24 [331:897] 187x465 FILL
+    Page 1/Studiyalar :: Rectangle 24 [331:876] 187x465 FILL 
+fa0f34b817337434f1d08a79332303c9ada02e09 
+    Page 1/Studiyalar :: Rectangle 25 [331:901] 187x465 FILL 
+9baa381bc3c76bd7c7e4123cff84744e86580723 
+    Page 1/Studiyalar :: Rectangle 19 [331:874] 760x465 FILL 
+72eadd42fd8b250c5b973775e079c2e11f01146e 
+    Page 1/Studiyalar :: Rectangle 26 [331:884] 187x465 STRETCH 
+28f34645f2b4014dbe94b246d1ec22f989a0361d 
+    Page 1/Studiyalar :: Rectangle 25 [331:882] 187x465 FILL 
+549b1b1ff05288d992dfa48c27b6b17b20d8393b 
+    Page 1/Xidmətlər :: image 2 [581:1196] 120x104 STRETCH
+    Page 1/Xidmətlər :: image 2 [581:1201] 120x104 STRETCH
+    Page 1/Xidmətlər :: image 2 [581:1206] 120x104 STRETCH
+    Page 1/Xidmətlər :: image 2 [581:1211] 120x104 STRETCH
+    Page 1/Xidmətlər :: image 2 [581:1177] 120x105 STRETCH
+    Page 1/Xidmətlər :: image 2 [581:1183] 120x105 STRETCH 
+    …+11
+4b523d0a5465a0b88a198b8c1ed00a2947a5bd5e 
+    Page 1/Haqqımızda :: Rectangle 36 [432:594] 644x440 FILL
+    Page 1/Mob/Haqqımızda :: Rectangle 36 [530:1897] 288x240 FILL 
+74f076837ebd51b2aa49f0bf81ba6215b94bf1bd 
+    Page 1/Haqqımızda :: Mado_Logo 1 [432:615] 120x34 FILL
+    Page 1/Mob/Haqqımızda :: Mado_Logo 1 [530:1902] 103x29 FILL 
+0b294084cc28ba8c8dc1fd11480dcae651045e68 
+    Page 1/Haqqımızda :: image 1 1 [432:616] 140x58 FILL
+    Page 1/Mob/Haqqımızda :: image 1 1 [530:1903] 120x50 FILL 
+a2d51a804c94f222b2ca760e0aaad139831eb619 
+    Page 1/Haqqımızda :: Starbucks-Logo-PNG-Images-HD 1 [432:617] 85x82 STRETCH
+    Page 1/Mob/Haqqımızda :: Starbucks-Logo-PNG-Images-HD 1 [530:1904] 73x70 STRETCH 
+f6d08a0e8483613b3a104da2e03205f15adf2cfa 
+    Page 1/Haqqımızda :: Baku_Electronics 1 [432:618] 208x73 FILL
+    Page 1/Mob/Haqqımızda :: Baku_Electronics 1 [530:1905] 178x63 FILL 
+56223574c43c9244796ef2aa1015512651cb382b 
+    Page 1/Haqqımızda :: Без названия 1 [432:619] 124x81 STRETCH
+    Page 1/Mob/Haqqımızda :: Без названия 1 [530:1906] 106x69 STRETCH 
+f930c30856f3c677274ee8d41a15d5ee0781b5aa 
+    Page 1/Haqqımızda :: Peynirci-baba-logo 1 [432:620] 195x49 FILL
+    Page 1/Mob/Haqqımızda :: Peynirci-baba-logo 1 [530:1907] 167x42 FILL 
+4fa4c1ae3ba7ee87ffd7155c7649860031f192a9 
+    Page 1/Rezervasiya et :: Rectangle 23 [346:1332] 60x53 FILL
+    Page 1/Rezervasiya et (qəbul olundu) :: Rectangle 23 [351:1858] 60x53 FILL
+    Page 1/Rezervasiya et (ana səhifədən keçid edəndə) :: Rectangle 23 [351:1817] 60x53 FILL
+    Page 1/Mob/Rezervasiya et :: Rectangle 23 [523:983] 60x53 FILL
+    Page 1/Mob/Rezervasiya et (qəbul olundu) :: Rectangle 23 [524:880] 60x53 FILL 
+240c28d260070cca84a94063a25a5a7da52d792e 
+    Page 1/Rezervasiya et :: Rectangle 23 [351:1793] 60x53 FILL
+    Page 1/Rezervasiya et (qəbul olundu) :: Rectangle 23 [351:1865] 60x53 FILL
+    Page 1/Rezervasiya et (ana səhifədən keçid edəndə) :: Rectangle 23 [351:1824] 60x53 FILL
+    Page 1/Mob/Rezervasiya et :: Rectangle 23 [523:990] 60x53 FILL
+    Page 1/Mob/Rezervasiya et (qəbul olundu) :: Rectangle 23 [524:887] 60x53 FILL 
+fa192fd2c997e3cef15ac474535db9e332e448b4 
+    Page 1/Rezervasiya et :: Rectangle 23 [351:1799] 60x53 FILL
+    Page 1/Rezervasiya et (qəbul olundu) :: Rectangle 23 [351:1871] 60x53 FILL
+    Page 1/Rezervasiya et (ana səhifədən keçid edəndə) :: Rectangle 23 [351:1830] 60x53 FILL
+    Page 1/Mob/Rezervasiya et :: Rectangle 23 [523:996] 60x53 FILL
+    Page 1/Mob/Rezervasiya et (qəbul olundu) :: Rectangle 23 [524:893] 60x53 FILL 
+c824cfd555234ab241393e6679cb746fe1a34994 
+    Page 1/Mob/İşlərimiz :: Rectangle 12 [510:879] 288x195 FILL 
+609d79fcd4f3166cd3f6190254143cbd05f9a5e6 
+    Page 1/Mob/İşlərimiz :: Rectangle 12 [510:884] 288x195 FILL 
+0d1a8cfa53f22d1cd9d0a1fc5ded19d594d0b77e 
+    Page 1/Mob/İşlərimiz :: Rectangle 12 [510:889] 288x195 FILL 
+a60c5918b806803e130ae4dcde0f38a967abf6c2 
+    Page 1/Mob/İşlərimiz :: Rectangle 12 [510:894] 288x195 FILL 
+c0a9bbdb1885fa70c6b699aef6714ec1df0388a8 
+    Page 1/Mob/İşlərimiz :: Rectangle 12 [510:899] 288x195 FILL
+    Page 1/Mob/Studiyalar :: Rectangle 30 [517:803] 288x144 FILL 
+8bbf9cabe4242223ab25614863ec6183a71a54e3 
+    Page 1/Mob/Studiyalar :: Frame 2095585334 [517:781] 288x432 FILL 
+0a74abd4e72d81c162edfad58f9d4c6ec20c4a6c 
+    Page 1/Mob/Studiyalar :: Frame 2095585336 [517:796] 288x432 FILL 
+244c0adc73d1c76e221c6dbf6b77eade93f76506 
+    Page 1/Mob/Studiyalar :: Rectangle 25 [517:786] 288x144 FILL 
+467041044d52474ad0b2502bce4921a01f615d39 
+    Page 1/Mob/Studiyalar :: Rectangle 28 [517:801] 288x144 FILL 
+947cb5b4021ef5c212247f0cc6f33ddbbe025018 
+    Page 1/Mob/Studiyalar :: Rectangle 26 [517:787] 288x144 FILL 
+3e1e6016e0b2c07ee34d9a71c1aac9d865da63e0 
+    Page 1/Mob/Studiyalar :: Rectangle 29 [517:802] 288x144 FILL 
+72b50f880d1f5708e7fedde39aecb3c1b303a541 
+    Page 1/Mob/Studiyalar :: Rectangle 27 [517:788] 288x144 FILL 
+e61add19af3b7f87a51413c77c6b1bc49be486c7 
+    Page 2/Logotype 1 :: Logotype 1 [110:1265] 597x330 FILL 
+cbad4f8370d9368f80fe7a39546be9c1db102b68 
+    Page 2/Frame 36 :: 19e8ca92c6eed77a8184b2cd470fc019 1 [110:1356] 925x925 FILL
+    Page 2/Frame 38 :: 19e8ca92c6eed77a8184b2cd470fc019 1 [110:1375] 762x762 FILL
+    Page 2/Home page :: 19e8ca92c6eed77a8184b2cd470fc019 1 [110:2743] 762x762 FILL 
+4fc5db291894b40ba3829c17ad2cad214c054d9e 
+    Page 2/Frame 40 :: Frame 40 [110:1380] 1440x900 FILL
+    Page 2/Frame 41 :: Rectangle 6 [110:1434] 645x699 FILL
+    Page 2/Home page :: Frame 43 [110:2327] 1440x900 FILL 
+502a3989382ea6ecf48bd7273d8ff57854b69fa5 
+    Page 2/Frame 42 :: Frame 42 [110:1401] 1440x900 FILL
+    Page 2/Frame 1410104219 :: Frame 1410104219 [203:354] 1440x900 FILL 
+c8bc4b5aee1ac351948171473de6fdcfdafbab99 
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1507] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1559] 645x504 FILL
+    Page 2/Home page :: Rectangle 8 [I110:2428;110:1507] 645x504 FILL
+    Page 2/Home page :: Rectangle 8 [I110:2828;110:1507] 645x504 FILL 
+0662e6a4c0326878d3c81356aaee104d28319e40 
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1649] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1720] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1810] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1923] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:2054] 645x504 STRETCH
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:2203] 645x504 STRETCH 
+07caeb7a72e872752dae0b936bdb3c5828dfeea7 
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1743] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1833] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1946] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:2077] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:2226] 645x504 FILL 
+261c337c4dcf7383bbf286a847ba1c3e4df2e8d6 
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1852] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1965] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:2096] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:2245] 645x504 FILL 
+1ee3e9a46fc99dac2d5366b0854f8900721528a0 
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:1988] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:2119] 645x504 FILL
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:2268] 645x504 FILL 
+fc9abdf600d5ed99e01fa6931518ad9f1ac46a97 
+    Page 2/Frame 1410104218 :: Rectangle 8 [110:2304] 645x504 FILL 
+d0f2fd3ab1c5f109feb5df83c72d97912c2c21dd 
+    Page 2/Home page :: Rectangle 9 [110:2409] 645x518 STRETCH
+    Page 2/Home page :: Rectangle 9 [110:2809] 645x518 STRETCH 
+8f7e490bfd79aa717a990401a3a28dd7bd125573 
+    Page 2/Home page :: Rectangle 10 [110:2410] 308x247 STRETCH
+    Page 2/Home page :: Rectangle 10 [110:2810] 308x247 STRETCH 
+1dc5fe98da0329d4027958c5217911cb01fc1fc3 
+    Page 2/Home page :: Rectangle 11 [110:2411] 308x247 STRETCH
+    Page 2/Home page :: Rectangle 11 [110:2811] 308x247 STRETCH 
+b9828b13266fb9a2482e18ea7d69789b348e9242 
+    Page 2/Home page :: Rectangle 16 [110:2678] 295x278 FILL
+    Page 2/Home page :: Rectangle 16 [110:3078] 295x278 FILL 
+21290432e335e42a61e91e8387384928d5cf9f55 
+    Page 2/Home page :: Rectangle 14 [110:2679] 307x278 FILL
+    Page 2/Home page :: Rectangle 14 [110:3079] 307x278 FILL 
+f42cd19654543b225aec61c5466c41d906369029 
+    Page 2/Frame 2095585331 :: image 1 [577:1263] 1536x1024 FILL 

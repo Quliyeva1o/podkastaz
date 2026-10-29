@@ -1,0 +1,299 @@
+
+######## Home (285:697) 1440x900
+  ## Frame 2095585298 [FRAME] y=0 h=900 :: [IMG Logotype-White 2 183x35] | Səsini Brendə Çevir | Podcast, video və kontent üçün professional studio | Rezervasiya et | Paketlər | © 2026 Podcast.az
+  ## Frame 2095585299 [FRAME] y=0 h=900 :: 
+
+######## Menu (214:852) 1440x900
+  ## Column [FRAME] y=120 h=586 :: Ana səhifə | Haqqımızda | Xidmətlər | Studiyalar | Paketlər | İşlərimiz
+  ## Frame 1410104267 [FRAME] y=821 h=18 :: Məxfilik siyasəti | / | İstifadəçi qaydaları
+  ## Frame 1410104270 [FRAME] y=526 h=313 :: [IMG Frame 1410104243 308x313] | Rezervasiya et | Vaxtını seç, studiyanı təmin et. | Əlaqə | Sualınız var? Bizə müraciət edin
+  ## X [FRAME] y=30 h=40 :: 
+
+######## Paketlər (221:1236) 1440x1220
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Paketlər
+  ## Frame 1410104278 [FRAME] y=154 h=986 :: Paketlər | Hər büdcəyə uyğun seçim, hər səviyyədə peşəkar studiya. | START | Yeni başlayanlar üçün | 99 | AZN | Müraciət et | 1 saat studiya istifadəsi | 1 dekor seçimi (4-dən biri) | 2 mikrofon | 1 kamera (Full HD) | Basic audio montaj | Faylların təqdim edilməsi | PRO | Kontent yaradanlar və bizneslər üçün | 199 | AZN | Müraciət et | 2 saat studiya | İstənilən dekor (dəyişmək olar) | 4 mikrofon | 2 kamera (Full HD / 4K) | Audio + video montaj | 2 qısa video (Reels / Shorts) | Thumbnail (cover şəkil) | Ən çox seçilən | PREMIUM | Brendlər və serial podcast-lar üçün | 299 | AZN | Müraciət et | 3 saat studiya | 2–3 dekor dəyişimi | 4 mikrofon | 3 kamera (4K) | Pro audio mastering | Full video montaj | 4 qısa video (Shorts) | Thumbnail + intro/outro | ADD-ON XİDMƏTLƏR | Əlavə 1 saat studiya | +40 | AZN | Əlavə kamera | +20 | AZN | Əlavə short video | +20 | AZN | Subtitrlər (AZ / EN / RU) | 
+
+######## Işlərimiz / Şəkillər (282:320) 1440x3240
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | İşlərimiz
+  ## Frame 1410104278 [FRAME] y=154 h=3006 :: İşlərimiz | Kadrların arxasında duran keyfiyyəti kəşf et. | Şəkillər | Videolar | [IMG Rectangle 8 420x376] | [IMG Rectangle 9 420x423] | [IMG Rectangle 10 420x536] | [IMG Rectangle 11 420x376] | [IMG Rectangle 12 420x536] | [IMG Rectangle 13 420x376] | [IMG Rectangle 9 420x553] | [IMG Rectangle 10 420x374] | [IMG Rectangle 11 420x484] | [IMG Rectangle 12 420x269] | [IMG Rectangle 13 420x484] | [IMG Rectangle 14 420x459] | [IMG Rectangle 10 420x274] | [IMG Rectangle 11 420x445] | [IMG Rectangle 12 420x560] | [IMG Rectangle 13 420x311] | [IMG Rectangle 14 420x560] | [IMG Rectangle 15 420x473]
+
+######## Işlərimiz / Videolar (285:569) 1440x900
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | İşlərimiz
+  ## Frame 1410104278 [FRAME] y=154 h=666 :: İşlərimiz | Kadrların arxasında duran keyfiyyəti kəşf et. | Şəkillər | Videolar | [IMG Rectangle 8 645x504] | Video Podcast Çəkilişi | Podcast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü. | 2–3 kamera | Full HD / 4K | Işıq və kadr quruluşu | [IMG Rectangle 8 645x504] | Audio Podcast Yazımı | Təmiz və balanslı səs üçün akustik izolyasiyalı mühit və professional avadanlıq. | Professional mikrofonlar | Səs balansı | Təmiz audio fayllar | [IMG Rectangle 8 645x504] | Səyyar studio | Tədbirlər | Konfranslar | Ofis içi podcast çəkilişləri | [IMG Rectangle 12 640x433] | [IMG Rectangle 13 381x278] | [IMG Rectangle 15 408x278]
+
+######## Studiyalar (307:409) 1440x2361
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Studiyalar
+  ## Frame 1410104278 [FRAME] y=154 h=2127 :: Studiyalar | Studiyalarımız peşəkar səs avadanlıqları, optimal akustika və rahat çəkiliş mühiti ilə təchiz olunub. | Studiya 1 | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. | Dekorlara bax | [IMG Frame 2095585332 760x465] | Həkimlər üçün dekor | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. | [IMG Rectangle 23 187x465] | [IMG Rectangle 24 187x465] | [IMG Rectangle 22 187x465] | Studiya 2 | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. | Dekorlara bax | [IMG Rectangle 19 760x465] | Həkimlər üçün dekor | Lorem ipsum dolor sit amet, consectetur adipisci
+
+######## Xidmətlər (351:1889) 1440x1498
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Xidmətlər
+  ## Frame 2095585340 [FRAME] y=154 h=1264 :: Xidmətlər | Səsdən yayıma qədər bütün xidmətlər bir məkanda. | Müraciət et | [IMG image 2 120x104] | Studio icarəsi | Studiya saatlıq istifadəyə verilir. Öz komandası ilə gələnlər və ya yalnız məkan axtaranlar üçün idealdır. | [IMG image 2 120x104] | Video podcast çəkilişi | Podcast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü. | [IMG image 2 120x104] | Audio Podcast Yazımı | Təmiz və balanslı səs üçün akustik izolyasiyalı mühit və professional avadanlıq. | [IMG image 2 120x104] | Montaj & Post-Production | Podcast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü. | [IMG image 2 120x105] | Shorts / Reels | Uzun podcast-lardan qısa və dinamik kontent hazırlanması. | [IMG image 2 120x105] | Podcast Start | Podcast-ınızı 0-dan professional səviyyəyə qaldırırıq. | [IMG image 2 120x105] | Canlı Yayım | [IM
+
+######## Haqqımızda (423:598) 1440x1280
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Haqqımızda
+  ## Frame 2095585328 [FRAME] y=154 h=1046 :: Haqqımızda | [IMG Rectangle 36 644x440] | Səsiniz burada öz auditoriyasını tapır. | Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qu
+
+######## Əlaqə (380:740) 1440x991
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Əlaqə
+  ## Frame 1410104278 [FRAME] y=154 h=757 :: Əlaqə | Podkast layihəniz üçün bizimlə əlaqə saxlayın. | Əlaqə saxlayın, sizi dinləmək üçün buradayıq! | Ünvan | Bakı şəhəri, Ə.Rəcəbli 1/10 | Telefon | +99412 565 77 77 | E-Poçt | info@netpoint.az | Biz sosial şəbəkələrdə | <Text Input> | <Label> | Ad | Ramin | <Text Input> | <Label> | Soyad | Quliyev | <Text Input> | <Label> | Telefon | +994 99 555 55 55 | <Text Input> | <Label> | E-mail ünvanı | raminquliyev@gmail.com | <Text Input> | <Label> | Mövzu | Video podcast çəkilişi xidməti | <Label> | Mesajınız | Meajınızı daxil edin | Mesajını göndər
+
+######## İstifadəçi qaydaları (275:540) 1440x1156
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | İstifadəçi qaydaları
+  ## Frame 1410104278 [FRAME] y=154 h=922 :: İstifadəçi qaydaları | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eu luctus nibh. Vivamus finibus egestas purus id scelerisque. Phasellus vel congue augue, in sodales ex. Cras quis dolor a neque maximus fringilla. Duis faucibus facilisis enim, eget faucibus erat interdum sed. Donec sed felis tincidunt ex volutpat ullamcorper. Donec ut justo metus. Suspendisse quis maximus sem. Vestibulum sed turpis convallis, dictum arcu at, eleifend neque. Fusce feugiat varius arcu vel tempus. Fusce feugiat, tortor in dictum hendrerit, lacus dolor porta felis, et elementum mi purus non quam. Praesent lacinia nibh in diam ullamcorper ullamcorper. Vestibulum molestie elementum diam sed efficitur. Mauris justo erat, fringilla eu luctus at, facilisis at orci. Praesent scelerisque aliquet urna eget maximus. Donec et mollis tortor. Ut luctus blandit vulputate. Quisque condimentum dolor ac 
+
+######## Məxfilik siyasəti (275:719) 1440x1156
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Məxfilik siyasəti
+  ## Frame 1410104278 [FRAME] y=154 h=922 :: Məxfilik siyasəti | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eu luctus nibh. Vivamus finibus egestas purus id scelerisque. Phasellus vel congue augue, in sodales ex. Cras quis dolor a neque maximus fringilla. Duis faucibus facilisis enim, eget faucibus erat interdum sed. Donec sed felis tincidunt ex volutpat ullamcorper. Donec ut justo metus. Suspendisse quis maximus sem. Vestibulum sed turpis convallis, dictum arcu at, eleifend neque. Fusce feugiat varius arcu vel tempus. Fusce feugiat, tortor in dictum hendrerit, lacus dolor porta felis, et elementum mi purus non quam. Praesent lacinia nibh in diam ullamcorper ullamcorper. Vestibulum molestie elementum diam sed efficitur. Mauris justo erat, fringilla eu luctus at, facilisis at orci. Praesent scelerisque aliquet urna eget maximus. Donec et mollis tortor. Ut luctus blandit vulputate. Quisque condimentum dolor ac ali
+
+######## Paketlər/Müraciət et (Default) (221:1237) 1440x977
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Paketlər | Müraciət et
+  ## Frame 1410104278 [FRAME] y=154 h=743 :: Paketə qoşul | Büdcəyə uyğun paketi seçib bizə müraciət edin | Paket haqqında detallar | <Frame 2095585281> | START | 99 | AZN | <Controls> | <Frame 2095585282> | PRO | 199 | AZN | <Controls> | <Frame 2095585280> | PREMIUM | 299 | AZN | <Controls> | Add-On Xidmətlər | Əlavə 1 saat studiya | +40 | AZN | <Controls> | Əlavə kamera | +20 | AZN | <Controls> | Əlavə short video | +20 | AZN | <Controls> | Subtitrlər (AZ / EN / RU) | +30 | AZN | <Controls> | Podcast intro/outro | +50 | AZN | <Controls> | Aylıq paket | Fərdi qiymət | <Controls> | Ümumi | 169 | AZN | Şəxsi məlumatlar | <Text Input> | <Label> | Ad | Jane | <Text Input> | <Label> | Soyad | Doe | <Text Input> | <Label> | Telefon | +994 00 000 00 00 | <Text Input> | <Label> | E-mail ünvanı | emailhere@gmail.com | <Controls> | Məlumatların doğruluğunu təsdiq edirəm | <Controls> | Saytın məxfilik siyasəti və istifadə qaydaları ilə tanış
+
+######## Rezervasiya et (331:933) 1440x1183
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Studiyalar | Dekorlar | Rezervasiya et
+  ## Frame 1410104278 [FRAME] y=154 h=949 :: Rezervasiya et | Vaxtını seç, studiyanı təmin et. | Dekor haqqında detallar | Studiya | Studiya 1 | Bakı | <Controls> | Studiya 2 | Əhməd Rəcəbli | <Controls> | Dekor | [IMG Rectangle 23 60x53] | Həkimlər üçün | <Controls> | [IMG Rectangle 23 60x53] | Marketoloqlar üçün | <Controls> | [IMG Rectangle 23 60x53] | Dizaynerlər üçün | <Controls> | [IMG Rectangle 23 60x53] | Müəllimlər üçün | <Controls> | Digər | İstəyinizə uyğun dekorun düzəlməsi | <Controls> | Tarix və saat | Tarix | gg / aa / iiii | <CalendarDots> | Başlama vaxtı | 00 : 00 | <Alarm> | Bitmə vaxtı | 00 : 00 | <Alarm> | Şəxsi məlumatlar | <Text Input> | <Label> | Ad | Ramin | <Text Input> | <Label> | Soyad | Quliyev | <Text Input> | <Label> | Telefon | +994 99 555 55 55 | <Text Input> | <Label> | E-mail ünvanı | raminquliyev@gmail.com | <Controls> | Məlumatların doğruluğunu təsdiq edirəm | <Controls> | Saytın məxfilik siyasət
+
+######## Rezervasiya et (qəbul olundu) (346:1581) 1440x900
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Studiyalar | Dekorlar | Rezervasiya et
+  ## Frame 1410104278 [FRAME] y=154 h=951 :: Rezervasiya et | Vaxtını seç, studiyanı təmin et. | Dekor haqqında detallar | Studiya | Studiya 1 | Bakı | <Controls> | Studiya 2 | Əhməd Rəcəbli | <Controls> | Dekor | [IMG Rectangle 23 60x53] | Həkimlər üçün | <Controls> | [IMG Rectangle 23 60x53] | Marketoloqlar üçün | <Controls> | [IMG Rectangle 23 60x53] | Dizaynerlər üçün | <Controls> | [IMG Rectangle 23 60x53] | Müəllimlər üçün | <Controls> | Digər | İstəyinizə uyğun dekorun düzəlməsi | <Controls> | Tarix və saat | Tarix | gg / aa / iiii | <CalendarDots> | Başlama vaxtı | 00 : 00 | <Alarm> | Bitmə vaxtı | 00 : 00 | <Alarm> | Şəxsi məlumatlar | <Text Input> | <Label> | Ad | Ramin | <Text Input> | <Label> | Soyad | Quliyev | <Text Input> | <Label> | Telefon | +994 99 555 55 55 | <Text Input> | <Label> | E-mail ünvanı | raminquliyev@gmail.com | <Controls> | Məlumatların doğruluğunu təsdiq edirəm | <Controls> | Saytın məxfilik siyasət
+  ## Rectangle 27 [RECTANGLE] y=0 h=1185 :: 
+  ## Frame 2095585201 [FRAME] y=278 h=344 :: <CheckCircle> | Qəbul olundu! | Müraciətiniz üçün təşəkkür edirik. Məlumatlarınız Podkast.az saytının administrasiyası tərəfindən yoxlanıldıqdan sonra sizinlə əlaqə saxlanacaq. | Ana səhifəyə qayıt
+
+######## Rezervasiya et (ana səhifədən keçid edəndə) (346:1338) 1440x1183
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Rezervasiya et
+  ## Frame 1410104278 [FRAME] y=154 h=949 :: Rezervasiya et | Vaxtını seç, studiyanı təmin et. | Dekor haqqında detallar | Studiya | Studiya 1 | Bakı | <Controls> | Studiya 2 | Əhməd Rəcəbli | <Controls> | Dekor | [IMG Rectangle 23 60x53] | Həkimlər üçün | <Controls> | [IMG Rectangle 23 60x53] | Marketoloqlar üçün | <Controls> | [IMG Rectangle 23 60x53] | Dizaynerlər üçün | <Controls> | [IMG Rectangle 23 60x53] | Müəllimlər üçün | <Controls> | Digər | İstəyinizə uyğun dekorun düzəlməsi | <Controls> | Tarix və saat | Tarix | gg / aa / iiii | <CalendarDots> | Başlama vaxtı | 00 : 00 | <Alarm> | Bitmə vaxtı | 00 : 00 | <Alarm> | Şəxsi məlumatlar | <Text Input> | <Label> | Ad | Ramin | <Text Input> | <Label> | Soyad | Quliyev | <Text Input> | <Label> | Telefon | +994 99 555 55 55 | <Text Input> | <Label> | E-mail ünvanı | raminquliyev@gmail.com | <Controls> | Məlumatların doğruluğunu təsdiq edirəm | <Controls> | Saytın məxfilik siyasət
+
+######## Dekorlar (311:581) 1440x3633
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Studiya 1 | Dekorlar
+  ## Frame 1410104278 [FRAME] y=154 h=3399 :: Dekorlar | Sizə uyğun olan dekoru seçib rezervasiya edin! | Həkimlər üçün dekor | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. | Rezervasiya et | [IMG Rectangle 19 307x278] | [IMG Rectangle 23 307x278] | [IMG Rectangle 24 307x278] | [IMG Rectangle 22 307x278] | [IMG Rectangle 24 307x278] | [IMG Rectangle 22 307x278] | [IMG Rectangle 19 307x278] | [IMG Rectangle 23 307x278] | Marketoloqlar üçün dekor | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqui
+
+######## Paketlər/Müraciət et (Məlumatlar daxil edilib) (285:705) 1440x977
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Paketlər | Müraciət et
+  ## Frame 1410104278 [FRAME] y=154 h=743 :: Paketə qoşul | Büdcəyə uyğun paketi seçib bizə müraciət edin | Paket haqqında detallar | <Frame 2095585281> | START | 99 | AZN | <Controls> | <Frame 2095585282> | PRO | 199 | AZN | <Controls> | <Frame 2095585280> | PREMIUM | 299 | AZN | <Controls> | Add-On Xidmətlər | Əlavə 1 saat studiya | +40 | AZN | <Controls> | Əlavə kamera | +20 | AZN | <Controls> | Əlavə short video | +20 | AZN | <Controls> | Subtitrlər (AZ / EN / RU) | +30 | AZN | <Controls> | Podcast intro/outro | +50 | AZN | <Controls> | Aylıq paket | Fərdi qiymət | <Controls> | Ümumi | 169 | AZN | Şəxsi məlumatlar | <Text Input> | <Label> | Ad | Ramin | <Text Input> | <Label> | Soyad | Quliyev | <Text Input> | <Label> | Telefon | +994 99 555 55 55 | <Text Input> | <Label> | E-mail ünvanı | raminquliyev@gmail.com | <Controls> | Məlumatların doğruluğunu təsdiq edirəm | <Controls> | Saytın məxfilik siyasəti və istifadə qaydaları i
+
+######## Paketlər/Müraciət qəbul olundu (346:1026) 1440x900
+  ## Frame 1410104275 [FRAME] y=0 h=124 :: <Header> | [IMG Logotype-White 2 183x35] | Ana səhifə | Paketlər | Müraciət et
+  ## Frame 1410104278 [FRAME] y=154 h=743 :: Paketə qoşul | Büdcəyə uyğun paketi seçib bizə müraciət edin | Paket haqqında detallar | <Frame 2095585281> | START | 99 | AZN | <Controls> | <Frame 2095585282> | PRO | 199 | AZN | <Controls> | <Frame 2095585280> | PREMIUM | 299 | AZN | <Controls> | Add-On Xidmətlər | Əlavə 1 saat studiya | +40 | AZN | <Controls> | Əlavə kamera | +20 | AZN | <Controls> | Əlavə short video | +20 | AZN | <Controls> | Subtitrlər (AZ / EN / RU) | +30 | AZN | <Controls> | Podcast intro/outro | +50 | AZN | <Controls> | Aylıq paket | Fərdi qiymət | <Controls> | Ümumi | 169 | AZN | Şəxsi məlumatlar | <Text Input> | <Label> | Ad | Ramin | <Text Input> | <Label> | Soyad | Quliyev | <Text Input> | <Label> | Telefon | +994 99 555 55 55 | <Text Input> | <Label> | E-mail ünvanı | raminquliyev@gmail.com | <Controls> | Məlumatların doğruluğunu təsdiq edirəm | <Controls> | Saytın məxfilik siyasəti və istifadə qaydaları i
+  ## Frame 2095585201 [FRAME] y=278 h=344 :: <CheckCircle> | Qəbul olundu! | Müraciətiniz üçün təşəkkür edirik. Məlumatlarınız Podkast.az saytının administrasiyası tərəfindən yoxlanıldıqdan sonra sizinlə əlaqə saxlanacaq. | Ana səhifəyə qayıt
+
+######## Mob/Home Page (472:1183) 320x574
+  ## Home [FRAME] y=249 h=325 :: [IMG Home 320x325] | © 2026 Podcast.az
+  ## Logotype-White 2 [RECTANGLE] y=23 h=26 :: [IMG Logotype-White 2 138x26]
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## Frame 2095585297 [FRAME] y=90 h=192 :: Səsini Brendə Çevir | Podcast, video və kontent üçün professional studio | Rezervasiya et | Paketlər
+  ## hugeicons:menu-09 [FRAME] y=16 h=40 :: 
+
+######## Mob/Menu (476:590) 320x574
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## X [FRAME] y=16 h=40 :: 
+  ## Column [FRAME] y=70 h=262 :: Ana səhifə | Haqqımızda | Xidmətlər | Studiyalar | Paketlər | İşlərimiz
+  ## Frame 1410104270 [FRAME] y=363 h=67 :: [IMG Frame 1410104243 292x67] | Rezervasiya et | Vaxtını seç, studiyanı təmin et.
+  ## Frame 1410104271 [FRAME] y=440 h=67 :: Əlaqə | Sualınız var? Bizə müraciət edin
+  ## Frame 1410104267 [FRAME] y=536 h=18 :: Məxfilik siyasəti | / | İstifadəçi qaydaları
+
+######## Mob/Paketlər (484:690) 320x2588
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## X [FRAME] y=16 h=40 :: 
+  ## Frame 2095585330 [INSTANCE] y=0 h=72 :: <Frame 2095585330> | [IMG Logotype-White 3 138x26]
+  ## Frame 1410104273 [FRAME] y=72 h=24 :: Paketlər
+  ## Frame 1410104272 [FRAME] y=128 h=93 :: Paketlər | Hər büdcəyə uyğun seçim, hər səviyyədə peşəkar studiya.
+  ## Frame 1410104255 [FRAME] y=251 h=452 :: START | Yeni başlayanlar üçün | 99 | AZN | Müraciət et | 1 saat studiya istifadəsi | 1 dekor seçimi (4-dən biri) | 2 mikrofon | 1 kamera (Full HD) | Basic audio montaj | Faylların təqdim edilməsi
+  ## Frame 2095585331 [FRAME] y=1323 h=549 :: PREMIUM | Brendlər və serial podcast-lar üçün | 299 | AZN | Müraciət et | 3 saat studiya | 2–3 dekor dəyişimi | 4 mikrofon | 3 kamera (4K) | Pro audio mastering | Full video montaj | 4 qısa video (Shorts) | Thumbnail + intro/outro
+  ## Group 3385 [GROUP] y=745 h=548 :: PRO | Kontent yaradanlar və bizneslər üçün | 199 | AZN | Müraciət et | 2 saat studiya | İstənilən dekor (dəyişmək olar) | 4 mikrofon | 2 kamera (Full HD / 4K) | Audio + video montaj | 2 qısa video (Reels / Shorts) | Thumbnail (cover şəkil) | Ən çox seçilən
+  ## Frame 1410104266 [FRAME] y=1912 h=586 :: ADD-ON XİDMƏTLƏR | Əlavə 1 saat studiya | +40 | AZN | Əlavə kamera | +20 | AZN | Əlavə short video | +20 | AZN | Subtitrlər (AZ / EN / RU) | +30 | AZN | Podcast intro/outro | +50 | AZN | Aylıq paket | Fərdi qiymət
+
+######## Mob/Paketlər/Müraciət et (Default) (493:820) 320x2048
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## X [FRAME] y=16 h=40 :: 
+  ## Frame 2095585330 [INSTANCE] y=0 h=72 :: <Frame 2095585330> | [IMG Logotype-White 3 138x26]
+  ## Frame 1410104273 [FRAME] y=72 h=24 :: Müraciət et
+  ## Frame 1410104272 [FRAME] y=128 h=93 :: Paketə qoşul | Büdcəyə uyğun paketi seçib bizə müraciət edin
+  ## Frame 2095585278 [FRAME] y=248 h=1039 :: Paket haqqında detallar | <Frame 2095585281> | START | 99 | AZN | <Controls> | <Frame 2095585282> | PRO | 199 | AZN | <Controls> | <Frame 2095585280> | PREMIUM | 299 | AZN | <Controls> | Add-On Xidmətlər | Əlavə 1 saat studiya | +40 | AZN | <Controls> | Əlavə kamera | +20 | AZN | <Controls> | Əlavə short video | +20 | AZN | <Controls> | Subtitrlər (AZ / EN / RU) | +30 | AZN | <Controls> | Podcast intro/outro | +50 | AZN | <Controls> | Aylıq paket | Fərdi qiymət | <Controls> | Ümumi | 169 | AZN
+  ## Frame 1410104279 [FRAME] y=1377 h=581 :: Şəxsi məlumatlar | <Text Input> | <Label> | Ad | Jane | <Text Input> | <Label> | Soyad | Doe | <Text Input> | <Label> | Telefon | +994 00 000 00 00 | <Text Input> | <Label> | E-mail ünvanı | emailhere@gmail.com | <Controls> | Məlumatların doğruluğunu təsdiq edirəm | <Controls> | Saytın məxfilik siyasəti və istifadə qaydaları ilə tanış olmuşam | Müraciət et
+
+######## Mob/Rezervasiya et (519:981) 320x2106
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## X [FRAME] y=16 h=40 :: 
+  ## Frame 2095585330 [INSTANCE] y=0 h=72 :: <Frame 2095585330> | [IMG Logotype-White 3 138x26]
+  ## Frame 1410104273 [FRAME] y=72 h=24 :: Rezervasiya et
+  ## Frame 1410104272 [FRAME] y=128 h=69 :: Rezervasiya et | Vaxtını seç, studiyanı təmin et.
+  ## Frame 2095585278 [FRAME] y=237 h=1108 :: Dekor haqqında detallar | Studiya 1 | Bakı | <Controls> | Studiya 2 | Əhməd Rəcəbli | <Controls> | Dekor | [IMG Rectangle 23 60x53] | Həkimlər üçün | <Controls> | [IMG Rectangle 23 60x53] | Marketoloqlar üçün | <Controls> | [IMG Rectangle 23 60x53] | Dizaynerlər üçün | <Controls> | [IMG Rectangle 23 60x53] | Müəllimlər üçün | <Controls> | Digər | İstəyinizə uyğun dekorun düzəlməsi | <Controls> | Tarix və saat | Tarix | gg / aa / iiii | <CalendarDots> | Başlama vaxtı | 00 : 00 | <Alarm> | Bitmə vaxtı | 00 : 00 | <Alarm>
+  ## Frame 1410104279 [FRAME] y=1435 h=581 :: Şəxsi məlumatlar | <Text Input> | <Label> | Ad | Jane | <Text Input> | <Label> | Soyad | Doe | <Text Input> | <Label> | Telefon | +994 00 000 00 00 | <Text Input> | <Label> | E-mail ünvanı | emailhere@gmail.com | <Controls> | Məlumatların doğruluğunu təsdiq edirəm | <Controls> | Saytın məxfilik siyasəti və istifadə qaydaları ilə tanış olmuşam | Müraciət et
+
+######## Mob/Xidmətlər (526:1021) 320x4035
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## X [FRAME] y=16 h=40 :: 
+  ## Frame 2095585330 [INSTANCE] y=0 h=72 :: <Frame 2095585330> | [IMG Logotype-White 3 138x26]
+  ## Frame 1410104273 [FRAME] y=72 h=24 :: Xidmətlər
+  ## Frame 1410104272 [FRAME] y=128 h=149 :: Xidmətlər | Səsdən yayıma qədər bütün xidmətlər bir məkanda. | Müraciət et
+  ## Frame 2095585341 [FRAME] y=317 h=2326 :: [IMG image 2 96x83] | Studio icarəsi | Studiya saatlıq istifadəyə verilir. Öz komandası ilə gələnlər və ya yalnız məkan axtaranlar üçün idealdır. | [IMG image 2 96x83] | Video podcast çəkilişi | Podcast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü. | [IMG image 2 96x83] | Audio Podcast Yazımı | Təmiz və balanslı səs üçün akustik izolyasiyalı mühit və professional avadanlıq. | [IMG image 2 96x83] | Montaj & Post-Production | Podcast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü. | [IMG image 2 96x84] | Shorts / Reels | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. | [IMG image 2 96x84] | Podcast Start | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. | [IMG image 2 96x84] | Canlı Yayım | Lorem ipsum dolor sit ame
+  ## Frame 1410104241 [FRAME] y=2814 h=1131 :: [IMG Frame 1410104243 288x277] | 4K Keyfiyyət | Kristal təmiz, yüksək səviyyəli çəkiliş | Çevik Rezervasiya | Saat və ya günlük sifariş | [IMG Frame 1410104245 288x276] | Sürətli Production | Sürətli geridönüş, peşəkar nəticələr | Uyğun Ünvanlar | Sizə yaxın studiyalar
+  ## Səsiniz burada öz auditoriyasını tapır. [TEXT] y=2733 h=51 :: Səsiniz burada öz auditoriyasını tapır.
+
+######## Mob/Haqqımızda (530:1701) 320x2769
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## X [FRAME] y=16 h=40 :: 
+  ## Frame 2095585330 [INSTANCE] y=0 h=72 :: <Frame 2095585330> | [IMG Logotype-White 3 138x26]
+  ## Frame 1410104273 [FRAME] y=72 h=24 :: Haqqımızda
+  ## Frame 1410104272 [FRAME] y=128 h=29 :: Haqqımızda
+  ## Frame 2095585326 [FRAME] y=197 h=1100 :: [IMG Rectangle 36 288x240] | Səsiniz burada öz auditoriyasını tapır. | Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum
+  ## Group 3384 [GROUP] y=1388 h=70 :: [IMG Mado_Logo 1 103x29] | [IMG image 1 1 120x50] | [IMG image 1 1 120x50] | [IMG Starbucks-Logo-PNG-Images-HD 1 73x70] | [IMG Baku_Electronics 1 178x63] | [IMG Baku_Electronics 1 178x63] | [IMG Без названия 1 106x69] | [IMG Без названия 1 106x69] | [IMG Peynirci-baba-logo 1 167x42]
+  ## Frame 1410104241 [FRAME] y=1548 h=1131 :: [IMG Frame 1410104243 288x277] | 4K Keyfiyyət | Kristal təmiz, yüksək səviyyəli çəkiliş | Çevik Rezervasiya | Saat və ya günlük sifariş | [IMG Frame 1410104245 288x276] | Sürətli Production | Sürətli geridönüş, peşəkar nəticələr | Uyğun Ünvanlar | Sizə yaxın studiyalar
+
+######## Mob/Əlaqə (530:1372) 320x1677
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## X [FRAME] y=16 h=40 :: 
+  ## Frame 2095585330 [INSTANCE] y=0 h=72 :: <Frame 2095585330> | [IMG Logotype-White 3 138x26]
+  ## Frame 1410104273 [FRAME] y=72 h=24 :: Əlaqə
+  ## Frame 1410104272 [FRAME] y=128 h=93 :: Əlaqə | Podkast layihəniz üçün bizimlə əlaqə saxlayın.
+  ## Frame 175 [FRAME] y=253 h=470 :: Əlaqə saxlayın, sizi dinləmək üçün buradayıq! | Ünvan | Bakı şəhəri, Ə.Rəcəbli 1/10 | Telefon | +99412 565 77 77 | E-Poçt | info@netpoint.az | Biz sosial şəbəkələrdə
+  ## Frame 99 [FRAME] y=846 h=741 :: <Text Input> | <Label> | Ad | Ramin | <Text Input> | <Label> | Soyad | Quliyev | <Text Input> | <Label> | Telefon | +994 99 555 55 55 | <Text Input> | <Label> | E-mail ünvanı | raminquliyev@gmail.com | <Text Input> | <Label> | Mövzu | Video podcast çəkilişi xidməti | <Label> | Mesajınız | Meajınızı daxil edin | Mesajını göndər
+
+######## Mob/Rezervasiya et (qəbul olundu) (524:839) 320x574
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## X [FRAME] y=16 h=40 :: 
+  ## Frame 2095585330 [INSTANCE] y=0 h=72 :: <Frame 2095585330> | [IMG Logotype-White 3 138x26]
+  ## Frame 1410104273 [FRAME] y=72 h=24 :: Rezervasiya et
+  ## Frame 1410104272 [FRAME] y=128 h=69 :: Rezervasiya et | Vaxtını seç, studiyanı təmin et.
+  ## Frame 2095585278 [FRAME] y=237 h=1108 :: Dekor haqqında detallar | Studiya 1 | Bakı | <Controls> | Studiya 2 | Əhməd Rəcəbli | <Controls> | Dekor | [IMG Rectangle 23 60x53] | Həkimlər üçün | <Controls> | [IMG Rectangle 23 60x53] | Marketoloqlar üçün | <Controls> | [IMG Rectangle 23 60x53] | Dizaynerlər üçün | <Controls> | [IMG Rectangle 23 60x53] | Müəllimlər üçün | <Controls> | Digər | İstəyinizə uyğun dekorun düzəlməsi | <Controls> | Tarix və saat | Tarix | gg / aa / iiii | <CalendarDots> | Başlama vaxtı | 00 : 00 | <Alarm> | Bitmə vaxtı | 00 : 00 | <Alarm>
+  ## Frame 1410104279 [FRAME] y=1435 h=581 :: Şəxsi məlumatlar | <Text Input> | <Label> | Ad | Jane | <Text Input> | <Label> | Soyad | Doe | <Text Input> | <Label> | Telefon | +994 00 000 00 00 | <Text Input> | <Label> | E-mail ünvanı | emailhere@gmail.com | <Controls> | Məlumatların doğruluğunu təsdiq edirəm | <Controls> | Saytın məxfilik siyasəti və istifadə qaydaları ilə tanış olmuşam | Müraciət et
+  ## Rectangle 27 [RECTANGLE] y=0 h=574 :: 
+  ## Frame 2095585201 [FRAME] y=202 h=372 :: <CheckCircle> | Qəbul olundu! | Müraciətiniz üçün təşəkkür edirik. Məlumatlarınız Podkast.az saytının administrasiyası tərəfindən yoxlanıldıqdan sonra sizinlə əlaqə saxlanacaq. | Ana səhifəyə qayıt
+
+######## Mob/İşlərimiz (507:762) 320x6007
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## X [FRAME] y=16 h=40 :: 
+  ## Frame 2095585330 [INSTANCE] y=0 h=72 :: <Frame 2095585330> | [IMG Logotype-White 3 138x26]
+  ## Frame 1410104273 [FRAME] y=72 h=24 :: İşlərimiz
+  ## Frame 1410104272 [FRAME] y=128 h=161 :: İşlərimiz | Kadrların arxasında duran keyfiyyəti kəşf et. | Şəkillər | Videolar
+  ## Frame 2095585294 [FRAME] y=234 h=5682 :: [IMG Rectangle 8 288x293] | [IMG Rectangle 9 288x232] | [IMG Rectangle 10 288x347] | [IMG Rectangle 11 288x313] | [IMG Rectangle 12 288x264] | [IMG Rectangle 13 288x206] | [IMG Rectangle 9 288x364] | [IMG Rectangle 10 288x256] | [IMG Rectangle 11 288x334] | [IMG Rectangle 12 288x269] | [IMG Rectangle 13 288x263] | [IMG Rectangle 14 288x337] | [IMG Rectangle 10 288x204] | [IMG Rectangle 11 288x300] | [IMG Rectangle 12 288x325] | [IMG Rectangle 13 288x189] | [IMG Rectangle 14 288x366] | [IMG Rectangle 15 288x308]
+
+######## Mob/İşlərimiz (509:830) 320x1690
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## X [FRAME] y=16 h=40 :: 
+  ## Frame 2095585330 [INSTANCE] y=0 h=72 :: <Frame 2095585330> | [IMG Logotype-White 3 138x26]
+  ## Frame 1410104273 [FRAME] y=72 h=24 :: İşlərimiz
+  ## Frame 1410104272 [FRAME] y=128 h=161 :: İşlərimiz | Kadrların arxasında duran keyfiyyəti kəşf et. | Şəkillər | Videolar
+  ## Group 3386 [GROUP] y=329 h=195 :: [IMG Rectangle 12 288x195]
+  ## Group 3387 [GROUP] y=544 h=195 :: [IMG Rectangle 12 288x195]
+  ## Group 3388 [GROUP] y=759 h=195 :: [IMG Rectangle 12 288x195]
+  ## Group 3389 [GROUP] y=975 h=195 :: [IMG Rectangle 12 288x195]
+  ## Group 3390 [GROUP] y=1190 h=195 :: [IMG Rectangle 12 288x195]
+  ## Group 3391 [GROUP] y=1405 h=195 :: [IMG Rectangle 12 288x195]
+
+######## Mob/Studiyalar (512:903) 320x3982
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## X [FRAME] y=16 h=40 :: 
+  ## Frame 2095585330 [INSTANCE] y=0 h=72 :: <Frame 2095585330> | [IMG Logotype-White 3 138x26]
+  ## Frame 1410104273 [FRAME] y=72 h=24 :: Studiyalar
+  ## Frame 1410104272 [FRAME] y=128 h=117 :: Studiyalar | Studiyalarımız peşəkar səs avadanlıqları, optimal akustika və rahat çəkiliş mühiti ilə təchiz olunub.
+  ## Frame 1410104248 [FRAME] y=305 h=171 :: Studiya 1 | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. | Dekorlara bax
+  ## Frame 2095585333 [FRAME] y=1531 h=171 :: Studiya 2 | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. | Dekorlara bax
+  ## Frame 2095585335 [FRAME] y=2756 h=171 :: Studiya 3 | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. | Dekorlara bax
+  ## Frame 2095585332 [FRAME] y=516 h=432 :: [IMG Frame 2095585332 288x432] | Həkimlər üçün dekor | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  ## Frame 2095585334 [FRAME] y=1742 h=432 :: [IMG Frame 2095585334 288x432] | Həkimlər üçün dekor | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  ## Frame 2095585336 [FRAME] y=2967 h=432 :: [IMG Frame 2095585336 288x432] | Həkimlər üçün dekor | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  ## Rectangle 23 [RECTANGLE] y=968 h=144 :: [IMG Rectangle 23 288x144]
+  ## Rectangle 25 [RECTANGLE] y=2194 h=144 :: [IMG Rectangle 25 288x144]
+  ## Rectangle 28 [RECTANGLE] y=3419 h=144 :: [IMG Rectangle 28 288x144]
+  ## Rectangle 24 [RECTANGLE] y=1132 h=144 :: [IMG Rectangle 24 288x144]
+  ## Rectangle 26 [RECTANGLE] y=2358 h=144 :: [IMG Rectangle 26 288x144]
+  ## Rectangle 29 [RECTANGLE] y=3583 h=144 :: [IMG Rectangle 29 288x144]
+  ## Rectangle 22 [RECTANGLE] y=1297 h=144 :: [IMG Rectangle 22 288x144]
+  ## Rectangle 27 [RECTANGLE] y=2522 h=144 :: [IMG Rectangle 27 288x144]
+  ## Rectangle 30 [RECTANGLE] y=3748 h=144 :: [IMG Rectangle 30 288x144]
+
+######## Mob/Dekorlar (518:806) 320x6129
+  ## hugeicons:menu-09 [FRAME] y=20 h=40 :: 
+  ## X [FRAME] y=16 h=40 :: 
+  ## Frame 2095585330 [INSTANCE] y=0 h=72 :: <Frame 2095585330> | [IMG Logotype-White 3 138x26]
+  ## Frame 1410104273 [FRAME] y=72 h=24 :: Dekorlar
+  ## Frame 1410104272 [FRAME] y=128 h=93 :: Dekorlar | Sizə uyğun olan dekoru seçib rezervasiya edin!
+  ## Frame 1410104248 [FRAME] y=281 h=171 :: Həkimlər üçün dekor | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. | Rezervasiya et
+  ## Frame 2095585331 [FRAME] y=1743 h=171 :: Marketoloqlar üçün dekor | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. | Rezervasiya et
+  ## Frame 2095585333 [FRAME] y=3205 h=171 :: Dizaynerlər üçün dekor | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. | Rezervasiya et
+  ## Frame 2095585335 [FRAME] y=4667 h=171 :: Müəllimlər üçün dekor | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. | Rezervasiya et
+  ## Frame 2095585301 [FRAME] y=492 h=1161 :: [IMG Rectangle 19 288x278] | [IMG Rectangle 23 288x278] | [IMG Rectangle 24 288x278] | [IMG Rectangle 22 288x278]
+  ## Frame 2095585332 [FRAME] y=1954 h=1161 :: [IMG Rectangle 19 288x278] | [IMG Rectangle 23 288x278] | [IMG Rectangle 24 288x278] | [IMG Rectangle 22 288x278]
+  ## Frame 2095585334 [FRAME] y=3416 h=1161 :: [IMG Rectangle 19 288x278] | [IMG Rectangle 23 288x278] | [IMG Rectangle 24 288x278] | [IMG Rectangle 22 288x278]
+  ## Frame 2095585336 [FRAME] y=4878 h=1161 :: [IMG Rectangle 19 288x278] | [IMG Rectangle 23 288x278] | [IMG Rectangle 24 288x278] | [IMG Rectangle 22 288x278]
+
+######## PAGE2 Colours: Colours | 50 | 50 | 100 | 100 | 200 | 200 | 300 | 300 | 400 | 400 | 500 | 500 | 600 | 600 | 700 | 700 | 800 | 800 | 900 | 900 | 950 | 950
+
+######## PAGE2 Icons: Icons
+
+######## PAGE2 Components: [IMG Logotype-White 2 183x35] | <Label> | Change Label | Placeholder text | <Placeholder> | <Hint Text> | <WarningCircle-fill> | This is a hint text to help user | <Label> | Change Label | Jane Doe | <Placeholder> | <Hint Text> | <WarningCircle-fill> | This is a hint text to help user | <Label> | Change Label | Typing | <Placeholder> | <Hint Text> | <WarningCircle-fill> | This is a hint text to help user | <Label> | Change Label | Placeholder text | <Placeholder> | <Hint Text> | <WarningCircle-fill> | This is a hint text to help user | <Controls> | Məlumatların doğruluğunu təsdiq edirəm | <Controls> | Saytın məxfilik siyasəti və istifadə qaydaları ilə tanış olmuşam | START | 99 | AZN | <Controls> | START | 99 | AZN | <Controls> | Şəkillər | Videolar
+
+######## PAGE2 Frame 1: Xidmətlər | Studiyalar | Paketlər | İşlərimiz | Rezervasiya Sloqan - Səsini brendə çevir | PAKET STRUKTURU (AZ bazarı üçün balanslı) 🟠 START Yeni başlayanlar üçün ⏱️ 1 saat studiya istifadəsi 🎨 1 dekor seçimi (4-dən biri) 🎙️ 2 mikrofon 🎥 1 kamera (Full HD) 🔊 Basic audio montaj 📁 Faylların təqdim edilməsi Qiymət: 99 AZN 🔥 PRO (Ən çox seçilən) Kontent yaradanlar və bizneslər üçün ⏱️ 2 saat studiya 🎨 İstənilən dekor (dəyişmək olar) 🎙️ 4 mikrofon 🎥 2 kamera (Full HD / 4K) 🔊 Audio + video montaj ✂️ 2 qısa video (Reels / Shorts) 🖼️ Thumbnail (cover şəkil) Qiymət: 199 AZN 👑 PREMIUM Brendlər və serial podcast-lar üçün ⏱️ 3 saat studiya 🎨 2–3 dekor dəyişimi 🎙️ 4 mikrofon 🎥 3 kamera (4K) 🔊 Pro audio mastering 🎬 Full video montaj ✂️ 4 qısa video (Shorts) 🖼️ Thumbnail + intro/outro 📤 YouTube yükləmə (istəyə bağlı) Qiymət: 299 AZN ➕ ADD-ON XİDMƏTLƏR (çox vacib satış elementi) Bunları ayrıca blok kimi ver: ⏱️ Əlavə 1 saat studiya – +40 AZN 🎥 Əlavə kamera – +20 AZN ✂️ Əlavə short video – +20 AZN 📝 Subtitrlər (AZ / EN / RU) – +30 AZN 🎧 Podcast intro/outro – +50 AZN 📦 Aylıq paket – fərdi qiymət | XİDMƏTLƏR Biz nə edirik? — 10 saniyədə cavab 🔥 Hero Səsini brendə çevir. Podcast, video və kontent üçün professional studio 👉 Rezervasiya et 🧩 XİDMƏTLƏR (kartlarla) 🏢 Studio İcarəsi (Studio Hire) Studiya saatlıq istifadəyə verilir. Öz komandası ilə gələnlər və ya yalnız məkan axtaranlar üçün idealdır. Daxildir: Professional podcast studio 4 fərqli dekor seçimi Mikrofonlar 
+
+######## FONTS
+151× Inter 400 16/24
+124× Inter 400 14/21
+104× Inter 400 14/20
+86× Inter 600 24/28
+40× Inter 600 16/24
+38× Inter 400 12/18
+30× Inter 600 18/21
+27× Inter 400 20/30
+25× Inter 500 14/21
+23× Inter 600 28/29
+22× Inter 500 20/24
+18× Inter 600 20/26
+16× Inter 600 48/50
+16× Inter 600 14/21
+15× Inter 400 20/23
+12× Inter 600 32/34
+10× Inter 500 16/24
+8× Inter 500 18/21
+6× Inter 600 54/81
+6× Inter 600 54/57
+6× Inter 500 16/19
+6× Inter 500 24/36
+4× Roboto 400 18/18
+4× Inter 600 20/30
+4× Inter 600 18/27
+4× Inter 400 12/16
+3× Roboto 400 14/14
+3× Inter 400 12/15
+2× Roboto 500 16/19
+2× Inter 500 20/23
+2× Inter 600 16/18
+2× Inter 600 54/65
+1× Inter 700 84/84
+1× Roboto 400 24/24
+1× Roboto 400 16/16
+1× Inter 600 32/40
+1× Inter 700 32/32
+1× Roboto 400 16/24
+
+######## COLORS
+503× #292726
+280× #ffffff
+231× #fe5b00
+142× #d9d9d9
+86× #85807d
+79× #504e4c
+22× #343b41
+17× #000000
+9× #f1f0ef
+7× #444444
+6× #222222
+5× #6e6a67
+4× #d2d0cf
+4× #303036
+2× #070022
+2× #f8f8f8
+2× #9d9996
+1× #fff7ec
+1× #ffeed3
+1× #ffd8a5
+1× #e5e4e3
+1× #ffbc6d
+1× #ff9432
+1× #bfbcba
+1× #ff750a
+1× #cc4002
+1× #a1320b
+1× #5d5957
+1× #822c0c
+1× #461304

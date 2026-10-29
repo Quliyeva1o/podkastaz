@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+/*
+ * Pixel-perfect scaling: 1rem = 16 Figma px of the active design frame.
+ *   mobile  (< 768px)   → Figma "Mob" frames, 320 wide; grows up to 20px rem (400px phone),
+ *                         wider phones keep that scale and the content just gets wider
+ *   tablet  (768–1023)  → no Figma frame: the mobile layout at a fixed 16px rem, widened
+ *   desktop (≥ 1024px)  → Figma desktop frames, 1440 wide (capped at 1920px screens)
+ * Every size is written in rem (spacing utilities are rem-based too), so the page matches
+ * Figma exactly at 320 and 1440 and scales proportionally between.
+ * --sbw (scrollbar width) is set by an inline script so the desktop scale uses the real
+ * content width and nothing overflows horizontally.
+ */
+html {
+  --sbw: 0px;
+  font-size: clamp(16px, calc((100vw - var(--sbw)) / 320 * 16), 20px);
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media (min-width: 1024px) {
+  html {
+    font-size: min(calc((100vw - var(--sbw)) / 1440 * 16), 21.333px);
+  }
+}
+
+/* Design tokens — Figma "Podcast.az" Page 2 → Colours, text styles */
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Primary (orange) scale; 600 is the brand colour */
+  --color-primary-50: #fff7ec;
+  --color-primary-100: #ffeed3;
+  --color-primary-200: #ffd8a5;
+  --color-primary-300: #ffbc6d;
+  --color-primary-400: #ff9432;
+  --color-primary-500: #ff750a;
+  --color-primary-600: #fe5b00;
+  --color-primary-700: #cc4002;
+  --color-primary-800: #a1320b;
+  --color-primary-900: #822c0c;
+  --color-primary-950: #461304;
+
+  /* Neutral scale; 950 is the main text colour */
+  --color-neutral-50: #f8f8f8;
+  --color-neutral-100: #f1f0ef;
+  --color-neutral-200: #e5e4e3;
+  --color-neutral-300: #d2d0cf;
+  --color-neutral-400: #bfbcba;
+  --color-neutral-500: #9d9996;
+  --color-neutral-600: #85807d;
+  --color-neutral-700: #6e6a67;
+  --color-neutral-800: #5d5957;
+  --color-neutral-850: #504e4c;
+  --color-neutral-950: #292726;
+  --color-silver: #d9d9d9;
+  --color-slate: #343b41;
+
+  /* Admin panel: marketinq.az CMS layout in the Podkast palette (ink + orange, Inter) */
+  --color-cms-nav: #1c1b1a;
+  --color-cms-nav-dark: #2c2a29;
+  --color-cms-nav-text: #bfbcba;
+  --color-cms-bg: #f1f0ef;
+  --color-cms-text: #292726;
+  --color-cms-label: #292726;
+  --color-cms-input: #292726;
+  --color-cms-muted: #6e6a67;
+  --color-cms-faint: #bfbcba;
+  --color-cms-border: #d2d0cf;
+  --color-cms-line: #e5e4e3;
+  --color-cms-primary: #292726;
+  --color-cms-link: #5d5957;
+  --color-cms-accent: #fe5b00;
+  --color-cms-danger: #e5484d;
+  --color-cms-success: #2e9e5b;
+  --color-cms-login: #000000;
+  /* Old names still used in shared admin components */
+  --color-ink: #292726;
+  --color-highlight: #fe5b00;
+  --font-cms: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-cms-head: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+
+  /* Text sizes = Figma px / 16. Small sizes keep a readable floor on small desktops. */
+  --text-84: 5.25rem;
+  --text-54: 3.375rem;
+  --text-48: 3rem;
+  --text-32: 2rem;
+  --text-28: 1.75rem;
+  --text-24: 1.5rem;
+  --text-20: max(1.25rem, 15px);
+  --text-18: max(1.125rem, 14px);
+  --text-16: max(1rem, 13px);
+  --text-14: max(0.875rem, 12px);
+  --text-12: max(0.75rem, 11px);
+
+  /* Figma letter spacing: -2% on most Inter text styles */
+  --tracking-tight: -0.02em;
+}
+
+/* In the base layer so utility classes (e.g. the admin panel body colours) can override it. */
+@layer base {
+  body {
+    background: var(--color-white);
+    color: var(--color-neutral-950);
+    font-family: var(--font-sans);
+    overflow-x: clip;
+  }
+}
+
+/* The admin panel uses a normal fixed 16px rem, not the fluid Figma scale. */
+html.admin-root {
+  font-size: 16px;
+}
+
+/* Content capped at the 1440 design width on very wide screens. */
+@utility container-page {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Fluid rem gives blocks fractional heights; on high-DPR phones the sub-pixel gap between
+ * two full-bleed blocks shows the page background as a hairline. Overlap each by 1px.
+ */
+main > * + * {
+  margin-top: -1px;
+}
+
+/* Menu overlay: fades in; the links and cards rise a little. */
+@keyframes menu-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes menu-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+.menu-overlay {
+  animation: menu-in 0.2s ease-out;
+}
+.menu-overlay .menu-rise {
+  animation: menu-rise 0.35s cubic-bezier(0.16, 1, 0.3, 1) calc(0.05s + var(--i, 0) * 0.03s) backwards;
+}
+
+/* Partner logos: endless strip (two copies, moves by one copy), faded out at both edges. */
+@keyframes partners {
+  to {
+    transform: translateX(calc(-50% - var(--gap) / 2));
+  }
+}
+.partners-marquee {
+  mask-image: linear-gradient(to right, transparent, black 18.75%, black 81.25%, transparent);
+}
+.partners-track {
+  --gap: 2.375rem;
+  animation: partners 30s linear infinite;
+}
+@media (min-width: 1024px) {
+  .partners-track {
+    --gap: 5.6rem;
+  }
+}
+.partners-marquee:hover .partners-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .partners-marquee {
+    overflow-x: auto;
+  }
+  .partners-track {
+    animation: none;
+  }
+}
+
+/* Studios page decor accordion: the open photo widens smoothly (desktop). */
+.decor-panel {
+  transition: flex-grow 0.5s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* İşlərimiz video carousel: the new current video and its neighbours fade in. */
+@keyframes works-in {
+  from {
+    opacity: 0;
+  }
+}
+.works-carousel :is(.works-current, .works-side) {
+  animation: works-in 0.4s ease-out;
+}

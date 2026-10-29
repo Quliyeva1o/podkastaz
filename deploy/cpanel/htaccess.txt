@@ -1,0 +1,14 @@
+# Rules for the .htaccess in Podkast.az's document root (~/podkast-public).
+# Put them ABOVE the block "Setup Node.js App" writes there
+# ("# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN"), and keep that block as is.
+#
+# One canonical address for Google: https://podkast.az (no www, always HTTPS). Replace
+# podkast.az by the domain the client chooses (PLAN.md §17.1) — and by the test address
+# (e.g. test.podkast.az) while testing. The other domain (podcast.az) is a cPanel Redirect.
+# Certificate checks (/.well-known/…) stay reachable over plain HTTP for AutoSSL.
+
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/\.well-known/
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://podkast.az%{REQUEST_URI} [R=301,L]

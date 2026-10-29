@@ -1,0 +1,24 @@
+# Automatic HTTPS (Let's Encrypt). Cloudflare sits in front with SSL mode "Full (strict)".
+#
+# One canonical host: https://{$DOMAIN} (marketinq.az). Every other host — www and the
+# other owned domains in REDIRECT_DOMAINS (comma separated, e.g. "marketing.az, www.marketing.az")
+# — answers with a permanent redirect to the same path on the canonical domain, so Google
+# never sees duplicate copies of the site.
+
+www.{$DOMAIN} {
+	redir https://{$DOMAIN}{uri} permanent
+}
+
+# Placeholder http:// host when REDIRECT_DOMAINS is empty (keeps the config valid, no certificate).
+{$REDIRECT_DOMAINS:http://alias.invalid} {
+	redir https://{$DOMAIN}{uri} permanent
+}
+
+{$DOMAIN} {
+	encode zstd gzip
+
+	@static path /_next/static/*
+	header @static Cache-Control "public, max-age=31536000, immutable"
+
+	reverse_proxy app:3000
+}

@@ -1,0 +1,22 @@
+# Local development services: docker compose -f docker-compose.dev.yml up -d
+#   Postgres on localhost:5441, Mailpit (catches all outgoing mail) SMTP localhost:1026, inbox http://localhost:8026
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: podkast
+      POSTGRES_PASSWORD: podkast
+      POSTGRES_DB: podkast
+    ports:
+      - "5441:5432"
+    volumes:
+      - pgdata-podkast-dev:/var/lib/postgresql/data
+
+  mailpit:
+    image: axllent/mailpit:v1.27
+    ports:
+      - "1026:1025"
+      - "8026:8025"
+
+volumes:
+  pgdata-podkast-dev:

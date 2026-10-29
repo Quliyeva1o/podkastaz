@@ -1,0 +1,6 @@
+{
+  "name": "podkast-app",
+  "private": true,
+  "description": "cPanel Node.js app root: app.js starts ./current (see deploy/cpanel/README.md). No dependencies here — each release carries its own.",
+  "main": "app.js"
+}
