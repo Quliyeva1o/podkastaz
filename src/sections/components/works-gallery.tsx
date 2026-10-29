@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Picture } from "@/components/picture";
 import { PhotoGallery, VideoGallery } from "@/components/site/works-client";
-import { cx } from "@/components/site/ui";
+import { cx, zoomImage } from "@/components/site/ui";
 import { listPublished } from "@/collections/queries";
 import type { WorkData } from "@/collections/registry";
 import { href } from "@/i18n/routes";
@@ -90,7 +90,7 @@ export async function WorksGallerySection({ data, lang, page }: SectionProps<Wor
                       sizes="(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 100vw"
                       priority={i < 3}
                       alt=""
-                      className="absolute inset-0 size-full object-cover"
+                      className={cx("absolute inset-0 size-full object-cover", zoomImage)}
                     />
                   ),
                 };

@@ -11,13 +11,50 @@ import { BlockForm } from "./block-form";
 const dayNames = ["B.e.", "Ç.a.", "Ç.", "C.a.", "C.", "Ş.", "B."];
 const HOUR_PX = 44;
 
-/** Week view (Monday–Sunday, Baku time) of live bookings and blocked time, coloured by studio. */
+/**
+ * Columns for one day: a booking uses the full width unless it overlaps others; overlapping ones
+ * (any studios) share the width side by side, each group as wide as it needs.
+ */
+function layoutLanes<T extends { id: string; startsAt: Date; endsAt: Date }>(items: T[]) {
+  const sorted = [...items].sort((a, b) => a.startsAt.getTime() - b.startsAt.getTime() || b.endsAt.getTime() - a.endsAt.getTime());
+  const place = new Map<string, { lane: number; lanes: number }>();
+  let group: T[] = [];
+  let laneEnds: number[] = [];
+  let groupEnd = -Infinity;
+  const close = () => group.forEach((b) => (place.get(b.id)!.lanes = laneEnds.length));
+  for (const b of sorted) {
+    if (b.startsAt.getTime() >= groupEnd) {
+      close();
+      group = [];
+      laneEnds = [];
+    }
+    let lane = laneEnds.findIndex((end) => end <= b.startsAt.getTime());
+    if (lane === -1) lane = laneEnds.push(0) - 1;
+    laneEnds[lane] = b.endsAt.getTime();
+    groupEnd = Math.max(groupEnd, b.endsAt.getTime());
+    group.push(b);
+    place.set(b.id, { lane, lanes: 1 });
+  }
+  close();
+  return place;
+}
+
+/**
+ * Week view (Monday–Sunday, Baku time) of live bookings and blocked time, coloured by studio;
+ * `?view=day&date=` shows one day with a column per studio and the customer's details.
+ */
 export default async function CalendarPage({ searchParams }: PageProps<"/admin/bookings/calendar">) {
   const sp = await searchParams;
-  const asked = typeof sp.week === "string" && isDate(sp.week) ? sp.week : bakuDate();
+  const dayView = sp.view === "day";
+  const param = dayView ? sp.date : sp.week;
+  const asked = typeof param === "string" && isDate(param) ? param : bakuDate();
   const monday = addDays(asked, -weekday(asked));
-  const days = Array.from({ length: 7 }, (_, i) => addDays(monday, i));
+  const days = dayView ? [asked] : Array.from({ length: 7 }, (_, i) => addDays(monday, i));
+  const rangeStart = days[0];
+  const rangeEnd = addDays(days.at(-1)!, 1);
   const today = bakuDate();
+  const step = dayView ? 1 : 7;
+  const nav = (d: string) => (dayView ? `?view=day&date=${d}` : `?week=${d}`);
 
   const studioRows = await db.select().from(studios).orderBy(asc(studios.position));
   const color = new Map(studioRows.map((s, i) => [s.id, studioColors[i % studioColors.length]]));
@@ -27,8 +64,8 @@ export default async function CalendarPage({ searchParams }: PageProps<"/admin/b
     .where(
       and(
         inArray(bookings.status, ["new", "confirmed", "completed", "blocked"]),
-        lt(bookings.startsAt, bakuInstant(addDays(monday, 7), 0)),
-        gt(bookings.endsAt, bakuInstant(monday, 0)),
+        lt(bookings.startsAt, bakuInstant(rangeEnd, 0)),
+        gt(bookings.endsAt, bakuInstant(rangeStart, 0)),
       ),
     )
     .orderBy(asc(bookings.startsAt));
@@ -38,6 +75,10 @@ export default async function CalendarPage({ searchParams }: PageProps<"/admin/b
   const first = Math.min(9, ...opens.map(([o]) => o));
   const last = Math.max(22, ...opens.map(([, c]) => c));
   const hours = Array.from({ length: last - first }, (_, i) => first + i);
+  // Columns: the 7 days (all studios side by side in each), or one column per studio for the day.
+  const columns = dayView
+    ? studioRows.map((s) => ({ key: s.id, day: asked, studio: s.id as string | null, label: s.name.az, href: null as string | null, today: false }))
+    : days.map((d, i) => ({ key: d, day: d, studio: null as string | null, label: `${dayNames[i]} ${d.slice(8)}.${d.slice(5, 7)}`, href: `?view=day&date=${d}`, today: d === today }));
 
   return (
     <>
@@ -46,13 +87,16 @@ export default async function CalendarPage({ searchParams }: PageProps<"/admin/b
         crumbs={[{ label: "Rezervasiyalar", href: "/admin/bookings" }, { label: "Təqvim" }]}
         actions={
           <>
-            <Link href={`?week=${addDays(monday, -7)}`} aria-label="Əvvəlki həftə" className={buttonClass("light", "px-3")}>
+            <Link href={dayView ? `?week=${asked}` : `?view=day&date=${today >= monday && today < addDays(monday, 7) ? today : monday}`} className={buttonClass("light")}>
+              {dayView ? "Həftə" : "Gün"}
+            </Link>
+            <Link href={nav(addDays(asked, -step))} aria-label={dayView ? "Əvvəlki gün" : "Əvvəlki həftə"} className={buttonClass("light", "px-3")}>
               <CaretLeft size={16} />
             </Link>
-            <Link href="?" className={buttonClass("light")}>
-              Bu həftə
+            <Link href={dayView ? `?view=day&date=${today}` : "?"} className={buttonClass("light")}>
+              {dayView ? "Bu gün" : "Bu həftə"}
             </Link>
-            <Link href={`?week=${addDays(monday, 7)}`} aria-label="Növbəti həftə" className={buttonClass("light", "px-3")}>
+            <Link href={nav(addDays(asked, step))} aria-label={dayView ? "Növbəti gün" : "Növbəti həftə"} className={buttonClass("light", "px-3")}>
               <CaretRight size={16} />
             </Link>
             <Link href="/admin/bookings" className={buttonClass("light")}>
@@ -65,7 +109,7 @@ export default async function CalendarPage({ searchParams }: PageProps<"/admin/b
       <Card accent={false}>
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <p className="font-medium">
-            {formatDate(monday)} – {formatDate(addDays(monday, 6))}
+            {dayView ? `${dayNames[weekday(asked)]} ${formatDate(asked)}` : `${formatDate(monday)} – ${formatDate(addDays(monday, 6))}`}
           </p>
           <ul className="flex flex-wrap gap-4 text-[13px]">
             {studioRows.map((s) => (
@@ -81,11 +125,17 @@ export default async function CalendarPage({ searchParams }: PageProps<"/admin/b
           </ul>
         </div>
         <div className="-mx-6 overflow-x-auto px-6">
-          <div className="grid min-w-[880px] grid-cols-[3rem_repeat(7,1fr)]">
+          <div className="grid min-w-[880px]" style={{ gridTemplateColumns: `3rem repeat(${columns.length}, 1fr)` }}>
             <div />
-            {days.map((d, i) => (
-              <div key={d} className={`border-b border-cms-line pb-2 text-center text-[13px] ${d === today ? "font-semibold text-highlight" : "text-cms-muted"}`}>
-                {dayNames[i]} {d.slice(8)}.{d.slice(5, 7)}
+            {columns.map((c) => (
+              <div key={c.key} className={`border-b border-cms-line pb-2 text-center text-[13px] ${c.today ? "font-semibold text-highlight" : "text-cms-muted"}`}>
+                {c.href ? (
+                  <Link href={c.href} className="hover:text-ink hover:underline">
+                    {c.label}
+                  </Link>
+                ) : (
+                  c.label
+                )}
               </div>
             ))}
             <div className="relative">
@@ -95,15 +145,14 @@ export default async function CalendarPage({ searchParams }: PageProps<"/admin/b
                 </div>
               ))}
             </div>
-            {days.map((d) => {
+            {columns.map((c) => {
+              const d = c.day;
               const dayStart = bakuInstant(d, 0).getTime();
               const dayEnd = bakuInstant(addDays(d, 1), 0).getTime();
-              const items = rows.filter((b) => b.startsAt.getTime() < dayEnd && b.endsAt.getTime() > dayStart);
-              // Side by side when bookings of different studios overlap.
-              const lanes = new Map(studioRows.map((s, i) => [s.id, i]));
-              const laneCount = Math.max(1, studioRows.length);
+              const items = rows.filter((b) => b.startsAt.getTime() < dayEnd && b.endsAt.getTime() > dayStart && (!c.studio || b.studioId === c.studio));
+              const lanes = layoutLanes(items);
               return (
-                <div key={d} className="relative border-l border-cms-line" style={{ height: HOUR_PX * hours.length }}>
+                <div key={c.key} className="relative border-l border-cms-line" style={{ height: HOUR_PX * hours.length }}>
                   {hours.map((h) => (
                     <div key={h} style={{ top: (h - first) * HOUR_PX }} className="absolute inset-x-0 border-t border-cms-line" />
                   ))}
@@ -114,7 +163,7 @@ export default async function CalendarPage({ searchParams }: PageProps<"/admin/b
                     const endMin = to === dayEnd ? 1440 : bakuMinutes(new Date(to));
                     const top = ((startMin - first * 60) / 60) * HOUR_PX;
                     const height = Math.max(18, ((endMin - startMin) / 60) * HOUR_PX - 2);
-                    const lane = lanes.get(b.studioId) ?? 0;
+                    const { lane, lanes: laneCount } = lanes.get(b.id) ?? { lane: 0, lanes: 1 };
                     const blocked = b.status === "blocked";
                     return (
                       <Link
@@ -135,6 +184,12 @@ export default async function CalendarPage({ searchParams }: PageProps<"/admin/b
                           {formatTime(startMin)}–{formatTime(endMin)}
                         </span>
                         <span className="block truncate">{blocked ? b.adminNote || statusLabels.blocked : `${b.firstName} ${b.lastName}`}</span>
+                        {!dayView && <span className="block truncate opacity-90">{b.studioSnapshot.name}</span>}
+                        {dayView && !blocked && (
+                          <span className="block truncate opacity-90">
+                            {[b.decorSnapshot?.name, b.phone].filter(Boolean).join(" · ")}
+                          </span>
+                        )}
                         {b.status === "new" && <span className="block truncate opacity-90">{statusLabels.new}</span>}
                       </Link>
                     );

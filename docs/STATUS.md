@@ -246,6 +246,49 @@ and a GitHub repo with the code (nothing is committed yet).
 - Left on purpose: Figma lorem / sample names and emails, seeded draft texts, 3 studios
   (Figma 2), H1 line height 80 vs 84 (same box), under 5 px rounding.
 
+## PLAN.md audit (2026-10-29)
+
+Checked every section of PLAN.md against the code; added what was missing:
+
+- **Admin istifadəçilər** (`/admin/users`, Ayarlar menu, admins only): add a user (name, email,
+  role, password ≥ 12), rename, role, new password (signs that user out everywhere), delete
+  (not yourself, never the last admin). Editors use the panel without this page.
+- **Calendar day view** (`?view=day&date=`): one column per studio with decor and phone; the
+  week view's day headers open it; Gün / Həftə switch.
+- **Lightbox on demand**: the photo/video viewer is a separate chunk loaded on the first click.
+- **Figma**: the diff tool now also checks boxes (frames, borders per side, radius, fill and
+  stroke colours with alpha) and the menu, privacy, empty package request, "Qəbul olundu" modal
+  and booking-from-home frames. Fixed: Roboto for the 4 Figma Roboto texts (home subtitle, ©,
+  menu legal links, contact email) instead of Inter; unchecked checkbox border `#e5e4e3`; the
+  booking "Studiya" heading margin on desktop; "Digər" card gap; add-on/package cards 85 px;
+  contact social gap 12 px and mobile textarea 143 px; mobile menu cards 292 px; decor cards
+  shown (disabled) before a studio is chosen, as in Figma's home-page variant.
+- **Tests** (60): admin users (editor cannot manage users, delete ends the session), media in
+  use cannot be deleted, contact honeypot / time trap not stored, per-IP rate limit, calendar
+  day view.
+
+### Motion and hover (2026-10-29)
+
+- Home hero: the blurred panel slides in from the left (desktop), the logo, title, text and
+  buttons follow from the left one by one, the photo settles from a slight zoom, © and social
+  buttons fade in. Inner pages: the title block rises in. Cards and blocks rise in while they
+  scroll into view (CSS scroll timelines, no JS; static where unsupported). All in
+  `globals.css` with `from`-only keyframes, so reduced motion / tests show the final layout.
+  Animated texts start at 1% opacity so the LCP is not delayed (Paketlər 1.94 → 1.05 s).
+- Hover: cards lift with a soft shadow (services, advantages, packages), photos zoom slightly
+  (about, decor galleries, works), partner logos brighten, social buttons and menu links move,
+  buttons press in (`active:scale`).
+- Studiyalar: decor and studio descriptions get Azerbaijani drafts the length of Figma's lorem
+  (`scripts/draft-texts.mts`), so the caption looks as designed; `check:launch` warns while a
+  draft is live and fails on lorem ipsum in studio/decor texts (Studiya 1 has lorem typed in
+  the admin).
+- Admin calendar (week): a booking takes the whole day column; only overlapping ones share it.
+  The studio name is shown on each box.
+
+Still open: Lighthouse itself (downloading it is blocked by the session's permission check —
+run `npx lighthouse` by hand), the optional `.ics` / WhatsApp / SMS (PLAN §5.4, client's call),
+the client questions below, and deploy (paused).
+
 ## Open questions for the client (PLAN.md §17)
 
 1. Domain: podkast.az (logo) or podcast.az (©)?

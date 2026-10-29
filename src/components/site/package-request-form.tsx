@@ -35,7 +35,8 @@ type Props = {
 function Price({ value, currency, className }: { value: string; currency?: string; className?: string }) {
   return (
     <span className={cx("flex items-end gap-1.5", className)}>
-      <span className="text-24 leading-[1.15] font-semibold tracking-tight">{value}</span>
+      {/* 28px line: Figma rounds the 24px text box (27.6) up to 28, so the cards are 85 tall. */}
+      <span className="text-24 leading-7 font-semibold tracking-tight">{value}</span>
       {currency && <span className="text-12 leading-[1.5]">{currency}</span>}
     </span>
   );

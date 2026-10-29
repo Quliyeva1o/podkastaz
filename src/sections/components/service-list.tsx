@@ -1,4 +1,5 @@
 import { Picture } from "@/components/picture";
+import { cardHover, cx } from "@/components/site/ui";
 import { listPublished } from "@/collections/queries";
 import type { ServiceData } from "@/collections/registry";
 import { getMediaItems } from "@/lib/content/queries";
@@ -18,7 +19,7 @@ export async function ServiceListSection({ lang }: SectionProps<ServiceListData>
         {items.map((item) => {
           const cover = media[item.data.cover ?? ""];
           return (
-            <li key={item.id} className="flex flex-col items-center gap-7.5 rounded-3xl border border-neutral-200 bg-white p-[1.5625rem] text-center desktop:min-h-[17.9375rem]">
+            <li key={item.id} className={cx("reveal flex flex-col items-center gap-7.5 rounded-3xl border border-neutral-200 bg-white p-[1.5625rem] text-center hover:border-primary-200 desktop:min-h-[17.9375rem]", cardHover)}>
               <div className="flex h-[5.1875rem] w-24 items-center justify-center desktop:h-26 desktop:w-30">
                 {cover && <Picture media={cover} lang={lang} sizes="120px" alt="" className="size-full object-contain" />}
               </div>

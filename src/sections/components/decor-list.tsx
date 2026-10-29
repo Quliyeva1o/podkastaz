@@ -1,5 +1,5 @@
 import { Picture } from "@/components/picture";
-import { ButtonLink, cx } from "@/components/site/ui";
+import { ButtonLink, cx, zoomImage } from "@/components/site/ui";
 import { href } from "@/i18n/routes";
 import { getMediaItems } from "@/lib/content/queries";
 import type { Decor, Studio } from "@/lib/studios/queries";
@@ -39,7 +39,7 @@ export async function DecorListSection({ data, lang, studio }: SectionProps<Deco
                   <li
                     key={`${id}-${i}`}
                     className={cx(
-                      "aspect-[288/278] overflow-hidden rounded-[0.375rem] bg-silver desktop:aspect-[307.4/278.2] desktop:rounded-[0.625rem]",
+                      "group/zoom reveal aspect-[288/278] overflow-hidden rounded-[0.375rem] bg-silver desktop:aspect-[307.4/278.2] desktop:rounded-[0.625rem]",
                       i >= 4 && "hidden tablet:block",
                     )}
                   >
@@ -48,7 +48,7 @@ export async function DecorListSection({ data, lang, studio }: SectionProps<Deco
                       lang={lang}
                       sizes="(min-width: 1024px) 22vw, (min-width: 768px) 50vw, 100vw"
                       priority={di === 0 && i < 4}
-                      className="size-full object-cover"
+                      className={cx("size-full object-cover", zoomImage)}
                     />
                   </li>
                 ))}

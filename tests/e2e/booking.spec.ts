@@ -132,6 +132,11 @@ test("admin: confirm a booking (customer email), block time, calendar", async ({
   await page.reload();
   await expect(page.getByRole("link", { name: /E2E texniki iş/ })).toBeVisible();
 
+  // Day view: a column per studio for that day.
+  await page.goto(`/admin/bookings/calendar?view=day&date=${day}`);
+  await expect(page.getByText("Studiya 2", { exact: true }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /E2E texniki iş/ })).toBeVisible();
+
   // CSV export of the list.
   const csv = await page.request.get(`/admin/bookings/export?from=${day}&to=${day}`);
   expect(csv.headers()["content-type"]).toContain("text/csv");

@@ -24,14 +24,14 @@ export function HeroSection({ data, lang, media, contacts }: SectionProps<HeroDa
       <Background media={bg} poster={poster} lang={lang} />
 
       {/* Desktop: Figma's panel is 32px padding + the 35px logo (the header draws it) above the centred block. */}
-      <div className="relative flex flex-col gap-5 px-4 pt-22.5 desktop:min-h-[inherit] desktop:w-[44.0625rem] desktop:justify-between desktop:gap-0 desktop:bg-black/14 desktop:px-15 desktop:pt-[4.1875rem] desktop:pb-10 desktop:backdrop-blur-[2.5rem]">
+      <div className="hero-panel relative flex flex-col gap-5 px-4 pt-22.5 desktop:min-h-[inherit] desktop:w-[44.0625rem] desktop:justify-between desktop:gap-0 desktop:bg-black/14 desktop:px-15 desktop:pt-[4.1875rem] desktop:pb-10 desktop:backdrop-blur-[2.5rem]">
         <div className="flex flex-col gap-5 desktop:my-auto desktop:gap-[3.125rem]">
-          <h1 className="text-32 leading-none font-bold desktop:text-84 desktop:leading-[0.952]">
+          <h1 className="hero-in text-32 leading-none font-bold desktop:text-84 desktop:leading-[0.952]">
             {tx(data.title, lang)}
             {seo && <span className="sr-only"> {seo}</span>}
           </h1>
-          <p className="text-16 leading-[1.5] desktop:text-24 desktop:leading-none">{tx(data.subtitle, lang)}</p>
-          <div className="flex gap-2.5 desktop:gap-5">
+          <p style={{ "--i": 1 } as React.CSSProperties} className="hero-in font-roboto text-16 leading-[1.5] desktop:text-24 desktop:leading-none">{tx(data.subtitle, lang)}</p>
+          <div style={{ "--i": 2 } as React.CSSProperties} className="hero-in flex gap-2.5 desktop:gap-5">
             <ButtonLink href={linkHref(data.primary, lang)} variant="white" className="h-10 flex-1 text-14! leading-[1.5]! desktop:h-12 desktop:w-[12.1875rem] desktop:flex-none desktop:text-16!">
               {tx(data.primary.label, lang)}
             </ButtonLink>
@@ -40,12 +40,12 @@ export function HeroSection({ data, lang, media, contacts }: SectionProps<HeroDa
             </ButtonLink>
           </div>
         </div>
-        <p className="hidden text-16 leading-none desktop:block">{tx(contacts?.copyright, lang)}</p>
+        <p className="hero-fade hidden font-roboto text-16 leading-none desktop:block">{tx(contacts?.copyright, lang)}</p>
       </div>
 
-      <div className="relative mt-auto flex flex-col gap-4 px-4 pb-5 desktop:absolute desktop:right-15 desktop:bottom-10 desktop:p-0">
+      <div className="hero-fade relative mt-auto flex flex-col gap-4 px-4 pb-5 desktop:absolute desktop:right-15 desktop:bottom-10 desktop:p-0">
         <SocialLinks socials={contacts?.socials ?? []} />
-        <p className="text-14 leading-none desktop:hidden">{tx(contacts?.copyright, lang)}</p>
+        <p className="font-roboto text-14 leading-none desktop:hidden">{tx(contacts?.copyright, lang)}</p>
       </div>
     </section>
   );
@@ -55,7 +55,7 @@ function Background({ media, poster, lang }: { media?: MediaItem; poster?: Media
   if (!media) return null;
   return (
     // Mobile: the lower 325/574 of the screen, cropped like Figma (x 27–88% of the photo).
-    <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-[56.6%] desktop:inset-0 desktop:h-auto">
+    <div aria-hidden className="hero-zoom absolute inset-x-0 bottom-0 -z-10 h-[56.6%] desktop:inset-0 desktop:h-auto">
       {poster && (
         <Picture media={poster} lang={lang} sizes="100vw" priority alt="" className="size-full object-cover object-[70%_center] desktop:object-center" />
       )}

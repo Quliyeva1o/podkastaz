@@ -25,7 +25,7 @@ export function TextArea({ label, error, className, ...input }: Base & Component
   return (
     <label className={cx("flex flex-col gap-2 text-14 leading-[1.43]", className)}>
       {label}
-      <textarea className={cx(fieldClass, "h-[8.625rem] resize-y")} aria-invalid={error ? true : undefined} {...input} />
+      <textarea className={cx(fieldClass, "h-[8.9375rem] resize-y desktop:h-[8.625rem]")} aria-invalid={error ? true : undefined} {...input} />
       {error && <span className="text-12 text-[#e5484d]">{error}</span>}
     </label>
   );

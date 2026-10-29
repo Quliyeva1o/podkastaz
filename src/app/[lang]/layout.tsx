@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, htmlLang, locales } from "@/i18n/config";
-import { inter } from "@/lib/fonts";
+import { inter, roboto } from "@/lib/fonts";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -21,7 +21,7 @@ export default async function SiteLayout({ children, params }: LayoutProps<"/[la
   if (!hasLocale(lang)) notFound();
 
   return (
-    <html lang={htmlLang[lang]} className={`${inter.variable} antialiased`} suppressHydrationWarning>
+    <html lang={htmlLang[lang]} className={`${inter.variable} ${roboto.variable} antialiased`} suppressHydrationWarning>
       <head>
         {/* Scrollbar width → --sbw, so the fluid rem scale uses the real content width (see globals.css). */}
         <script

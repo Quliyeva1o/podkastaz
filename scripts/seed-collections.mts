@@ -1,8 +1,9 @@
 // Seeds the collections (services, packages, add-ons, works, partners) and the studios with
 // their decors from Figma, images included. Idempotent: a collection (or the studios table)
 // that already has rows is left alone, so admin edits survive re-runs.
-// Figma lorem ipsum (studio and decor descriptions) is not copied: those stay empty until
-// the client sends real texts. Usage: npm run db:seed-collections
+// Figma lorem ipsum (studio and decor descriptions) is not copied: short Azerbaijani drafts
+// (scripts/draft-texts.mts) keep the layout until the client sends real texts.
+// Usage: npm run db:seed-collections
 import { count, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
@@ -10,6 +11,7 @@ import { collections, type CollectionName } from "../src/collections/registry";
 import { slugify } from "../src/collections/slug";
 import { bookingSettings, collectionItems, decors, studios } from "../src/db/schema";
 import type { Localized } from "../src/i18n/config";
+import { decorDrafts, studioDraft } from "./draft-texts.mjs";
 import { defaultHours } from "../src/lib/studios/fields";
 import { objectSchema, withDefaults } from "../src/sections/fields";
 import { importMedia } from "./figma/local-media.mjs";
@@ -173,7 +175,7 @@ if (studioCount > 0) {
         slugAz: slugify(s.name),
         name: t(s.name),
         address: t(s.address),
-        description: t(""),
+        description: t(studioDraft),
         cover: ids[0],
         hours: defaultHours,
         position,
@@ -186,7 +188,7 @@ if (studioCount > 0) {
         slugAz: slugify(`${short} dekor`),
         name: t(`${short} dekor`),
         shortName: t(short),
-        description: t(""),
+        description: t(decorDrafts[short] ?? ""),
         cover: ids[i],
         gallery: galleryOrder[i].map((k) => ids[k]),
         position: i,

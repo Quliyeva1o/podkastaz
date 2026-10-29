@@ -28,7 +28,7 @@ export function SocialLinks({
             rel="noopener noreferrer"
             aria-label={names[s.network]}
             className={cx(
-              "flex size-[2.39rem] items-center justify-center rounded-full backdrop-blur-[2.7rem] transition-colors desktop:size-10",
+              "flex size-[2.39rem] items-center justify-center rounded-full backdrop-blur-[2.7rem] transition-[background-color,border-color,color,translate] duration-200 hover:-translate-y-0.5 desktop:size-10",
               itemClassName ?? "bg-white/16 text-white hover:bg-white/30 desktop:bg-white/24",
             )}
           >

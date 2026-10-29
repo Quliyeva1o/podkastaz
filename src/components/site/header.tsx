@@ -44,7 +44,9 @@ export function Header({
         <Link
           href={href("home", lang)}
           aria-label={tx(logo?.alt, lang) || siteName}
-          className="block w-[8.6rem] desktop:w-[11.4375rem]"
+          // On the home page the logo comes in from the left with the hero panel.
+          style={dark ? ({ "--i": -1 } as React.CSSProperties) : undefined}
+          className={cx("block w-[8.6rem] transition-opacity hover:opacity-80 desktop:w-[11.4375rem]", dark && "hero-in")}
         >
           {logo ? (
             <Picture media={logo} lang={lang} sizes="(min-width: 1024px) 12vw, 140px" priority alt="" className="h-auto w-full" />

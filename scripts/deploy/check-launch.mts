@@ -5,6 +5,7 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { bookingSettings, collectionItems, decors, pages, pageSections, sectionContents, studios } from "../../src/db/schema";
+import { draftTexts } from "../draft-texts.mjs";
 import { eq } from "drizzle-orm";
 
 const client = postgres(process.env.DATABASE_URL!, { max: 1 });
@@ -63,7 +64,9 @@ for (const p of await db.select().from(pages)) {
 for (const s of await db.select().from(studios)) {
   if (!s.active) continue;
   if (/^Studiya \d$/.test(s.name.az)) warnings.push(`studio "${s.name.az}": Figma placeholder name`);
+  if (/lorem|ipsum/i.test(s.description.az)) errors.push(`studio "${s.name.az}": lorem ipsum in the description`);
   if (!s.description.az.trim()) warnings.push(`studio "${s.name.az}": no description (Studiyalar page)`);
+  else if (draftTexts.has(s.description.az)) warnings.push(`studio "${s.name.az}": the seeded draft description`);
   if (s.hours.every((h) => h?.open === "10:00" && h?.close === "22:00")) warnings.push(`studio "${s.name.az}": default opening hours 10:00–22:00 every day`);
 }
 for (const b of await db.select().from(bookingSettings)) {
@@ -74,6 +77,10 @@ for (const b of await db.select().from(bookingSettings)) {
 }
 const emptyDecors = (await db.select().from(decors)).filter((d) => d.active && !d.description.az.trim());
 if (emptyDecors.length) warnings.push(`${emptyDecors.length} decors without a description (Figma had lorem)`);
+const loremDecors = (await db.select().from(decors)).filter((d) => d.active && /lorem|ipsum/i.test(d.description.az));
+if (loremDecors.length) errors.push(`${loremDecors.length} decors with lorem ipsum in the description`);
+const draftDecors = (await db.select().from(decors)).filter((d) => d.active && draftTexts.has(d.description.az));
+if (draftDecors.length) warnings.push(`${draftDecors.length} decors still have the seeded draft description`);
 const items = await db.select().from(collectionItems);
 const videos = items.filter((i) => i.collection === "works" && (i.data as { kind: string }).kind === "video");
 if (videos.length && videos.every((v) => !(v.data as { youtube: string }).youtube)) {

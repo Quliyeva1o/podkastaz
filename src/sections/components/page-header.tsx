@@ -20,12 +20,12 @@ export function PageHeaderSection({ data, lang }: SectionProps<PageHeaderData>) 
   return (
     <section data-section="pageHeader" className="container-page px-4 pt-8 desktop:px-15 desktop:pt-7.5">
       <div className={cx("flex flex-col gap-4 desktop:gap-5.25", mobile[data.alignMobile] ?? mobile.center, desktop[data.alignDesktop] ?? desktop.center)}>
-        <h1 className="text-28 leading-[1.05] font-semibold tracking-tight desktop:text-48">
+        <h1 className="rise-in text-28 leading-[1.05] font-semibold tracking-tight desktop:text-48">
           {tx(data.title, lang)}
           {/* Figma shows a short title; the hidden rest gives search engines a descriptive H1. */}
           {suffix && <span className="sr-only"> {suffix}</span>}
         </h1>
-        {subtitle && <p className="text-16 leading-[1.5] tracking-tight text-neutral-850 desktop:text-20">{subtitle}</p>}
+        {subtitle && <p style={{ "--i": 1 } as React.CSSProperties} className="rise-in text-16 leading-[1.5] tracking-tight text-neutral-850 desktop:text-20">{subtitle}</p>}
         {cta && (
           <ButtonLink href={linkHref(data.cta, lang)} className="h-10 w-full desktop:h-12.5 desktop:w-[12.25rem]">
             {cta}

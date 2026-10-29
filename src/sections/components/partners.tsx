@@ -41,7 +41,7 @@ export async function PartnersSection({ data, lang }: SectionProps<PartnersData>
         <li
           key={`${copy}-${item.id}`}
           aria-hidden={copy ? true : undefined}
-          className={cx("flex shrink-0 items-center opacity-50", copy > 0 && "desktop:hidden")}
+          className={cx("flex shrink-0 items-center opacity-50 transition-opacity duration-300 hover:opacity-100", copy > 0 && "desktop:hidden")}
           style={{ "--logo-h": h, "--logo-w": w } as React.CSSProperties}
         >
           {item.data.url && !copy ? (
@@ -59,7 +59,7 @@ export async function PartnersSection({ data, lang }: SectionProps<PartnersData>
     <section
       data-section="partners"
       aria-label={tx(data.title, lang) || undefined}
-      className="partners-marquee container-page overflow-hidden pt-[5.6875rem] desktop:px-15 desktop:pt-15"
+      className="reveal partners-marquee container-page overflow-hidden pt-[5.6875rem] desktop:px-15 desktop:pt-15"
     >
       <ul className="partners-track flex w-max items-center gap-[2.375rem] desktop:w-full desktop:justify-between desktop:gap-0">
         {row(0)}

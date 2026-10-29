@@ -66,6 +66,9 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
   const dateInput = useRef<HTMLInputElement>(null);
 
   const current = studios.find((s) => s.slug === studio);
+  // Before a studio is chosen the decor cards still show (Figma "Rezervasiya et" from the home
+  // page), disabled, with the first studio's decors; choosing a studio shows its own.
+  const decorStudio = current ?? studios[0];
 
   useEffect(() => {
     if (startedAt.current) startedAt.current.value = String(Date.now());
@@ -150,8 +153,8 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
           <h2 className={heading}>{labels.detailsTitle}</h2>
 
           <fieldset className="flex flex-col gap-4">
-            {/* Figma mobile has no "Studiya" label above the cards (screen readers still get it). */}
-            <legend className={cx(groupTitle, "sr-only mb-4 desktop:not-sr-only")}>{labels.studioLabel}</legend>
+            {/* Figma mobile has no "Studiya" label above the cards (screen readers still get it); not-sr-only resets the margin, hence the !. */}
+            <legend className={cx(groupTitle, "sr-only desktop:not-sr-only desktop:mb-4!")}>{labels.studioLabel}</legend>
             <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2">
               {studios.map((s) => (
                 <label key={s.slug} className={cx(card, "items-start", studio === s.slug ? "border-primary-600" : "border-neutral-200 hover:border-neutral-400")}>
@@ -183,7 +186,7 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
           <fieldset className="flex flex-col gap-4" disabled={!current}>
             <legend className={cx(groupTitle, "mb-4 desktop:mb-4")}>{labels.decorLabel}</legend>
             <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2">
-              {(current?.decors ?? []).map((d) => (
+              {(decorStudio?.decors ?? []).map((d) => (
                 <label key={d.slug} className={cx(card, "items-center", decor === d.slug ? "border-primary-600" : "border-neutral-200 hover:border-neutral-400")}>
                   <input type="radio" name="decor" value={d.slug} checked={decor === d.slug} onChange={() => setDecor(d.slug)} className="sr-only" required />
                   <span className="relative h-[3.3125rem] w-15 shrink-0 overflow-hidden rounded-[0.375rem] bg-silver">{d.thumb}</span>
@@ -191,8 +194,8 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
                   <Radio checked={decor === d.slug} />
                 </label>
               ))}
-              {current && (
-                <label className={cx(card, "min-h-[5.3125rem] items-center", decor === "other" ? "border-primary-600" : "border-neutral-200 hover:border-neutral-400")}>
+              {decorStudio && (
+                <label className={cx(card, "min-h-[5.3125rem] items-center gap-2.5!", decor === "other" ? "border-primary-600" : "border-neutral-200 hover:border-neutral-400")}>
                   <input type="radio" name="decor" value="other" checked={decor === "other"} onChange={() => setDecor("other")} className="sr-only" required />
                   <span className="flex flex-1 flex-col gap-1 text-14 leading-[1.5] tracking-tight">
                     <span className="font-medium">{labels.otherTitle}</span>

@@ -66,6 +66,8 @@ async function Gate({ children }: { children: React.ReactNode }) {
         { label: "Şirkət məlumatları (SEO)", href: "/admin/pages/global/business" },
         { label: "Email bildirişləri", href: "/admin/pages/global/notifications" },
         { label: "Yönləndirmələr (301)", href: "/admin/redirects" },
+        // Only admins manage users (editors do not see the link).
+        ...(user.role === "admin" ? [{ label: "Admin istifadəçilər", href: "/admin/users" }] : []),
       ],
     },
   ];

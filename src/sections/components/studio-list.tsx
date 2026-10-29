@@ -26,7 +26,7 @@ export async function StudioListSection({ data, lang }: SectionProps<StudioListD
           ? decors.map((d) => ({ id: d.id, name: tx(d.name, lang), description: tx(d.description, lang), image: d.cover }))
           : [{ id: studio.id, name, description: "", image: studio.cover }];
         return (
-          <article key={studio.id} id={studio.slugAz} className="flex flex-col gap-10 desktop:gap-7.5">
+          <article key={studio.id} id={studio.slugAz} className="reveal flex flex-col gap-10 desktop:gap-7.5">
             <div className="flex flex-col gap-6 desktop:flex-row desktop:items-center desktop:justify-between desktop:gap-10">
               <div className="flex flex-col gap-3 desktop:max-w-[40.375rem]">
                 <h2 className="text-24 leading-[1.15] font-semibold tracking-tight desktop:text-32 desktop:leading-[1.05]">{name}</h2>

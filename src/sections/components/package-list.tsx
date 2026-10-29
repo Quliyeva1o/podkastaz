@@ -48,7 +48,7 @@ export async function PackageListSection({ data, lang }: SectionProps<PackageLis
             </div>
           );
           return (
-            <li key={p.id} className={cx(p.data.highlighted ? "-mx-px -mb-px desktop:-mx-0.5 desktop:-mt-[0.8125rem] desktop:-mb-0.5" : "tablet:pt-12 desktop:pt-[2.1875rem]")}>
+            <li key={p.id} className={cx("reveal transition-[translate] duration-300 ease-out hover:-translate-y-1 [&>*]:transition-shadow [&>*]:duration-300 hover:[&>*]:shadow-[0_1.25rem_2.5rem_-1.5rem_rgb(41_39_38/0.3)]", p.data.highlighted ? "-mx-px -mb-px desktop:-mx-0.5 desktop:-mt-[0.8125rem] desktop:-mb-0.5" : "tablet:pt-12 desktop:pt-[2.1875rem]")}>
               {p.data.highlighted ? (
                 // Gradient frame outside the card (Figma stroke: 1px mobile, 2px desktop, 48px on top for the tab);
                 // the other cards start below the tab (on desktop Figma lets the tab stick out 13px above the row).
@@ -68,7 +68,7 @@ export async function PackageListSection({ data, lang }: SectionProps<PackageLis
       </ul>
 
       {addons.length > 0 && (
-        <div className="flex flex-col gap-5 rounded-[0.625rem] border border-neutral-300 bg-white p-[1.1875rem] desktop:gap-6">
+        <div className="reveal flex flex-col gap-5 rounded-[0.625rem] border border-neutral-300 bg-white p-[1.1875rem] desktop:gap-6">
           <h2 className="text-18 leading-[1.37] font-semibold tracking-tight desktop:text-center desktop:text-20 desktop:leading-[1.23]">{tx(data.addonsTitle, lang)}</h2>
           <ul className="flex flex-col gap-6 desktop:grid desktop:grid-flow-col desktop:auto-cols-fr desktop:gap-12.5">
             {addons.map((a) => (

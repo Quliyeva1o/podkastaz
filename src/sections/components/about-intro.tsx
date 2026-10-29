@@ -1,4 +1,5 @@
 import { Picture } from "@/components/picture";
+import { cx, zoomImage } from "@/components/site/ui";
 import { tx } from "../helpers";
 import type { AboutIntroData, SectionProps } from "../types";
 
@@ -11,12 +12,12 @@ export function AboutIntroSection({ data, lang, media }: SectionProps<AboutIntro
   return (
     <section data-section="aboutIntro" className="container-page px-4 pt-10 desktop:px-15 desktop:pt-15">
       <div className="flex flex-col gap-6 desktop:flex-row desktop:items-center desktop:gap-10">
-        <div className="aspect-[288/240] overflow-hidden rounded-[0.625rem] bg-silver desktop:aspect-[644/440] desktop:w-[48.8%] desktop:shrink-0">
+        <div className="group/zoom reveal aspect-[288/240] overflow-hidden rounded-[0.625rem] bg-silver desktop:aspect-[644/440] desktop:w-[48.8%] desktop:shrink-0">
           {photo && (
-            <Picture media={photo} lang={lang} sizes="(min-width: 1024px) 45vw, 100vw" priority className="size-full object-cover" />
+            <Picture media={photo} lang={lang} sizes="(min-width: 1024px) 45vw, 100vw" priority className={cx("size-full object-cover", zoomImage)} />
           )}
         </div>
-        <div className="flex flex-col gap-5 desktop:gap-6">
+        <div className="reveal flex flex-col gap-5 desktop:gap-6">
           <h2 className="text-24 leading-[1.15] font-semibold tracking-tight text-primary-600 desktop:text-32 desktop:leading-[1.05]">
             {tx(data.title, lang)}
           </h2>

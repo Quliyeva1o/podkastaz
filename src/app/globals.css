@@ -89,6 +89,7 @@ html {
   --font-cms-head: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-roboto: var(--font-roboto-face), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1024px;
@@ -198,6 +199,82 @@ main > * + * {
   }
   .partners-track {
     animation: none;
+  }
+}
+
+/*
+ * Home hero: the blurred panel slides in from the left (desktop), then the title, text and
+ * buttons follow from the left one by one (--i); the photo settles from a slight zoom. Only
+ * `from` frames: with animations off (reduced motion, tests) everything is simply in place.
+ */
+@keyframes hero-panel {
+  from {
+    transform: translateX(-100%);
+  }
+}
+@keyframes hero-in {
+  from {
+    opacity: 0.01;
+    transform: translateX(-3rem);
+  }
+}
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+.hero-in {
+  animation: hero-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) calc(0.35s + var(--i, 0) * 0.12s) backwards;
+}
+.hero-zoom {
+  animation: hero-zoom 1.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.hero-fade {
+  animation: fade-in 0.8s ease-out 0.9s backwards;
+}
+@media (min-width: 1024px) {
+  .hero-panel {
+    animation: hero-panel 1s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+}
+
+/*
+ * Inner pages: the title block rises in on load. Texts start at 1% opacity, not 0: the browser
+ * does not count fully transparent text as painted, which would delay the LCP by the animation.
+ */
+@keyframes rise-in {
+  from {
+    opacity: 0.01;
+    transform: translateY(1.25rem);
+  }
+}
+.rise-in {
+  animation: rise-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 0.08s) backwards;
+}
+
+/*
+ * Cards and blocks rise in as they enter the screen (scroll-driven, no JavaScript). Browsers
+ * without scroll timelines show them as they are. Transform (not `translate`) is animated, so a
+ * card's hover lift (`translate`) still works after it has appeared.
+ */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(2.5rem);
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal ease-out backwards;
+      animation-timeline: view();
+      animation-range: entry 0% entry 90%;
+    }
   }
 }
 

@@ -26,7 +26,7 @@ export function Radio({ checked }: { checked: boolean }) {
 /** Figma "Controls" checkbox look: 16px, r3, orange tick. */
 export function TickBox({ checked, className }: { checked: boolean; className?: string }) {
   return (
-    <span aria-hidden className={cx("flex size-4 shrink-0 items-center justify-center rounded-[0.19rem] border", checked ? "border-neutral-950" : "border-neutral-300", className)}>
+    <span aria-hidden className={cx("flex size-4 shrink-0 items-center justify-center rounded-[0.19rem] border", checked ? "border-neutral-950" : "border-neutral-200", className)}>
       {checked && (
         <svg viewBox="0 0 9 6.5" className="w-[0.5625rem] fill-primary-600">
           <path d="M8.78.22a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2.5-2.5a.75.75 0 1 1 1.06-1.06L3.25 4.69 7.72.22a.75.75 0 0 1 1.06 0Z" />

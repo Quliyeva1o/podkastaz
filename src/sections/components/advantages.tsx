@@ -1,7 +1,7 @@
 import type { Icon } from "@phosphor-icons/react";
 import { Alarm, CheckCircle, Headphones, MapPinArea, Microphone, Rocket, Star, VideoCamera } from "@phosphor-icons/react/ssr";
 import { Picture } from "@/components/picture";
-import { cx } from "@/components/site/ui";
+import { cardHover, cx } from "@/components/site/ui";
 import { tx } from "../helpers";
 import type { AdvantagesData, SectionProps } from "../types";
 
@@ -37,7 +37,8 @@ export function AdvantagesSection({ data, lang, media, variant }: SectionProps<A
               key={i}
               className={cx(
                 // px 16 (Figma 20): the browser sets Inter a hair wider, and "Kristal təmiz, …" must stay on one line.
-                "relative isolate flex min-h-[15.8rem] flex-col items-center gap-7.5 overflow-hidden rounded-2xl px-5 py-7.5 text-center desktop:px-4",
+                "reveal relative isolate flex min-h-[15.8rem] flex-col items-center gap-7.5 overflow-hidden rounded-2xl px-5 py-7.5 text-center desktop:px-4",
+                cardHover,
                 item.accent ? "bg-primary-600 text-white" : "border border-neutral-300 bg-white",
               )}
             >

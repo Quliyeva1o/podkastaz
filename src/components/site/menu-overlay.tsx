@@ -65,7 +65,7 @@ export function MenuOverlay({
         aria-expanded={open}
         aria-haspopup="dialog"
         onClick={() => setOpen(true)}
-        className={cx("-m-px flex size-10 items-center justify-center", buttonClassName)}
+        className={cx("-m-px flex size-10 items-center justify-center transition-transform duration-200 hover:scale-110", buttonClassName)}
       >
         {icon}
       </button>
@@ -97,7 +97,7 @@ export function MenuOverlay({
                         href={item.href}
                         onClick={close}
                         aria-current={item.target === current ? "page" : undefined}
-                        className="block text-24 leading-[1.5] font-medium transition-colors hover:text-primary-400 desktop:text-54 desktop:font-semibold"
+                        className="block text-24 leading-[1.5] font-medium transition-[color,translate] duration-300 hover:translate-x-2 hover:text-primary-400 desktop:text-54 desktop:font-semibold desktop:hover:translate-x-4"
                       >
                         {item.label}
                       </Link>
@@ -113,7 +113,7 @@ export function MenuOverlay({
                 <MenuCard card={contact} icon={Envelope} onNavigate={close} className="bg-white/10" index={nav.length + 1} />
               </div>
 
-              <p className="menu-rise mt-[1.8125rem] flex items-center gap-2.5 text-14 leading-none desktop:col-start-1 desktop:row-start-2 desktop:mt-10 desktop:gap-4 desktop:text-18">
+              <p className="menu-rise mt-[1.8125rem] flex items-center gap-2.5 font-roboto text-14 leading-none desktop:col-start-1 desktop:row-start-2 desktop:mt-10 desktop:gap-4 desktop:text-18">
                 {legal.map((l, i) => (
                   <span key={l.href} className="contents">
                     {i > 0 && (
@@ -121,7 +121,7 @@ export function MenuOverlay({
                         /
                       </span>
                     )}
-                    <Link href={l.href} onClick={close} className="hover:text-primary-400">
+                    <Link href={l.href} onClick={close} className="transition-colors hover:text-primary-400">
                       {l.label}
                     </Link>
                   </span>
@@ -156,7 +156,8 @@ function MenuCard({
       onClick={onNavigate}
       style={{ "--i": index } as React.CSSProperties}
       className={cx(
-        "menu-rise group/card relative flex items-start gap-2.5 overflow-hidden rounded-[0.375rem] p-3 desktop:h-[19.5625rem] desktop:w-[19.21875rem] desktop:flex-col desktop:justify-between desktop:gap-7.5 desktop:px-5 desktop:py-7.5",
+        // Mobile: Figma makes the cards 292 wide (4px past the 16px margin on the right).
+        "menu-rise group/card relative flex w-[18.25rem] items-start tablet:w-auto gap-2.5 overflow-hidden rounded-[0.375rem] p-3 desktop:h-[19.5625rem] desktop:w-[19.21875rem] desktop:flex-col desktop:justify-between desktop:gap-7.5 desktop:px-5 desktop:py-7.5",
         className,
       )}
     >
