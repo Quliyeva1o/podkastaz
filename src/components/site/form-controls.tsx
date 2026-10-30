@@ -11,13 +11,13 @@ import { buttonClass, cx } from "./ui";
 export const formHeading = "text-18 leading-[1.15] font-semibold tracking-tight desktop:text-24";
 export const groupTitle = "text-18 leading-[1.15] font-semibold tracking-tight";
 // 15px padding + 1px border = Figma's 16px padding with the stroke inside.
-export const choiceCard = "relative flex cursor-pointer gap-4 rounded-[0.375rem] border p-[0.9375rem] transition-colors";
+export const choiceCard = "relative flex cursor-pointer gap-4 rounded-2xl border p-[0.9375rem] transition-colors";
 export const choiceBorder = (on: boolean) => (on ? "border-primary-600" : "border-neutral-200 hover:border-neutral-400");
 
-/** Figma "Controls" radio: 16px ring, orange 10px dot when selected. */
+/** Figma "Controls" radio: 16px ring (#e5e4e3, #d2d0cf when selected), orange 10px dot when selected. */
 export function Radio({ checked }: { checked: boolean }) {
   return (
-    <span aria-hidden className={cx("flex size-4 shrink-0 items-center justify-center rounded-full border", checked ? "border-neutral-950" : "border-neutral-200")}>
+    <span aria-hidden className={cx("flex size-4 shrink-0 items-center justify-center rounded-full border", checked ? "border-neutral-300" : "border-neutral-200")}>
       {checked && <span className="size-2.5 rounded-full bg-primary-600" />}
     </span>
   );

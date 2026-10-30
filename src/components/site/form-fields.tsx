@@ -3,11 +3,11 @@ import { cx } from "./ui";
 
 /**
  * Figma "Text Input" (Components page): label 14/20 above a 48px field — white, 1px
- * #e5e4e3 border, r8, 14px padding, 14/20 text, #85807d placeholder; orange border on focus,
- * red with a hint on error.
+ * #e5e4e3 border, r8, 14px padding, 14/20 text, #85807d placeholder. Hover: #f8f8f8 with a
+ * #d2d0cf border; typing: #85807d border; red with a hint on error.
  */
 export const fieldClass =
-  "w-full rounded-lg border border-neutral-200 bg-white px-3.5 py-[0.8125rem] text-14 leading-[1.43] text-neutral-950 placeholder:text-neutral-600 outline-none transition-colors focus:border-primary-600 aria-invalid:border-[#e5484d]";
+  "w-full rounded-lg border border-neutral-200 bg-white px-3.5 py-[0.8125rem] text-14 leading-[1.43] text-neutral-950 placeholder:text-neutral-600 outline-none transition-colors hover:border-neutral-300 hover:bg-neutral-50 focus:border-neutral-600 focus:bg-white aria-invalid:border-[#e5484d]";
 
 type Base = { label: string; error?: string; className?: string };
 

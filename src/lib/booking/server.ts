@@ -54,3 +54,37 @@ export async function availability(slug: string, date: string): Promise<DaySlots
   if (!found) return null;
   return daySlots(date, found.studio.hours, found.rules, await busyOn(found.studio.id, date));
 }
+
+/** How a day looks in the booking calendar: bookable, fully taken, or not offered. */
+export type DayState = "open" | "full" | "closed" | "past" | "tooFar";
+
+/**
+ * Every day of a studio from `from` for `days` days (the calendar's 6 weeks), from one query.
+ * "full" = the studio opens that day but no start time is free any more.
+ */
+export async function daysAvailability(slug: string, from: string, days: number): Promise<Record<string, DayState> | null> {
+  const found = await studioForBooking(slug);
+  if (!found) return null;
+  const rows = await db
+    .select({ start: bookings.startsAt, end: bookings.blockedUntil })
+    .from(bookings)
+    .where(
+      and(
+        eq(bookings.studioId, found.studio.id),
+        inArray(bookings.status, [...liveStatuses]),
+        lt(bookings.startsAt, bakuInstant(addDays(from, days + 1), 0)),
+        gt(bookings.blockedUntil, bakuInstant(addDays(from, -1), 0)),
+      ),
+    );
+  const now = new Date();
+  const out: Record<string, DayState> = {};
+  for (let i = 0; i < days; i++) {
+    const date = addDays(from, i);
+    const dayStart = bakuInstant(date, 0).getTime();
+    const dayEnd = bakuInstant(addDays(date, 2), 0).getTime();
+    const busy = rows.filter((b) => b.start.getTime() < dayEnd && b.end.getTime() > dayStart);
+    const slots = daySlots(date, found.studio.hours, found.rules, busy, now);
+    out[date] = slots.status !== "open" ? slots.status : slots.starts.some((s) => s.ends.length) ? "open" : "full";
+  }
+  return out;
+}

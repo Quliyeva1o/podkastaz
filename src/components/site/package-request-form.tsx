@@ -110,7 +110,8 @@ export function PackageRequestForm({ packages, addons, labels, lang, links, init
               {addons.map((a) => {
                 const on = chosen.includes(a.id);
                 return (
-                  <label key={a.id} className={cx(choiceCard, "items-start", choiceBorder(on))}>
+                  // Figma mobile keeps the add-on cards at r6 (packages and desktop: r16).
+                  <label key={a.id} className={cx(choiceCard, "items-start max-desktop:rounded-[0.375rem]", choiceBorder(on))}>
                     <input
                       type="checkbox"
                       name="addons"

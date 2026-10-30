@@ -1,10 +1,9 @@
 "use client";
 
-import { Alarm, CalendarDots } from "@phosphor-icons/react";
 import { useActionState, useEffect, useRef, useState, type ReactNode } from "react";
 import { createBooking, type BookingState } from "@/lib/booking/actions";
 import type { DaySlots } from "@/lib/booking/slots";
-import { addDays, bakuDate } from "@/lib/booking/time";
+import { DatePicker, TimePicker } from "./booking-pickers";
 import { Check, choiceCard, formHeading, groupTitle, Radio, SuccessModal, withLinks } from "./form-controls";
 import { TextArea, TextField } from "./form-fields";
 import { Turnstile } from "./turnstile";
@@ -20,6 +19,7 @@ export type BookingStudio = {
 export type BookingLabels = Record<
   | "detailsTitle" | "studioLabel" | "decorLabel" | "otherTitle" | "otherText" | "otherRequest" | "otherRequestPlaceholder"
   | "dateTimeTitle" | "dateLabel" | "datePlaceholder" | "startLabel" | "endLabel" | "timePlaceholder"
+  | "calendarToday" | "calendarTaken" | "calendarSelected" | "months" | "weekdays" | "prevMonth" | "nextMonth" | "hourLabel" | "minuteLabel" | "confirmTime"
   | "closedDay" | "noSlots" | "chooseStudioFirst" | "chooseDateFirst"
   | "personalTitle" | "firstName" | "firstNamePlaceholder" | "lastName" | "lastNamePlaceholder"
   | "phone" | "phonePlaceholder" | "email" | "emailPlaceholder"
@@ -42,12 +42,11 @@ type Props = {
 const heading = formHeading;
 const card = choiceCard;
 
-const display = (date: string) => (date ? date.split("-").reverse().join(" / ") : "");
-
 /**
  * Rezervasiya et (Figma "Frame 1410104280"): studio, decor, date and times on the left, personal
- * data, the two consents and the button on the right (one column on mobile). Free times come
- * from /api/availability; taken ones are shown disabled. The server re-checks everything.
+ * data, the two consents and the button on the right (one column on mobile). Free days and
+ * times come from /api/availability: the calendar greys taken days, the time picker taken hours
+ * and minutes (booking-pickers.tsx). The server re-checks everything.
  */
 export function BookingForm({ studios, labels, links, initial, lang, turnstileKey }: Props) {
   const [state, action, pending] = useActionState<BookingState, FormData>(createBooking, null);
@@ -63,7 +62,6 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
   const [terms, setTerms] = useState(false);
   const [done, setDone] = useState(false);
   const startedAt = useRef<HTMLInputElement>(null);
-  const dateInput = useRef<HTMLInputElement>(null);
 
   const current = studios.find((s) => s.slug === studio);
   // Before a studio is chosen the decor cards still show (Figma "Rezervasiya et" from the home
@@ -72,13 +70,6 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
 
   useEffect(() => {
     if (startedAt.current) startedAt.current.value = String(Date.now());
-    // The picker's range, set in the browser (the page itself is prerendered); the server
-    // checks each studio's own notice and booking horizon.
-    if (dateInput.current) {
-      const today = bakuDate();
-      dateInput.current.min = today;
-      dateInput.current.max = addDays(today, 365);
-    }
   }, []);
 
   // Free times of the chosen studio and day (again after a "taken" answer).
@@ -127,17 +118,6 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
     state && !state.ok
       ? { taken: labels.errorTaken, invalid: labels.errorInvalid, rate: labels.errorRate, server: labels.errorServer }[state.error]
       : "";
-
-  const timeBox = (label: string, value: string, select: ReactNode) => (
-    <div className={cx(card, "items-end border-neutral-200 focus-within:border-primary-600")}>
-      <span className="flex flex-1 flex-col gap-1">
-        <span className="text-14 leading-[1.5] tracking-tight">{label}</span>
-        <span className={cx("text-20 leading-[1.15] tracking-tight", !value && "text-neutral-600")}>{value ? value.replace(":", " : ") : labels.timePlaceholder}</span>
-      </span>
-      <Alarm aria-hidden className="size-6 shrink-0" />
-      {select}
-    </div>
-  );
 
   return (
     <>
@@ -212,79 +192,31 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
 
           <fieldset className="flex flex-col gap-4" disabled={!current}>
             <legend className={cx(groupTitle, "mb-4")}>{labels.dateTimeTitle}</legend>
-            <div
-              className={cx(card, "items-end border-neutral-200 focus-within:border-primary-600")}
-              onClick={() => {
-                try {
-                  dateInput.current?.showPicker();
-                } catch {}
+            <DatePicker
+              studio={studio}
+              value={date}
+              disabled={!current}
+              labels={labels}
+              onChange={(d) => {
+                setDate(d);
+                setStart("");
+                setEnd("");
+                setSlots(null);
               }}
-            >
-              <span className="flex flex-1 flex-col gap-1">
-                <span className="text-14 leading-[1.5] tracking-tight">{labels.dateLabel}</span>
-                <span className={cx("text-20 leading-[1.15] tracking-tight", !date && "text-neutral-600")}>{display(date) || labels.datePlaceholder}</span>
-              </span>
-              <CalendarDots aria-hidden className="size-6 shrink-0" />
-              <input
-                ref={dateInput}
-                type="date"
-                name="date"
-                aria-label={labels.dateLabel}
-                value={date}
-                onChange={(e) => {
-                  setDate(e.target.value);
-                  setStart("");
-                  setEnd("");
-                  setSlots(null);
-                }}
-                required
-                className="absolute inset-0 size-full cursor-pointer opacity-0"
-              />
-            </div>
+            />
             <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2">
-              {timeBox(
-                labels.startLabel,
-                start,
-                <select
-                  name="start"
-                  aria-label={labels.startLabel}
-                  value={start}
-                  onChange={(e) => {
-                    setStart(e.target.value);
-                    setEnd("");
-                  }}
-                  required
-                  disabled={!open.length}
-                  className="absolute inset-0 size-full cursor-pointer opacity-0 disabled:cursor-not-allowed"
-                >
-                  <option value="">{labels.timePlaceholder}</option>
-                  {open.map((s) => (
-                    <option key={s.time} value={s.time} disabled={!s.ends.length}>
-                      {s.time}
-                    </option>
-                  ))}
-                </select>,
-              )}
-              {timeBox(
-                labels.endLabel,
-                end === "24:00" ? "00:00" : end,
-                <select
-                  name="end"
-                  aria-label={labels.endLabel}
-                  value={end}
-                  onChange={(e) => setEnd(e.target.value)}
-                  required
-                  disabled={!ends.length}
-                  className="absolute inset-0 size-full cursor-pointer opacity-0 disabled:cursor-not-allowed"
-                >
-                  <option value="">{labels.timePlaceholder}</option>
-                  {ends.map((t) => (
-                    <option key={t} value={t}>
-                      {t === "24:00" ? "00:00" : t}
-                    </option>
-                  ))}
-                </select>,
-              )}
+              <TimePicker
+                name="start"
+                label={labels.startLabel}
+                value={start}
+                options={open.map((o) => ({ time: o.time, disabled: !o.ends.length }))}
+                labels={labels}
+                onChange={(t) => {
+                  setStart(t);
+                  setEnd("");
+                }}
+              />
+              <TimePicker name="end" label={labels.endLabel} value={end} options={ends.map((t) => ({ time: t, disabled: false }))} labels={labels} onChange={setEnd} />
             </div>
             {dayMessage && (
               <p role="status" className="text-14 leading-[1.5] text-neutral-700">

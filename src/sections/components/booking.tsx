@@ -11,6 +11,7 @@ import type { BookingFormData, SectionProps } from "../types";
 const labelKeys = [
   "detailsTitle", "studioLabel", "decorLabel", "otherTitle", "otherText", "otherRequest", "otherRequestPlaceholder",
   "dateTimeTitle", "dateLabel", "datePlaceholder", "startLabel", "endLabel", "timePlaceholder",
+  "calendarToday", "calendarTaken", "calendarSelected", "months", "weekdays", "prevMonth", "nextMonth", "hourLabel", "minuteLabel", "confirmTime",
   "closedDay", "noSlots", "chooseStudioFirst", "chooseDateFirst",
   "personalTitle", "firstName", "firstNamePlaceholder", "lastName", "lastNamePlaceholder",
   "phone", "phonePlaceholder", "email", "emailPlaceholder",
