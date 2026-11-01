@@ -285,6 +285,24 @@ Checked every section of PLAN.md against the code; added what was missing:
 - Admin calendar (week): a booking takes the whole day column; only overlapping ones share it.
   The studio name is shown on each box.
 
+### Booking pickers and new Figma version (2026-11-01, Figma file of 2026-10-29)
+
+- `figma-diff` also checks the open calendar and time frames (`booking-calendar`, `booking-time`).
+  Booking and package request now match at 1440 and 320; what still differs is sample data and
+  states. Corners: r16 everywhere (only mobile add-ons r6). Figma's frames are mixed (some r6): a
+  question for the designer.
+- Mobile: 20px under the Dekor / Tarix headings, 90px under every inner page as in all mobile
+  frames. Consents and panels: tick position, checked border, calendar padding, time panel 14px.
+
+- Empty date/time now stops the form (a `readOnly` input skips `required`) and opens the picker.
+- A failed send keeps what was typed on the booking, package and contact forms
+  (`src/lib/forms/keep-form.ts`, moved out of the admin folder).
+- End time lists every later time of the day, taken ones disabled (`times` in the availability
+  answer); free times reload when a time picker opens; a time just taken is dropped.
+- Calendar: taken days are `aria-disabled`, so the keyboard walks over them and always has a tab
+  stop after the month buttons; load errors are shown; panels scroll into view and close on Tab.
+- Booking E2E tests use the pickers (they still drove the old native inputs); 2 tests added (62).
+
 Still open: Lighthouse itself (downloading it is blocked by the session's permission check —
 run `npx lighthouse` by hand), the optional `.ics` / WhatsApp / SMS (PLAN §5.4, client's call),
 the client questions below, and deploy (paused).

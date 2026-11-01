@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef } from "react";
+import { keepFormSubmit } from "@/lib/forms/keep-form";
 import { submitContact, type ContactState } from "@/lib/forms/contact";
 import { TextArea, TextField } from "./form-fields";
 import { Turnstile } from "./turnstile";
@@ -58,6 +59,7 @@ export function ContactForm({
     <form
       ref={form}
       action={action}
+      onSubmit={keepFormSubmit(action)}
       className="flex flex-col gap-10 desktop:gap-8"
     >
       <input type="hidden" name="locale" value={lang} />
@@ -120,6 +122,7 @@ export function ContactForm({
       <div className="flex flex-col">
         <button
           type="submit"
+          data-save
           disabled={pending}
           className={buttonClass(
             "primary",

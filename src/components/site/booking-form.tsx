@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useRef, useState, type ReactNode } from "react";
 import { createBooking, type BookingState } from "@/lib/booking/actions";
+import { keepFormSubmit } from "@/lib/forms/keep-form";
 import type { DaySlots } from "@/lib/booking/slots";
 import { DatePicker, TimePicker } from "./booking-pickers";
 import { Check, choiceCard, formHeading, groupTitle, Radio, SuccessModal, withLinks } from "./form-controls";
@@ -57,11 +58,13 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [slots, setSlots] = useState<DaySlots | null>(null);
+  const [slotsFailed, setSlotsFailed] = useState(false);
   const [refresh, setRefresh] = useState(0);
   const [accuracy, setAccuracy] = useState(false);
   const [terms, setTerms] = useState(false);
   const [done, setDone] = useState(false);
   const startedAt = useRef<HTMLInputElement>(null);
+  const form = useRef<HTMLFormElement>(null);
 
   const current = studios.find((s) => s.slug === studio);
   // Before a studio is chosen the decor cards still show (Figma "Rezervasiya et" from the home
@@ -72,16 +75,29 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
     if (startedAt.current) startedAt.current.value = String(Date.now());
   }, []);
 
-  // Free times of the chosen studio and day (again after a "taken" answer).
+  // Free times of the chosen studio and day (again after a "taken" answer and whenever a time
+  // picker opens: someone else may have booked in the meantime).
   useEffect(() => {
     if (!studio || !date) return;
     const ctrl = new AbortController();
     fetch(`/api/availability?studio=${studio}&date=${date}`, { signal: ctrl.signal, cache: "no-store" })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((s: DaySlots | null) => setSlots(s))
-      .catch(() => {});
+      .then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+        return r.json();
+      })
+      .then((s: DaySlots) => {
+        setSlots(s);
+        setSlotsFailed(false);
+      })
+      .catch(() => {
+        if (!ctrl.signal.aborted) setSlotsFailed(true);
+      });
     return () => ctrl.abort();
   }, [studio, date, refresh]);
+
+  useEffect(() => {
+    if (state?.ok) form.current?.reset();
+  }, [state]);
 
   // The server's answer: success opens the modal, a taken time reloads the free times.
   const [handled, setHandled] = useState<BookingState>(null);
@@ -104,16 +120,26 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
 
   const open = slots?.status === "open" ? slots.starts : [];
   const ends = open.find((s) => s.time === start)?.ends ?? [];
+  // A chosen time someone else has just taken (fresh answer from the server) is dropped.
+  if (slots?.status === "open" && start && !ends.length) {
+    setStart("");
+    setEnd("");
+  } else if (slots?.status === "open" && end && !ends.includes(end)) {
+    setEnd("");
+  }
   const dayMessage = !studio
     ? labels.chooseStudioFirst
     : !date
       ? ""
+      : slotsFailed
+        ? labels.errorServer
       : slots && slots.status !== "open"
         ? labels.closedDay
         : slots && !open.some((s) => s.ends.length)
           ? labels.noSlots
           : "";
 
+  const reload = () => setRefresh((n) => n + 1);
   const error =
     state && !state.ok
       ? { taken: labels.errorTaken, invalid: labels.errorInvalid, rate: labels.errorRate, server: labels.errorServer }[state.error]
@@ -121,7 +147,7 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
 
   return (
     <>
-      <form action={action} className="grid grid-cols-1 gap-[5.625rem] desktop:grid-cols-2 desktop:gap-20">
+      <form ref={form} action={action} onSubmit={keepFormSubmit(action)} className="grid grid-cols-1 gap-[5.625rem] desktop:grid-cols-2 desktop:gap-20">
         <input type="hidden" name="locale" value={lang} />
         <input ref={startedAt} type="hidden" name="startedAt" defaultValue="" />
         <input type="hidden" name="source" value={initial.decor ? "decor" : "direct"} />
@@ -155,7 +181,7 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
                   />
                   <span className="flex flex-1 flex-col gap-1">
                     <span className="text-14 leading-[1.5] tracking-tight">{s.name}</span>
-                    <span className="text-18 leading-[1.15] font-medium tracking-tight">{s.address}</span>
+                    <span className="text-18 leading-[1.3125rem] font-medium tracking-tight">{s.address}</span>
                   </span>
                   <Radio checked={studio === s.slug} />
                 </label>
@@ -164,7 +190,7 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
           </fieldset>
 
           <fieldset className="flex flex-col gap-4" disabled={!current}>
-            <legend className={cx(groupTitle, "mb-4 desktop:mb-4")}>{labels.decorLabel}</legend>
+            <legend className={cx(groupTitle, "mb-5 desktop:mb-4")}>{labels.decorLabel}</legend>
             <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2">
               {(decorStudio?.decors ?? []).map((d) => (
                 <label key={d.slug} className={cx(card, "items-center", decor === d.slug ? "border-primary-600" : "border-neutral-200 hover:border-neutral-400")}>
@@ -191,7 +217,7 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
           </fieldset>
 
           <fieldset className="flex flex-col gap-4" disabled={!current}>
-            <legend className={cx(groupTitle, "mb-4")}>{labels.dateTimeTitle}</legend>
+            <legend className={cx(groupTitle, "mb-5 desktop:mb-4")}>{labels.dateTimeTitle}</legend>
             <DatePicker
               studio={studio}
               value={date}
@@ -202,6 +228,7 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
                 setStart("");
                 setEnd("");
                 setSlots(null);
+                setSlotsFailed(false);
               }}
             />
             <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2">
@@ -211,12 +238,22 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
                 value={start}
                 options={open.map((o) => ({ time: o.time, disabled: !o.ends.length }))}
                 labels={labels}
+                onOpen={reload}
                 onChange={(t) => {
                   setStart(t);
                   setEnd("");
                 }}
               />
-              <TimePicker name="end" label={labels.endLabel} value={end} options={ends.map((t) => ({ time: t, disabled: false }))} labels={labels} onChange={setEnd} />
+              {/* Every later time of the day, so the taken ones show as disabled rather than missing. */}
+              <TimePicker
+                name="end"
+                label={labels.endLabel}
+                value={end}
+                options={slots?.status === "open" && start ? slots.times.filter((t) => t > start).map((t) => ({ time: t, disabled: !ends.includes(t) })) : []}
+                labels={labels}
+                onOpen={reload}
+                onChange={setEnd}
+              />
             </div>
             {dayMessage && (
               <p role="status" className="text-14 leading-[1.5] text-neutral-700">
@@ -242,6 +279,7 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
           <div className="flex flex-col gap-3">
             <button
               type="submit"
+              data-save
               disabled={pending || !accuracy || !terms}
               className={buttonClass("primary", "h-10 w-full disabled:cursor-not-allowed disabled:bg-neutral-100 disabled:text-neutral-300")}
             >

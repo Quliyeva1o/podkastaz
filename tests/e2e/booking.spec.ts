@@ -17,6 +17,26 @@ async function mails(to: string) {
   return ((await res.json()) as { messages: { Subject: string }[] }).messages ?? [];
 }
 
+/** Opens the calendar and picks a day (next month when it is not on the current one). */
+async function pickDate(page: Page, date: string) {
+  await page.getByRole("button", { name: /^Tarix/ }).click();
+  const calendar = page.getByRole("dialog", { name: "Tarix" });
+  if (date.slice(0, 7) !== bakuDay(0).slice(0, 7)) await calendar.getByRole("button", { name: "Növbəti ay" }).click();
+  await calendar.locator(`[data-date="${date}"][aria-disabled="false"]`).click();
+  await expect(calendar).toBeHidden();
+}
+
+/** Opens a time picker, chooses the hour and minute, confirms. */
+async function pickTime(page: Page, label: string, time: string) {
+  const [h, m] = time.split(":");
+  await page.getByRole("button", { name: new RegExp(`^${label}`) }).click();
+  const panel = page.getByRole("dialog", { name: label });
+  await panel.getByRole("listbox", { name: "Saat" }).getByRole("option", { name: h, exact: true }).click();
+  await panel.getByRole("listbox", { name: "Dəqiqə" }).getByRole("option", { name: m, exact: true }).click();
+  await panel.getByRole("button", { name: "Təsdiq et" }).click();
+  await expect(panel).toBeHidden();
+}
+
 /** Fills the whole form for Studiya 2 on `day`, `start`–`end`. */
 async function fill(page: Page, email: string, start: string, end: string) {
   await page.goto("/rezervasiya?studiya=studiya-2&dekor=marketoloqlar-ucun-dekor");
@@ -24,11 +44,9 @@ async function fill(page: Page, email: string, start: string, end: string) {
   await expect(page.locator("input[name=startedAt]")).not.toHaveValue("");
   const trapStart = Date.now();
   await expect(page.locator("input[name=decor][value=marketoloqlar-ucun-dekor]")).toBeChecked();
-  await page.locator("input[name=date]").fill(day);
-  const startSelect = page.locator("select[name=start]");
-  await expect(startSelect.locator(`option[value="${start}"]`)).toBeEnabled();
-  await startSelect.selectOption(start);
-  await page.locator("select[name=end]").selectOption(end);
+  await pickDate(page, day);
+  await pickTime(page, "Başlama vaxtı", start);
+  await pickTime(page, "Bitmə vaxtı", end);
   await page.getByLabel("Ad", { exact: true }).fill("E2E");
   await page.getByLabel("Soyad").fill("Rezerv");
   await page.getByLabel("Telefon").fill("+994 50 000 00 00");
@@ -89,13 +107,106 @@ test("two people submitting the same time at once: one booking, one 'taken'", as
       ]),
     ),
   );
-  expect(results.sort()).toEqual(["ok", "taken"]);
+  expect([...results].sort()).toEqual(["ok", "taken"]);
+
+  // The one who lost the race keeps what they typed and has to choose another time.
+  const loser = results[0] === "taken" ? a : b;
+  await expect(loser.getByLabel("Ad", { exact: true })).toHaveValue("E2E");
+  await expect(loser.getByLabel("Telefon")).toHaveValue("+994 50 000 00 00");
+  await expect(loser.locator("input[name=start]")).toHaveValue("");
 
   const sql = postgres(process.env.DATABASE_URL!, { max: 1 });
   const rows = await sql`select count(*)::int as n from bookings where email in ('rezerv2@e2e.test', 'rezerv3@e2e.test')`;
   await sql.end();
   expect(rows[0].n).toBe(1);
   await Promise.all([a.close(), b.close()]);
+});
+
+test("pickers: taken days and hours are disabled, the chosen ones marked, empty date stops the form", async ({ page }) => {
+  // Studiya 3: one day fully booked, another with 12:00-14:00 taken.
+  const full = bakuDay(8);
+  const partial = bakuDay(9);
+  const sql = postgres(process.env.DATABASE_URL!, { max: 1 });
+  const book = (date: string, from: string, to: string) => sql`
+    insert into bookings (studio_id, studio_snapshot, starts_at, ends_at, blocked_until, first_name, last_name, phone, email, status)
+    select id, '{}'::jsonb, ${`${date} ${from}+04`}::timestamptz, ${`${date} ${to}+04`}::timestamptz, ${`${date} ${to}+04`}::timestamptz, 'E2E', 'Picker', '+994500000000', 'picker@e2e.test', 'confirmed'
+    from studios where slug_az = 'studiya-3'`;
+  await book(full, "10:00", "16:00");
+  await book(full, "16:00", "22:00");
+  await book(partial, "12:00", "14:00");
+  await sql.end();
+
+  await page.goto("/rezervasiya?studiya=studiya-3");
+  await expect(page.locator("input[name=startedAt]")).not.toHaveValue("");
+
+  // No date yet: the browser refuses to send and the calendar opens by itself.
+  const date = page.locator("input[name=date]");
+  expect(await date.evaluate((e: HTMLInputElement) => e.validity.valueMissing)).toBe(true);
+  await page.locator("input[name=decor][value=other]").check({ force: true });
+  await page.getByLabel("Ad", { exact: true }).fill("E2E");
+  await page.getByLabel("Soyad").fill("Picker");
+  await page.getByLabel("Telefon").fill("+994 50 000 00 00");
+  await page.getByLabel("E-mail ünvanı").fill("picker@e2e.test");
+  await page.locator("input[name=accuracy]").check();
+  await page.locator("input[name=terms]").check();
+  await page.getByRole("button", { name: "Müraciət et" }).click();
+  const calendar = page.getByRole("dialog", { name: "Tarix" });
+  await expect(calendar).toBeVisible();
+  await expect(page.getByRole("alert").filter({ hasText: /\S/ })).toHaveCount(0);
+
+  // The fully booked day is grey and cannot be picked; the keyboard can still walk over it.
+  if (full.slice(0, 7) !== bakuDay(0).slice(0, 7)) await calendar.getByRole("button", { name: "Növbəti ay" }).click();
+  const fullCell = calendar.locator(`[data-date="${full}"]`);
+  await expect(fullCell).toHaveAttribute("aria-disabled", "true");
+  await expect(fullCell).toHaveAttribute("aria-label", /Tutulub/);
+  await fullCell.click({ force: true });
+  await expect(calendar).toBeVisible();
+  await page.keyboard.press("Escape");
+
+  await pickDate(page, partial);
+  await expect(page.getByRole("button", { name: /^Tarix/ })).toContainText(partial.split("-").reverse().join("/"));
+
+  // Start: 12:00-13:30 taken; 11:30 too (no hour left before the booking); 12 and 13 grey.
+  await page.getByRole("button", { name: /^Başlama vaxtı/ }).click();
+  const start = page.getByRole("dialog", { name: "Başlama vaxtı" });
+  const hours = start.getByRole("listbox", { name: "Saat" });
+  await expect(hours.getByRole("option", { name: "12", exact: true })).toHaveAttribute("aria-disabled", "true");
+  await expect(hours.getByRole("option", { name: "13", exact: true })).toHaveAttribute("aria-disabled", "true");
+  await hours.getByRole("option", { name: "12", exact: true }).click({ force: true });
+  await expect(hours.getByRole("option", { name: "12", exact: true })).toHaveAttribute("aria-selected", "false");
+  await hours.getByRole("option", { name: "11", exact: true }).click();
+  await expect(start.getByRole("listbox", { name: "Dəqiqə" }).getByRole("option", { name: "30", exact: true })).toHaveAttribute("aria-disabled", "true");
+  await page.keyboard.press("Escape");
+
+  // End after 10:00: free up to the booking, every later hour shown but disabled.
+  await pickTime(page, "Başlama vaxtı", "10:00");
+  await page.getByRole("button", { name: /^Bitmə vaxtı/ }).click();
+  const end = page.getByRole("dialog", { name: "Bitmə vaxtı" });
+  const endHours = end.getByRole("listbox", { name: "Saat" });
+  await expect(endHours.getByRole("option", { name: "12", exact: true })).toHaveAttribute("aria-disabled", "false");
+  await expect(endHours.getByRole("option", { name: "15", exact: true })).toHaveAttribute("aria-disabled", "true");
+  await endHours.getByRole("option", { name: "12", exact: true }).click();
+  await expect(end.getByRole("listbox", { name: "Dəqiqə" }).getByRole("option", { name: "30", exact: true })).toHaveAttribute("aria-disabled", "true");
+  await page.keyboard.press("Escape");
+});
+
+test("calendar keyboard: arrows move over taken days, Enter picks a free one, Escape returns", async ({ page }) => {
+  await page.goto("/rezervasiya?studiya=studiya-2&dekor=marketoloqlar-ucun-dekor");
+  await expect(page.locator("input[name=startedAt]")).not.toHaveValue("");
+  const trigger = page.getByRole("button", { name: /^Tarix/ });
+  await trigger.click();
+  const calendar = page.getByRole("dialog", { name: "Tarix" });
+  await expect(calendar.locator("[role=grid]")).toHaveAttribute("aria-busy", "false");
+  await expect(calendar.locator("[data-date]:focus")).toHaveAttribute("data-date", bakuDay(0));
+  await page.keyboard.press("ArrowDown");
+  await expect(calendar.locator("[data-date]:focus")).toHaveAttribute("data-date", bakuDay(7));
+  await page.keyboard.press("Enter");
+  await expect(calendar).toBeHidden();
+  await expect(page.locator("input[name=date]")).toHaveValue(bakuDay(7));
+  await trigger.click();
+  await page.keyboard.press("Escape");
+  await expect(calendar).toBeHidden();
+  await expect(trigger).toBeFocused();
 });
 
 test("admin: confirm a booking (customer email), block time, calendar", async ({ page, request }) => {

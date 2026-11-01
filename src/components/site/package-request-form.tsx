@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useActionState, useEffect, useRef, useState } from "react";
+import { keepFormSubmit } from "@/lib/forms/keep-form";
 import { submitPackageRequest, type PackageRequestState } from "@/lib/forms/package-request";
 import { Check, choiceBorder, choiceCard, formHeading, groupTitle, Radio, SuccessModal, TickBox, withLinks } from "./form-controls";
 import { TextField } from "./form-fields";
@@ -83,7 +84,7 @@ export function PackageRequestForm({ packages, addons, labels, lang, links, init
 
   return (
     <>
-      <form ref={form} action={action} className="grid grid-cols-1 gap-[5.625rem] desktop:grid-cols-2 desktop:gap-20">
+      <form ref={form} action={action} onSubmit={keepFormSubmit(action)} className="grid grid-cols-1 gap-[5.625rem] desktop:grid-cols-2 desktop:gap-20">
         <input ref={startedAt} type="hidden" name="startedAt" defaultValue="" />
         <div aria-hidden className="absolute -left-[9999px]">
           <input type="text" name="website" tabIndex={-1} autoComplete="off" />
@@ -157,6 +158,7 @@ export function PackageRequestForm({ packages, addons, labels, lang, links, init
           <div className="flex flex-col gap-3">
             <button
               type="submit"
+              data-save
               disabled={pending || !accuracy || !terms || !pkg}
               className={buttonClass("primary", "h-10 w-full disabled:cursor-not-allowed disabled:bg-neutral-100 disabled:text-neutral-300")}
             >

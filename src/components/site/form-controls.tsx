@@ -8,8 +8,9 @@ import { buttonClass, cx } from "./ui";
 
 /** Shared pieces of the booking and package request forms (Figma "Components" page). */
 
-export const formHeading = "text-18 leading-[1.15] font-semibold tracking-tight desktop:text-24";
-export const groupTitle = "text-18 leading-[1.15] font-semibold tracking-tight";
+// Line heights as Figma rounds its text boxes: 21 for 18px (20.7), 28 for 24px (27.6).
+export const formHeading = "text-18 leading-[1.3125rem] font-semibold tracking-tight desktop:text-24 desktop:leading-7";
+export const groupTitle = "text-18 leading-[1.3125rem] font-semibold tracking-tight";
 // 15px padding + 1px border = Figma's 16px padding with the stroke inside.
 export const choiceCard = "relative flex cursor-pointer gap-4 rounded-2xl border p-[0.9375rem] transition-colors";
 export const choiceBorder = (on: boolean) => (on ? "border-primary-600" : "border-neutral-200 hover:border-neutral-400");
@@ -26,7 +27,7 @@ export function Radio({ checked }: { checked: boolean }) {
 /** Figma "Controls" checkbox look: 16px, r3, orange tick. */
 export function TickBox({ checked, className }: { checked: boolean; className?: string }) {
   return (
-    <span aria-hidden className={cx("flex size-4 shrink-0 items-center justify-center rounded-[0.19rem] border", checked ? "border-neutral-950" : "border-neutral-200", className)}>
+    <span aria-hidden className={cx("flex size-4 shrink-0 items-center justify-center rounded-[0.19rem] border", checked ? "border-neutral-300" : "border-neutral-200", className)}>
       {checked && (
         <svg viewBox="0 0 9 6.5" className="w-[0.5625rem] fill-primary-600">
           <path d="M8.78.22a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2.5-2.5a.75.75 0 1 1 1.06-1.06L3.25 4.69 7.72.22a.75.75 0 0 1 1.06 0Z" />
@@ -40,7 +41,7 @@ export function TickBox({ checked, className }: { checked: boolean; className?: 
 export function Check({ name, label, checked, onChange }: { name: string; label: ReactNode; checked: boolean; onChange: (v: boolean) => void }) {
   return (
     <label className="flex cursor-pointer items-start gap-2 text-14 leading-[1.5]">
-      <span className="relative mt-0.5 flex size-5 shrink-0 items-center justify-center">
+      <span className="relative flex size-5 shrink-0 items-center justify-center">
         <input type="checkbox" name={name} checked={checked} onChange={(e) => onChange(e.target.checked)} className="peer absolute inset-0 cursor-pointer opacity-0" />
         <TickBox checked={checked} className="peer-focus-visible:ring-2 peer-focus-visible:ring-primary-300" />
       </span>

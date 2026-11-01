@@ -9,7 +9,7 @@ import { Button, Card, EditGrid, inputClass, labelClass, StatusText } from "./cm
 import { LangTabs, Switch } from "./cms-client";
 import { FieldsEditor, isSideField, missingLocales } from "./field-editor";
 import { MediaLibraryProvider } from "./media-library";
-import { keepFormSubmit } from "./use-keep-form";
+import { keepFormSubmit } from "@/lib/forms/keep-form";
 
 /** Editor for one collection item, laid out like the previous panel's edit pages. */
 export function ItemEditor({

@@ -8,7 +8,7 @@ import { Button, Card, EditGrid, inputClass, labelClass, StatusText } from "./cm
 import { LangTabs, Switch } from "./cms-client";
 import { FieldsEditor, isSideField, missingLocales } from "./field-editor";
 import { MediaLibraryProvider } from "./media-library";
-import { keepFormSubmit } from "./use-keep-form";
+import { keepFormSubmit } from "@/lib/forms/keep-form";
 
 /**
  * Editor for a row of an own table (studio, decor): the section field editor for the content,

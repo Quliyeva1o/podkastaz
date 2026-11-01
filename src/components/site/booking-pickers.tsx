@@ -10,8 +10,8 @@ import { buttonClass, cx } from "./ui";
  * Date and time pickers of the booking form (Figma "Rezervasiya et (Kalendar)" / "(Saat)").
  * Each is a Figma field box that opens a panel above it (below when there is no room), aligned
  * to its right edge: a month calendar where taken days are grey and the chosen one orange, and
- * an hour/minute picker where taken times are disabled. A hidden required input carries the
- * value into the form, so the browser still asks for it before sending.
+ * an hour/minute picker where taken times are disabled. A visually hidden required input carries
+ * the value into the form, so the browser still asks for it before sending.
  */
 
 export type DayState = "open" | "full" | "closed" | "past" | "tooFar";
@@ -19,7 +19,7 @@ export type TimeOption = { time: string; disabled: boolean };
 export type PickerLabels = Record<
   | "dateLabel" | "datePlaceholder" | "timePlaceholder"
   | "calendarToday" | "calendarTaken" | "calendarSelected" | "months" | "weekdays" | "prevMonth" | "nextMonth"
-  | "hourLabel" | "minuteLabel" | "confirmTime",
+  | "hourLabel" | "minuteLabel" | "confirmTime" | "errorServer",
   string
 >;
 
@@ -54,6 +54,11 @@ function usePopover(trigger: RefObject<HTMLButtonElement | null>, panel: RefObje
   }, [trigger, height]);
   const toggle = useCallback(() => (open ? close(false) : show()), [open, close, show]);
 
+  // Keep the whole panel on screen (clear of the fixed header).
+  useLayoutEffect(() => {
+    if (open) panel.current?.scrollIntoView({ block: "nearest" });
+  }, [open, panel]);
+
   useEffect(() => {
     if (!open) return;
     const onDown = (e: PointerEvent) => {
@@ -61,10 +66,17 @@ function usePopover(trigger: RefObject<HTMLButtonElement | null>, panel: RefObje
       if (!panel.current?.contains(t) && !trigger.current?.contains(t)) close(false);
     };
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
+    // Tabbing out of the panel closes it too.
+    const onFocus = (e: FocusEvent) => {
+      const t = e.target as Node;
+      if (!panel.current?.contains(t) && !trigger.current?.contains(t)) close(false);
+    };
     document.addEventListener("pointerdown", onDown);
     document.addEventListener("keydown", onKey);
+    document.addEventListener("focusin", onFocus);
     return () => {
       document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("focusin", onFocus);
       document.removeEventListener("keydown", onKey);
     };
   }, [open, close, panel, trigger]);
@@ -118,24 +130,30 @@ function FieldBox({
   );
 }
 
-/** The value travels in a hidden text input: `required` still stops the form while it is empty. */
+/**
+ * The value travels in a visually hidden text input: `required` stops the form while it is empty
+ * and the browser focuses it, which opens the picker. Not `readOnly`: read-only inputs skip
+ * validation.
+ */
 function FormValue({ name, value, onFocus }: { name: string; value: string; onFocus: () => void }) {
   return (
     <input
       name={name}
       value={value}
       required
-      readOnly
       tabIndex={-1}
       aria-hidden
+      onChange={() => {}}
       onFocus={onFocus}
       className="pointer-events-none absolute bottom-0 left-1/2 size-px opacity-0"
     />
   );
 }
 
-const panelBase = "absolute right-0 z-20 bg-white";
-const panelPlace = (below: boolean) => (below ? "top-[calc(100%+1rem)]" : "bottom-[calc(100%+1rem)]");
+const panelBase = "absolute right-0 z-20 scroll-my-28 bg-white";
+// Figma: the calendar sits 16px above its field, the time picker 14px.
+const panelPlace = (below: boolean, gap: "1rem" | "0.875rem") =>
+  below ? (gap === "1rem" ? "top-[calc(100%+1rem)]" : "top-[calc(100%+0.875rem)]") : gap === "1rem" ? "bottom-[calc(100%+1rem)]" : "bottom-[calc(100%+0.875rem)]";
 
 // ---------------------------------------------------------------- Date
 
@@ -179,8 +197,8 @@ export function DatePicker({
           aria-label={labels.dateLabel}
           className={cx(
             panelBase,
-            panelPlace(below),
-            "w-full rounded-3xl border border-neutral-200 p-4 shadow-[0_0.625rem_1rem_rgb(93_114_132/0.2)] desktop:w-[31.375rem] desktop:p-7.5 desktop:shadow-none",
+            panelPlace(below, "1rem"),
+            "w-full rounded-3xl border border-neutral-200 p-4 shadow-[0_0.625rem_1rem_rgb(93_114_132/0.2)] desktop:w-[31.375rem] desktop:p-[1.8125rem] desktop:shadow-none",
           )}
         >
           <Calendar
@@ -211,6 +229,9 @@ function Calendar({ studio, value, labels, onPick }: { studio: string; value: st
   const [month, setMonth] = useState(() => monthStart(value || today));
   const [focus, setFocus] = useState(value || today);
   const [states, setStates] = useState<{ key: string; days: Record<string, DayState> } | null>(null);
+  const [failed, setFailed] = useState(false);
+  // Focus follows the arrow keys (and enters the grid on opening), never the month buttons.
+  const moveFocus = useRef(true);
   const grid = useRef<HTMLDivElement>(null);
 
   const first = month;
@@ -224,9 +245,17 @@ function Calendar({ studio, value, labels, onPick }: { studio: string; value: st
   useEffect(() => {
     const ctrl = new AbortController();
     fetch(`/api/availability?studio=${studio}&from=${gridStart}&days=${weeks * 7}`, { signal: ctrl.signal, cache: "no-store" })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((j: { days: Record<string, DayState> } | null) => j && setStates({ key, days: j.days }))
-      .catch(() => {});
+      .then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+        return r.json();
+      })
+      .then((j: { days: Record<string, DayState> }) => {
+        setStates({ key, days: j.days });
+        setFailed(false);
+      })
+      .catch(() => {
+        if (!ctrl.signal.aborted) setFailed(true);
+      });
     return () => ctrl.abort();
   }, [studio, gridStart, weeks, key]);
 
@@ -239,14 +268,19 @@ function Calendar({ studio, value, labels, onPick }: { studio: string; value: st
 
   // Arrow keys move the focused day (and the month with it); Enter / Space pick it.
   useEffect(() => {
+    if (!moveFocus.current) return;
+    moveFocus.current = false;
     grid.current?.querySelector<HTMLButtonElement>(`[data-date="${focus}"]`)?.focus({ preventScroll: true });
   }, [focus, month]);
   const move = (by: number) => {
     const next = addDays(focus, by);
-    if (next < today) return;
+    if (next < today || (next > lastDay && !canNext)) return;
+    moveFocus.current = true;
     setFocus(next);
     if (!inMonth(next)) setMonth(monthStart(next));
   };
+  // After the month buttons the focused day may lie outside the month: its first day takes the tab stop.
+  const tabStop = inMonth(focus) ? focus : first;
   const onKey = (e: React.KeyboardEvent) => {
     const by = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[e.key];
     if (by) {
@@ -298,11 +332,11 @@ function Calendar({ studio, value, labels, onPick }: { studio: string; value: st
                     <button
                       type="button"
                       data-date={d}
-                      tabIndex={d === focus ? 0 : -1}
-                      disabled={!ok}
+                      tabIndex={d === tabStop ? 0 : -1}
+                      aria-disabled={!ok}
                       aria-current={isToday ? "date" : undefined}
                       aria-label={`${Number(d.slice(8))} ${names[Number(d.slice(5, 7)) - 1]}${taken ? `, ${labels.calendarTaken}` : ""}`}
-                      onClick={() => onPick(d)}
+                      onClick={() => ok && onPick(d)}
                       onFocus={() => setFocus(d)}
                       className={cx(
                         "flex aspect-square w-full items-center justify-center border border-neutral-200 text-14 leading-[1.5] outline-none transition-colors focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-primary-300 desktop:size-16",
@@ -327,6 +361,11 @@ function Calendar({ studio, value, labels, onPick }: { studio: string; value: st
           ))}
         </div>
       </div>
+      {failed && (
+        <p role="alert" className="text-14 leading-[1.5] text-[#e5484d]">
+          {labels.errorServer}
+        </p>
+      )}
       <ul className="flex flex-wrap gap-x-5 gap-y-2 text-14 leading-[1.5] tracking-tight desktop:text-16">
         {[
           [labels.calendarToday, "bg-neutral-950"],
@@ -352,6 +391,7 @@ export function TimePicker({
   options,
   onChange,
   labels,
+  onOpen,
   disabled,
 }: {
   name: string;
@@ -360,12 +400,18 @@ export function TimePicker({
   options: TimeOption[];
   onChange: (time: string) => void;
   labels: PickerLabels;
+  /** Called when the panel opens: the form reloads the free times. */
+  onOpen: () => void;
   disabled?: boolean;
 }) {
   const trigger = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const panelId = useId();
   const { open, show, toggle, below, close } = usePopover(trigger, panel, 23.5);
+  const opening = () => {
+    if (!open) onOpen();
+    toggle();
+  };
 
   return (
     <div className="relative">
@@ -376,7 +422,7 @@ export function TimePicker({
         icon={<Alarm aria-hidden className="size-6 shrink-0" />}
         open={open}
         disabled={disabled || !options.some((o) => !o.disabled)}
-        onClick={toggle}
+        onClick={opening}
         buttonRef={trigger}
         panelId={panelId}
       />
@@ -387,7 +433,7 @@ export function TimePicker({
           id={panelId}
           role="dialog"
           aria-label={label}
-          className={cx(panelBase, panelPlace(below), "w-[14.25rem] rounded-[0.875rem] border border-neutral-200 p-4 shadow-[0_0.625rem_1rem_rgb(93_114_132/0.2)]")}
+          className={cx(panelBase, panelPlace(below, "0.875rem"), "w-[14.25rem] rounded-[0.875rem] border border-neutral-200 p-4 shadow-[0_0.625rem_1rem_rgb(93_114_132/0.2)]")}
         >
           <TimeWheel
             label={label}
@@ -413,7 +459,9 @@ const split = (t: string) => {
 /** Figma "Frame 2095585346": label + chosen time, Saat : Dəqiqə columns (taken times grey), Təsdiq et. */
 function TimeWheel({ label, value, options, labels, onConfirm }: { label: string; value: string; options: TimeOption[]; labels: PickerLabels; onConfirm: (t: string) => void }) {
   const firstFree = options.find((o) => !o.disabled)?.time ?? "";
-  const [draft, setDraft] = useState(value && options.some((o) => o.time === value && !o.disabled) ? value : firstFree);
+  const [picked, setPicked] = useState(value);
+  // Free times reload while the panel is open: a time just taken falls back to the first free one.
+  const draft = options.some((o) => o.time === picked && !o.disabled) ? picked : firstFree;
   const { h, m } = split(draft);
 
   const hours = [...new Set(options.map((o) => split(o.time).h))];
@@ -422,7 +470,7 @@ function TimeWheel({ label, value, options, labels, onConfirm }: { label: string
 
   const pickHour = (hh: string) => {
     const same = options.find((o) => o.time === `${hh}:${m}` && !o.disabled);
-    setDraft(same?.time ?? options.find((o) => split(o.time).h === hh && !o.disabled)?.time ?? draft);
+    setPicked(same?.time ?? options.find((o) => split(o.time).h === hh && !o.disabled)?.time ?? draft);
   };
 
   return (
@@ -439,13 +487,13 @@ function TimeWheel({ label, value, options, labels, onConfirm }: { label: string
           items={hours.map((hh) => ({ key: hh, text: hh === "24" ? "00" : hh, selected: hh === h, disabled: !hourFree(hh) }))}
           onPick={pickHour}
         />
-        <span aria-hidden className="mt-6 text-18 leading-[1.32] font-medium tracking-tight">
+        <span aria-hidden className="text-18 leading-[1.32] font-medium tracking-tight">
           :
         </span>
         <Wheel
           title={labels.minuteLabel}
           items={minutes.map((o) => ({ key: o.time, text: split(o.time).m, selected: o.time === draft, disabled: o.disabled }))}
-          onPick={(t) => setDraft(t)}
+          onPick={setPicked}
         />
       </div>
       <button type="button" disabled={!draft} onClick={() => onConfirm(draft)} className={buttonClass("primary", "h-10 w-full disabled:bg-neutral-100 disabled:text-neutral-300")}>
@@ -458,6 +506,7 @@ function TimeWheel({ label, value, options, labels, onConfirm }: { label: string
 /** One scrolling column: 5 rows of 36px visible, faded at the top and bottom, the chosen row centred. */
 function Wheel({ title, items, onPick }: { title: string; items: { key: string; text: string; selected: boolean; disabled: boolean }[]; onPick: (key: string) => void }) {
   const box = useRef<HTMLDivElement>(null);
+  const id = useId();
   const selected = items.find((i) => i.selected)?.key;
   useLayoutEffect(() => {
     const el = box.current?.querySelector<HTMLElement>('[aria-selected="true"]');
@@ -483,6 +532,7 @@ function Wheel({ title, items, onPick }: { title: string; items: { key: string; 
           role="listbox"
           aria-label={title}
           tabIndex={0}
+          aria-activedescendant={selected ? `${id}-${selected}` : undefined}
           onKeyDown={onKey}
           className="h-[12.5rem] overflow-y-auto overscroll-contain rounded-md p-2.5 outline-none [scrollbar-width:none] focus-visible:ring-2 focus-visible:ring-primary-300 [&::-webkit-scrollbar]:hidden"
         >
@@ -491,6 +541,7 @@ function Wheel({ title, items, onPick }: { title: string; items: { key: string; 
           {items.map((i) => (
             <div
               key={i.key}
+              id={`${id}-${i.key}`}
               role="option"
               aria-selected={i.selected}
               aria-disabled={i.disabled}
@@ -505,7 +556,8 @@ function Wheel({ title, items, onPick }: { title: string; items: { key: string; 
           ))}
           <div className="h-[4.5rem]" />
         </div>
-        <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-linear-to-b from-white to-transparent" />
+        {/* Figma's top fade starts 13px down; solid white above it hides rows scrolled past the edge. */}
+        <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[4.8125rem] bg-linear-to-b from-white from-[17%] to-transparent" />
         <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-linear-to-t from-white to-transparent" />
       </div>
     </div>

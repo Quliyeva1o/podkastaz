@@ -19,6 +19,8 @@ export type DaySlots =
       status: "open";
       /** Every start time of the day; `ends` is empty when that start is taken or too soon. */
       starts: { time: string; ends: string[] }[];
+      /** Every step of the opening hours, closing time included (the end picker's rows). */
+      times: string[];
     };
 
 /**
@@ -60,7 +62,9 @@ export function daySlots(date: string, hours: WeekHours, rules: Rules, busy: Bus
     }
     starts.push({ time: formatTime(t), ends });
   }
-  return { status: "open", starts };
+  const times: string[] = [];
+  for (let t = open; t <= close; t += step) times.push(formatTime(t));
+  return { status: "open", starts, times };
 }
 
 /** Whether start–end is one of the offered combinations. */

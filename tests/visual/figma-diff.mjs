@@ -34,6 +34,8 @@ const frames = {
     "package-request-empty": ["221:1237", "/paketler/muraciet"],
     "package-request-sent": ["346:1026", "/paketler/muraciet?paket=start", "sendPackage"],
     "booking-home": ["346:1338", "/rezervasiya"],
+    "booking-calendar": ["673:1170", "/rezervasiya?studiya=studiya-1&dekor=hekimler-ucun-dekor", "openCalendar"],
+    "booking-time": ["673:2439", "/rezervasiya?studiya=studiya-1&dekor=hekimler-ucun-dekor", "openTime"],
   },
   mobile: {
     home: ["472:1183", "/"],
@@ -59,6 +61,20 @@ const prepare = {
   menu: async (page) => {
     await page.locator("header button[aria-expanded]").first().click();
     await page.waitForTimeout(500);
+  },
+  openCalendar: async (page) => {
+    await page.getByRole("button", { name: /^Tarix/ }).click();
+    await page.locator('[role=grid][aria-busy="false"]').waitFor();
+    await page.waitForTimeout(400);
+  },
+  openTime: async (page) => {
+    await prepare.openCalendar(page);
+    await page.locator('[role=dialog] [data-date][aria-disabled="false"]').last().click();
+    await page.getByRole("button", { name: /^Başlama vaxtı/ }).click();
+    const panel = page.getByRole("dialog", { name: "Başlama vaxtı" });
+    await panel.getByRole("listbox", { name: "Saat" }).getByRole("option", { name: "11", exact: true }).click();
+    await panel.getByRole("listbox", { name: "Dəqiqə" }).getByRole("option", { name: "30", exact: true }).click();
+    await page.waitForTimeout(400);
   },
   sendPackage: async (page) => {
     await page.waitForTimeout(3200);

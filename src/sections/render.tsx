@@ -145,7 +145,7 @@ export async function SiteFrame({
         (breadcrumb?.(crumbs, tx(labels?.breadcrumb, lang) || "Breadcrumb") ?? (
           <Breadcrumb items={crumbs} label={tx(labels?.breadcrumb, lang) || "Breadcrumb"} />
         ))}
-      <main id="top" className={cx(!isHome && "pb-10 desktop:pb-20")}>
+      <main id="top" className={cx(!isHome && "pb-[5.625rem] desktop:pb-20")}>
         {children}
       </main>
       <JsonLd graph={[...siteGraph(lang, contacts, business), ...(crumbs.length ? [breadcrumbGraph(crumbs)] : []), ...graph]} />
