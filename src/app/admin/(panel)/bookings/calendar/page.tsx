@@ -9,7 +9,10 @@ import { buttonClass, Card, PageHeader } from "../../_components/cms";
 import { BlockForm } from "./block-form";
 
 const dayNames = ["B.e.", "Ç.a.", "Ç.", "C.a.", "C.", "Ş.", "B."];
-const HOUR_PX = 44;
+const HOUR_PX = 60;
+/** Height of one text line in a booking card, and its vertical padding + border. */
+const LINE_PX = 15;
+const CARD_PAD_PX = 8;
 
 /**
  * Columns for one day: a booking uses the full width unless it overlaps others; overlapping ones
@@ -122,10 +125,14 @@ export default async function CalendarPage({ searchParams }: PageProps<"/admin/b
               <span aria-hidden className="size-3 rounded-full bg-[repeating-linear-gradient(45deg,#292726_0_3px,#85807d_3px_6px)]" />
               {statusLabels.blocked}
             </li>
+            <li className="flex items-center gap-1.5">
+              <span aria-hidden className="size-2 rounded-full bg-highlight" />
+              {statusLabels.new}
+            </li>
           </ul>
         </div>
         <div className="-mx-6 overflow-x-auto px-6">
-          <div className="grid min-w-[880px]" style={{ gridTemplateColumns: `3rem repeat(${columns.length}, 1fr)` }}>
+          <div className="grid min-w-[1040px]" style={{ gridTemplateColumns: `3rem repeat(${columns.length}, 1fr)` }}>
             <div />
             {columns.map((c) => (
               <div key={c.key} className={`border-b border-cms-line pb-2 text-center text-[13px] ${c.today ? "font-semibold text-highlight" : "text-cms-muted"}`}>
@@ -152,9 +159,12 @@ export default async function CalendarPage({ searchParams }: PageProps<"/admin/b
               const items = rows.filter((b) => b.startsAt.getTime() < dayEnd && b.endsAt.getTime() > dayStart && (!c.studio || b.studioId === c.studio));
               const lanes = layoutLanes(items);
               return (
-                <div key={c.key} className="relative border-l border-cms-line" style={{ height: HOUR_PX * hours.length }}>
+                <div key={c.key} className={`relative border-b border-l border-cms-line last:border-r ${d === today && !dayView ? "bg-highlight/4" : ""}`} style={{ height: HOUR_PX * hours.length }}>
                   {hours.map((h) => (
                     <div key={h} style={{ top: (h - first) * HOUR_PX }} className="absolute inset-x-0 border-t border-cms-line" />
+                  ))}
+                  {hours.map((h) => (
+                    <div key={h} style={{ top: (h - first + 0.5) * HOUR_PX }} className="absolute inset-x-0 border-t border-dashed border-cms-line/50" />
                   ))}
                   {items.map((b) => {
                     const from = Math.max(b.startsAt.getTime(), dayStart);
@@ -162,35 +172,55 @@ export default async function CalendarPage({ searchParams }: PageProps<"/admin/b
                     const startMin = from === dayStart ? 0 : bakuMinutes(new Date(from));
                     const endMin = to === dayEnd ? 1440 : bakuMinutes(new Date(to));
                     const top = ((startMin - first * 60) / 60) * HOUR_PX;
-                    const height = Math.max(18, ((endMin - startMin) / 60) * HOUR_PX - 2);
+                    const height = Math.max(LINE_PX + CARD_PAD_PX, ((endMin - startMin) / 60) * HOUR_PX - 3);
                     const { lane, lanes: laneCount } = lanes.get(b.id) ?? { lane: 0, lanes: 1 };
                     const blocked = b.status === "blocked";
+                    const isNew = b.status === "new";
+                    const studioColor = color.get(b.studioId);
+                    const time = `${formatTime(startMin)}–${formatTime(endMin)}`;
+                    const who = blocked ? b.adminNote || statusLabels.blocked : `${b.firstName} ${b.lastName}`;
+                    const details = dayView && !blocked ? [b.decorSnapshot?.name, b.phone].filter(Boolean).join(" · ") : blocked ? "" : b.studioSnapshot.name;
+                    // Only the lines that fit whole: nothing is ever cut in half; the title has it all.
+                    const room = Math.floor((height - CARD_PAD_PX) / LINE_PX) - 1;
+                    const summary = [b.studioSnapshot.name, time, who, details, isNew ? statusLabels.new : ""].filter(Boolean);
                     return (
                       <Link
                         key={b.id}
                         href={`/admin/bookings/${b.id}`}
-                        title={`${b.studioSnapshot.name}, ${formatTime(startMin)}–${formatTime(endMin)}`}
-                        className={`absolute overflow-hidden rounded-md px-1.5 py-1 text-[11px] leading-tight text-white hover:z-10 hover:ring-2 hover:ring-ink ${b.status === "new" ? "ring-2 ring-white ring-inset" : ""}`}
+                        title={[...new Set(summary)].join(" · ")}
+                        className={`@container absolute overflow-hidden rounded-md border-l-[3px] py-0.5 pr-0.5 pl-1 text-[11px] leading-[15px] text-ink shadow-[0_0_0_1px_white] transition-shadow outline-none hover:z-10 hover:shadow-[0_0_0_1px_white,0_4px_12px_rgb(41_39_38/0.22)] focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-ink ${b.status === "completed" ? "opacity-55" : ""}`}
                         style={{
-                          top,
+                          top: top + 1,
                           height,
                           left: `calc(${(lane / laneCount) * 100}% + 2px)`,
                           width: `calc(${100 / laneCount}% - 4px)`,
-                          background: blocked ? "repeating-linear-gradient(45deg,#292726 0 6px,#5d5957 6px 12px)" : color.get(b.studioId),
-                          opacity: b.status === "completed" ? 0.55 : 1,
+                          borderLeftColor: blocked ? "#5d5957" : studioColor,
+                          background: blocked
+                            ? "repeating-linear-gradient(45deg,#f1f0ef 0 6px,#e5e4e3 6px 12px)"
+                            : `color-mix(in srgb, ${studioColor} 16%, white)`,
                         }}
                       >
-                        <span className="block font-semibold">
-                          {formatTime(startMin)}–{formatTime(endMin)}
+                        <span className="sr-only">{[...new Set(summary)].join(", ")}</span>
+                        {isNew && <span aria-hidden className="absolute right-1 bottom-1 size-2 rounded-full bg-highlight ring-1 ring-white @[5rem]:top-1 @[5rem]:bottom-auto" />}
+                        <span aria-hidden className="block truncate font-semibold tabular-nums @[5rem]:pr-2.5">
+                          {formatTime(startMin)}
+                          {/* The end time only where the card is wide enough for both. */}
+                          <span className="hidden @[5rem]:inline">–{formatTime(endMin)}</span>
                         </span>
-                        <span className="block truncate">{blocked ? b.adminNote || statusLabels.blocked : `${b.firstName} ${b.lastName}`}</span>
-                        {!dayView && <span className="block truncate opacity-90">{b.studioSnapshot.name}</span>}
-                        {dayView && !blocked && (
-                          <span className="block truncate opacity-90">
-                            {[b.decorSnapshot?.name, b.phone].filter(Boolean).join(" · ")}
+                        {/* A narrow card keeps the first name; its colour already says which studio. */}
+                        {room > 0 && (
+                          <span aria-hidden className="block truncate">
+                            {blocked ? (
+                              who
+                            ) : (
+                              <>
+                                {b.firstName}
+                                <span className="hidden @[4.5rem]:inline"> {b.lastName}</span>
+                              </>
+                            )}
                           </span>
                         )}
-                        {b.status === "new" && <span className="block truncate opacity-90">{statusLabels.new}</span>}
+                        {room > 1 && details && <span aria-hidden className="hidden truncate text-cms-muted @[4.5rem]:block">{details}</span>}
                       </Link>
                     );
                   })}
