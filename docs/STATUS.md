@@ -2,6 +2,53 @@
 
 Phases are in [PLAN.md §16](../PLAN.md). Update this file at the end of every phase.
 
+## Where to continue (handoff, 2026-11-01)
+
+**Working rules from the client:** reply in Azerbaijani, short and clear. Figma 1:1, and Figma is
+read-only. Never ask for a password or write one in chat. `.env.local` is never committed. Commit
+and push only when asked. Check with `node tests/visual/figma-diff.mjs desktop|mobile`.
+
+**State:** all code is on `main`. https://test.podkast.az runs commit `952db1a` (later commits only
+touch this file). Pickers, admin calendar cards and the test deploy are done; 62 E2E tests passed.
+
+**Not in git, copy from the Mac by hand (never through the repo):**
+
+- `.env.local`: the DB URL, local admin, salt, SMTP and `FIGMA_TOKEN`.
+- `design/figma-cache/file.json` and `design/assets/figma/`: this is the Figma version of
+  2026-10-29. An older copy makes `figma-diff` report differences that are not real. The API is
+  heavily rate limited (429 on 2026-11-01), so copying is safer than downloading again.
+- `uploads/` and the local database: the only copy of the raster/video originals is on the Mac; the
+  server has web renditions only. The Mac's Postgres cluster sits in a temp folder (`/private/tmp`),
+  so it can disappear: copy it first, or treat the server database as the source of truth.
+
+A fresh computer can also start from the steps in the README (Docker + seeds), but that gives the
+seed content, not the Mac's edits. The Mac has no Docker: Homebrew Postgres on port 5441, Mailpit on
+1026 / 8026, started by hand.
+
+**Server** (details in [deploy/cpanel/README.md](../deploy/cpanel/README.md)), run from cPanel Terminal:
+`~/podkast-src`, `~/podkast-app` (`current`, `releases/`, `shared/.env`, `shared/uploads`),
+`~/podkast-public/.htaccess`. Server env: `SITE_URL=https://test.podkast.az`, `SITE_NOINDEX=1`, SMTP
+lines and `NOTIFY_EMAIL` commented out.
+
+**Client has to do (Claude's permission check refused the first two):**
+
+1. Run AutoSSL for podkast.az: `https://podkast.az` and `www` still show a certificate error.
+2. Add the backup cron: `15 3 * * * bash $HOME/podkast-src/deploy/cpanel/backup.sh >/dev/null 2>&1`
+3. Create the `noreply@podkast.az` mailbox, then enable SMTP in the server `.env` and restart the app.
+4. Log in to the admin on the test site, then remove `ADMIN_PASSWORD` from the server `.env`.
+5. Enter real content in the admin: phone, social links, legal texts, studio names and hours.
+
+**Not verified on the live server:** sending a form, admin login.
+
+**Launch to podkast.az** (only when the above is done and the client asks): `npm run check:launch`;
+in the server `.env` set `SITE_URL` to the domain and remove `SITE_NOINDEX`; remove the test redirect
+at the top of `~/podkast-public/.htaccess` and use `deploy/cpanel/htaccess.txt`; change the Node app
+URL; run `deploy.sh` again; then Search Console and Business Profile.
+
+**Questions for the designer:** mixed corners in Figma's form frames (r6 / r16, built as r16); the
+second consent gap (Figma 10, built 8); contrast of white on orange and of the greys (Phase 7).
+The rest of the `figma-diff` output for booking and package request is sample data and states.
+
 ## Phase 0 — Figma assets ✅ (2026-10-28)
 
 - Whole Figma file saved once (`design/figma-cache/file.json`) + all 260 image fills
@@ -181,6 +228,10 @@ All pages built from the Figma JSON and measured in the browser against it at 14
   permission check. The tests above cover its SEO audits; a real Lighthouse run (SEO +
   performance) is part of phase 7.
 
+**Test deploy (2026-11-01):** https://test.podkast.az (noindex) on the A2 Hosting account `qarajin3`,
+commit `952db1a`, data from the local database. `podkast.az` redirects there (302, top of
+`~/podkast-public/.htaccess`) until launch. Email off (no mailbox yet), backup cron not set.
+
 Still to do at launch (phase 8): `SITE_URL` = the real domain, the other domain + `www` → 301,
 Search Console (sitemap), Google Business Profile, real social links (placeholders are left out
 of `sameAs`).
@@ -211,10 +262,9 @@ of `sameAs`).
   on the studio photos.
 - Checks: lint, typecheck, build, 56 E2E (Chromium) + 138 cross-browser.
 
-## Phase 8 — deploy (prepared 2026-10-29, not deployed)
+## Phase 8 — deploy (prepared 2026-10-29, test deploy 2026-11-01, launch still to do)
 
-Ready on this side; the deploy itself needs the client's cPanel account, the domain decision
-and a GitHub repo with the code (nothing is committed yet).
+Test deploy is live (see "Where to continue"). What was prepared:
 
 - `deploy/cpanel/`: deploy.sh / rollback.sh / backup.sh / app.js for `~/podkast-src`,
   `~/podkast-app`, `~/podkast-public`; env.example for Podkast (SITE_URL, DB, SMTP mailbox,
@@ -305,7 +355,7 @@ Checked every section of PLAN.md against the code; added what was missing:
 
 Still open: Lighthouse itself (downloading it is blocked by the session's permission check —
 run `npx lighthouse` by hand), the optional `.ics` / WhatsApp / SMS (PLAN §5.4, client's call),
-the client questions below, and deploy (paused).
+the client questions below, and the launch to podkast.az.
 
 ## Open questions for the client (PLAN.md §17)
 
