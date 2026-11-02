@@ -7,9 +7,9 @@ import { tx } from "../helpers";
 import type { PartnersData, SectionProps } from "../types";
 
 /**
- * Partner logos (Figma "Group 3384"): greyed (50%) logos, each at its own height, faded out at
- * both edges. Desktop: one row spread over the content width, as in Figma. Mobile: Figma lets the
- * row run past the screen, so it moves as an endless strip (it simply scrolls for reduced motion).
+ * Partner logos (Figma "Group 3384"): black and white at 50%, each at its own height, in colour on
+ * hover, faded out at both edges. An endless strip on every screen: two copies, each at least as
+ * wide as the screen, so it never shows a gap (it simply scrolls for reduced motion).
  */
 export async function PartnersSection({ data, lang }: SectionProps<PartnersData>) {
   const items = await listPublished<PartnerData>("partners");
@@ -41,7 +41,7 @@ export async function PartnersSection({ data, lang }: SectionProps<PartnersData>
         <li
           key={`${copy}-${item.id}`}
           aria-hidden={copy ? true : undefined}
-          className={cx("flex shrink-0 items-center opacity-50 transition-opacity duration-300 hover:opacity-100", copy > 0 && "desktop:hidden")}
+          className="flex shrink-0 items-center opacity-50 grayscale transition-[opacity,filter] duration-300 hover:opacity-100 hover:grayscale-0"
           style={{ "--logo-h": h, "--logo-w": w } as React.CSSProperties}
         >
           {item.data.url && !copy ? (
@@ -61,10 +61,10 @@ export async function PartnersSection({ data, lang }: SectionProps<PartnersData>
       aria-label={tx(data.title, lang) || undefined}
       className="reveal partners-marquee container-page overflow-hidden pt-[5.6875rem] desktop:px-15 desktop:pt-15"
     >
-      <ul className="partners-track flex w-max items-center gap-[2.375rem] desktop:w-full desktop:justify-between desktop:gap-0">
-        {row(0)}
-        {row(1)}
-      </ul>
+      <div className="flex">
+        <ul className="partners-track">{row(0)}</ul>
+        <ul aria-hidden className="partners-track">{row(1)}</ul>
+      </div>
     </section>
   );
 }

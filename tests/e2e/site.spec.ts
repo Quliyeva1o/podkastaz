@@ -254,3 +254,56 @@ test("@site the logo is fully white on the home page, in colour on the others", 
   await page.goto("/paketler");
   await expect(logo).toHaveCSS("filter", "none");
 });
+
+test("@site partner logos move endlessly, in black and white, in colour on hover", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/haqqimizda");
+  const section = page.locator("[data-section=partners]");
+  await section.scrollIntoViewIfNeeded();
+  const track = section.locator(".partners-track").first();
+  await expect(track).toHaveCSS("animation-name", "partners");
+  // Two copies, each at least as wide as the strip, so no gap ever shows.
+  await expect(section.locator(".partners-track")).toHaveCount(2);
+  const [own, strip] = await Promise.all([track.evaluate((el) => (el as HTMLElement).offsetWidth), section.evaluate((el) => el.clientWidth)]);
+  expect(own).toBeGreaterThanOrEqual(strip - 120);
+  const logo = track.locator("li").first();
+  await expect(logo).toHaveCSS("filter", "grayscale(1)");
+  await expect(logo).toHaveCSS("opacity", "0.5");
+  await section.hover();
+  await logo.hover({ force: true });
+  await expect(logo).toHaveCSS("filter", "grayscale(0)");
+  await expect(logo).toHaveCSS("opacity", "1");
+});
+
+for (const [width, height] of [[1440, 900], [1366, 650], [1440, 600], [1920, 950], [1920, 700], [390, 844], [390, 600], [320, 568]]) {
+  test(`@site booking pickers always open above their field at ${width}×${height}`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    await page.goto("/rezervasiya?studiya=studiya-1&dekor=hekimler-ucun-dekor");
+    await expect(page.locator("input[name=startedAt]")).not.toHaveValue("");
+    const field = page.locator("form button[aria-haspopup=dialog]").first();
+    // Scrolled so the field is at the very top of the screen: the hardest case.
+    await field.evaluate((el) => el.scrollIntoView({ block: "start" }));
+    await field.click();
+    const panel = page.locator("form [role=dialog]");
+    await expect(panel).toBeVisible();
+    // Above the field, and all of it on screen.
+    await expect.poll(async () => (await panel.boundingBox())!.y).toBeGreaterThanOrEqual(0);
+    const [a, b] = [(await panel.boundingBox())!, (await field.boundingBox())!];
+    expect(a.y + a.height).toBeLessThanOrEqual(b.y);
+    expect(a.y + a.height).toBeLessThanOrEqual(height);
+  });
+}
+
+test("@site the play button reacts under the pointer, the video itself does not", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/islerimiz/videolar");
+  const tile = page.locator(".video-tile:visible").first();
+  const badge = tile.locator(".play-badge");
+  await expect(badge).toBeVisible();
+  await tile.hover({ position: { x: 20, y: 20 } });
+  await expect(badge).toHaveCSS("scale", "none");
+  await expect(tile).toHaveCSS("cursor", "default");
+  await badge.hover();
+  await expect(badge).toHaveCSS("scale", "1.25");
+  await expect(badge).toHaveCSS("cursor", "pointer");
+});

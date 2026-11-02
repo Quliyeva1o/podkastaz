@@ -17,7 +17,11 @@ everywhere; the forms' time trap is held by React (`useStartedAt`), because writ
 from an effect lost it on about 1 client navigation in 100 and made the form E2E tests flaky. On low
 screens (height-based, `.menu-nav`, CSS only; 1440×900 is unchanged) the menu's top padding drops to the
 bottom padding's size, then its link names and gaps shrink; cards, legal links and the close button keep
-their size and place, so an extremely low screen can still scroll.
+their size and place, so an extremely low screen can still scroll. The home logo is fully white (CSS filter,
+Figma's exposure filter on the same file). Partner logos: endless strip on every screen, black and white
+at 50%, colour on hover. Date and time panels always open above the field; their icons are `#fe5b00`, top
+right, as in every Figma frame. Videos always show the play badge as in Figma; without a YouTube link or mp4
+(the seed has none) a click does nothing until the client adds links.
 
 **Not in git, copy from the Mac by hand (never through the repo):**
 

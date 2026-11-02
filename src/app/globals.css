@@ -201,11 +201,11 @@ main > * + * {
   font-size: calc(var(--menu-unit) * var(--menu-font));
 }
 
-/* Partner logos: faded out at both edges (Figma: 270 px white gradients over the row); on mobile an
-   endless strip (two copies, moves by one copy), on desktop a still row. */
+/* Partner logos: faded out at both edges (Figma: 270 px white gradients over the row); an endless
+   strip: two copies side by side, each moving by its own width and pausing under the pointer. */
 @keyframes partners {
   to {
-    transform: translateX(calc(-50% - var(--gap) / 2));
+    transform: translateX(-100%);
   }
 }
 .partners-marquee {
@@ -213,11 +213,18 @@ main > * + * {
 }
 .partners-track {
   --gap: 2.375rem;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--gap);
+  min-width: 100%;
+  padding-right: var(--gap);
   animation: partners 30s linear infinite;
 }
 @media (min-width: 1024px) {
   .partners-track {
-    animation: none;
+    --gap: 5.5625rem;
   }
 }
 .partners-marquee:hover .partners-track {
@@ -306,6 +313,35 @@ main > * + * {
       animation-range: entry 0% entry 90%;
     }
   }
+}
+
+/* Videos: under the pointer the play button grows with a small wiggle, and shrinks back smoothly. */
+@keyframes play-nudge {
+  0% {
+    scale: 1;
+    rotate: 0deg;
+  }
+  40% {
+    scale: 1.3;
+    rotate: -8deg;
+  }
+  70% {
+    scale: 1.2;
+    rotate: 5deg;
+  }
+  100% {
+    scale: 1.25;
+    rotate: 0deg;
+  }
+}
+.play-badge {
+  transition: scale 0.25s ease-out, background-color 0.25s ease-out;
+}
+.play-badge:hover,
+.video-tile:focus-visible .play-badge {
+  scale: 1.25;
+  background-color: rgb(68 68 68 / 0.35);
+  animation: play-nudge 0.5s ease-out;
 }
 
 /* Studios page decor accordion: the open photo widens smoothly (desktop). */

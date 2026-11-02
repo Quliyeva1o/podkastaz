@@ -8,7 +8,7 @@ import { buttonClass, cx } from "./ui";
 
 /**
  * Date and time pickers of the booking form (Figma "Rezervasiya et (Kalendar)" / "(Saat)").
- * Each is a Figma field box that opens a panel above it (below when there is no room), aligned
+ * Each is a Figma field box that opens a panel above it, aligned
  * to its right edge: a month calendar where taken days are grey and the chosen one orange, and
  * an hour/minute picker where taken times are disabled. A visually hidden required input carries
  * the value into the form, so the browser still asks for it before sending.
@@ -36,27 +36,50 @@ export const displayDate = (date: string) => (date ? date.split("-").reverse().j
 /** "18:30" → "18 : 30"; a booking that runs to midnight ends at "24:00", shown as 00 : 00. */
 export const displayTime = (time: string) => (time ? (time === "24:00" ? "00:00" : time).replace(":", " : ") : "");
 
+const PANEL_MARGIN = 8;
+
+function keepOnScreen(el: HTMLElement) {
+  const { top, bottom } = el.getBoundingClientRect();
+  if (top < PANEL_MARGIN) window.scrollBy(0, top - PANEL_MARGIN);
+  else if (bottom > window.innerHeight - PANEL_MARGIN) window.scrollBy(0, bottom - window.innerHeight + PANEL_MARGIN);
+}
+
 /**
- * Open/close with outside click and Escape. The panel (about `height` rem tall) opens above the
- * field as in Figma, or below it when the space above the field is too small.
+ * Open/close with outside click and Escape. The panel always opens above the field, as in Figma:
+ * the page ends right under these fields, so below it would hang over empty space.
  */
-function usePopover(trigger: RefObject<HTMLButtonElement | null>, panel: RefObject<HTMLDivElement | null>, height: number) {
+function usePopover(trigger: RefObject<HTMLButtonElement | null>, panel: RefObject<HTMLDivElement | null>) {
   const [open, setOpen] = useState(false);
-  const [below, setBelow] = useState(false);
   const close = useCallback((focusTrigger = true) => {
     setOpen(false);
     if (focusTrigger) trigger.current?.focus();
   }, [trigger]);
-  const show = useCallback(() => {
-    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    setBelow((trigger.current?.getBoundingClientRect().top ?? 0) < (height + 1.5) * rem);
-    setOpen(true);
-  }, [trigger, height]);
+  const show = useCallback(() => setOpen(true), []);
   const toggle = useCallback(() => (open ? close(false) : show()), [open, close, show]);
 
-  // Keep the whole panel on screen (clear of the fixed header).
+  // rem follows the screen width, so on a wide but low screen the panel can be taller than the
+  // screen: it shrinks to fit (also when the next month has a week more)…
   useLayoutEffect(() => {
-    if (open) panel.current?.scrollIntoView({ block: "nearest" });
+    const el = panel.current;
+    if (!open || !el) return;
+    const fit = () => {
+      const zoom = Number(el.style.getPropertyValue("zoom")) || 1;
+      const natural = el.getBoundingClientRect().height / zoom;
+      const next = Math.min(1, Math.floor(((window.innerHeight - PANEL_MARGIN * 2) / natural) * 1000) / 1000);
+      if (Math.abs(next - zoom) > 0.002) el.style.setProperty("zoom", String(next));
+    };
+    fit();
+    const watcher = new ResizeObserver(() => {
+      fit();
+      keepOnScreen(el);
+    });
+    watcher.observe(el);
+    return () => watcher.disconnect();
+  }, [open, panel]);
+
+  // …and the page moves so all of it shows (after the calendar has focused its day).
+  useEffect(() => {
+    if (open && panel.current) keepOnScreen(panel.current);
   }, [open, panel]);
 
   useEffect(() => {
@@ -81,7 +104,7 @@ function usePopover(trigger: RefObject<HTMLButtonElement | null>, panel: RefObje
     };
   }, [open, close, panel, trigger]);
 
-  return { open, show, toggle, below, close };
+  return { open, show, toggle, close };
 }
 
 /** Figma field box: label, value (or grey placeholder), icon; orange border while its panel is open. */
@@ -117,7 +140,7 @@ function FieldBox({
       aria-controls={open ? panelId : undefined}
       className={cx(
         choiceCard,
-        "w-full items-end bg-white text-left outline-none focus-visible:ring-2 focus-visible:ring-primary-300 disabled:cursor-not-allowed",
+        "w-full items-start bg-white text-left outline-none focus-visible:ring-2 focus-visible:ring-primary-300 disabled:cursor-not-allowed",
         open ? "border-primary-500" : "border-neutral-200 hover:border-neutral-400 disabled:hover:border-neutral-200",
       )}
     >
@@ -152,8 +175,6 @@ function FormValue({ name, value, onFocus }: { name: string; value: string; onFo
 
 const panelBase = "absolute right-0 z-20 scroll-my-28 bg-white";
 // Figma: the calendar sits 16px above its field, the time picker 14px.
-const panelPlace = (below: boolean, gap: "1rem" | "0.875rem") =>
-  below ? (gap === "1rem" ? "top-[calc(100%+1rem)]" : "top-[calc(100%+0.875rem)]") : gap === "1rem" ? "bottom-[calc(100%+1rem)]" : "bottom-[calc(100%+0.875rem)]";
 
 // ---------------------------------------------------------------- Date
 
@@ -173,7 +194,7 @@ export function DatePicker({
   const trigger = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const panelId = useId();
-  const { open, show, toggle, below, close } = usePopover(trigger, panel, 34);
+  const { open, show, toggle, close } = usePopover(trigger, panel);
 
   return (
     <div className="relative">
@@ -181,7 +202,7 @@ export function DatePicker({
         label={labels.dateLabel}
         value={displayDate(value)}
         placeholder={labels.datePlaceholder}
-        icon={<CalendarDots aria-hidden className="size-6 shrink-0" />}
+        icon={<CalendarDots aria-hidden className="size-6 shrink-0 text-primary-600" />}
         open={open}
         disabled={disabled}
         onClick={toggle}
@@ -197,7 +218,7 @@ export function DatePicker({
           aria-label={labels.dateLabel}
           className={cx(
             panelBase,
-            panelPlace(below, "1rem"),
+            "bottom-[calc(100%+1rem)]",
             "w-full rounded-3xl border border-neutral-200 p-4 shadow-[0_0.625rem_1rem_rgb(93_114_132/0.2)] desktop:w-[31.375rem] desktop:p-[1.8125rem] desktop:shadow-none",
           )}
         >
@@ -407,7 +428,7 @@ export function TimePicker({
   const trigger = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const panelId = useId();
-  const { open, show, toggle, below, close } = usePopover(trigger, panel, 23.5);
+  const { open, show, toggle, close } = usePopover(trigger, panel);
   const opening = () => {
     if (!open) onOpen();
     toggle();
@@ -419,7 +440,7 @@ export function TimePicker({
         label={label}
         value={displayTime(value)}
         placeholder={labels.timePlaceholder}
-        icon={<Alarm aria-hidden className="size-6 shrink-0" />}
+        icon={<Alarm aria-hidden className="size-6 shrink-0 text-primary-600" />}
         open={open}
         disabled={disabled || !options.some((o) => !o.disabled)}
         onClick={opening}
@@ -433,7 +454,7 @@ export function TimePicker({
           id={panelId}
           role="dialog"
           aria-label={label}
-          className={cx(panelBase, panelPlace(below, "0.875rem"), "w-[14.25rem] rounded-[0.875rem] border border-neutral-200 p-4 shadow-[0_0.625rem_1rem_rgb(93_114_132/0.2)]")}
+          className={cx(panelBase, "bottom-[calc(100%+0.875rem)] w-[14.25rem] rounded-[0.875rem] border border-neutral-200 p-4 shadow-[0_0.625rem_1rem_rgb(93_114_132/0.2)]")}
         >
           <TimeWheel
             label={label}

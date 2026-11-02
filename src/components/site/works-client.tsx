@@ -104,7 +104,7 @@ function PlayBadge({ size }: { size: "sm" | "lg" }) {
     <span
       aria-hidden
       className={cx(
-        "pointer-events-none absolute top-1/2 left-1/2 flex -translate-1/2 items-center justify-center rounded-full bg-[#444]/10 text-white backdrop-blur-[0.7rem]",
+        "play-badge absolute top-1/2 left-1/2 z-10 flex cursor-pointer -translate-1/2 items-center justify-center rounded-full bg-[#444]/10 text-white backdrop-blur-[0.7rem]",
         size === "lg" ? "size-15 desktop:backdrop-blur-[1.5625rem]" : "size-8",
       )}
     >
@@ -141,12 +141,12 @@ export function VideoGallery({
       onClick={() => (playable(v) ? setPlaying(i) : undefined)}
       aria-label={playable(v) ? `${labels.play}: ${v.title}` : v.title}
       className={cx(
-        "relative block overflow-hidden bg-silver after:absolute after:inset-0 after:bg-black/20",
+        "video-tile relative block overflow-hidden bg-silver after:absolute after:inset-0 after:bg-black/20",
         className,
       )}
     >
       {v.thumb}
-      {playable(v) && <PlayBadge size={size} />}
+      <PlayBadge size={size} />
     </button>
   );
 
