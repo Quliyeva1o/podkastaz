@@ -40,7 +40,8 @@ export function Header({
 
   return (
     <header className={cx("site-header z-30", dark ? "absolute inset-x-0 top-0" : "relative")}>
-      <div className="container-page flex h-18 items-center justify-between px-4 desktop:h-25 desktop:px-15">
+      {/* Over the full-bleed home hero the header runs edge to edge, in line with the hero's text and social buttons. */}
+      <div className={cx("flex h-18 items-center justify-between px-4 desktop:h-25 desktop:px-15", dark ? "w-full" : "container-page")}>
         <Link
           href={href("home", lang)}
           aria-label={tx(logo?.alt, lang) || siteName}

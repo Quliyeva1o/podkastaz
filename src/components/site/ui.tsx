@@ -9,7 +9,7 @@ type ButtonVariant = "primary" | "white" | "glass" | "outline";
 const buttonVariants: Record<ButtonVariant, string> = {
   primary: "bg-primary-600 text-white hover:bg-primary-700",
   white: "bg-white text-neutral-950 hover:bg-neutral-100",
-  glass: "bg-white/16 text-white backdrop-blur-[1rem] hover:bg-white/24",
+  glass: "bg-white/16 text-white backdrop-blur-[0.5rem] hover:bg-white/24",
   outline: "border border-neutral-300 text-primary-600 hover:border-primary-600",
 };
 

@@ -37,7 +37,7 @@ export function DecorAccordion({ items, label }: { items: AccordionItem[]; label
             <div
               aria-hidden={!active}
               className={cx(
-                "absolute inset-x-3 bottom-3 flex flex-col gap-3.5 rounded-[0.375rem] bg-[#222]/24 p-4 text-white backdrop-blur-[4.5rem] transition-opacity duration-300 desktop:right-4.5 desktop:bottom-4.5 desktop:left-4",
+                "absolute inset-x-3 bottom-3 flex flex-col gap-3.5 rounded-[0.375rem] bg-[#222]/24 p-4 text-white backdrop-blur-[2.25rem] transition-opacity duration-300 desktop:right-4.5 desktop:bottom-4.5 desktop:left-4",
                 active ? "opacity-100 delay-150" : "pointer-events-none opacity-0",
               )}
             >

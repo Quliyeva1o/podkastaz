@@ -197,3 +197,18 @@ for (const p of seoPages) {
     expect(problems).toEqual([]);
   });
 }
+
+for (const width of [1440, 2560]) {
+  test(`@site home header lines up with the hero at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/");
+    await page.addStyleTag({ content: "*,*::before,*::after{animation:none!important}" });
+    const left = async (selector: string) => (await page.locator(selector).first().boundingBox())!;
+    const logo = await left("header a");
+    const title = await left("h1");
+    const menu = await left("header button[aria-expanded]");
+    const socials = await left('[data-section="hero"] ul');
+    expect(Math.abs(logo.x - title.x)).toBeLessThan(1);
+    expect(Math.abs(menu.x + menu.width - (socials.x + socials.width))).toBeLessThan(2);
+  });
+}

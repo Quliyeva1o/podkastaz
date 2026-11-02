@@ -23,8 +23,8 @@ export function HeroSection({ data, lang, media, contacts }: SectionProps<HeroDa
     >
       <Background media={bg} poster={poster} lang={lang} />
 
-      {/* Desktop: Figma's panel is 32px padding + the 35px logo (the header draws it) above the centred block. */}
-      <div className="hero-panel relative flex flex-col gap-5 px-4 pt-22.5 desktop:min-h-[inherit] desktop:w-[44.0625rem] desktop:justify-between desktop:gap-0 desktop:bg-black/14 desktop:px-15 desktop:pt-[4.1875rem] desktop:pb-10 desktop:backdrop-blur-[2.5rem]">
+      {/* Desktop: Figma's panel is 32px padding + the 35px logo (the header draws it) above the centred block. CSS blur = half of Figma's radius (40), here and on every blurred element. */}
+      <div className="hero-panel relative flex flex-col gap-5 px-4 pt-22.5 desktop:min-h-[inherit] desktop:w-[44.0625rem] desktop:justify-between desktop:gap-0 desktop:bg-black/14 desktop:px-15 desktop:pt-[4.1875rem] desktop:pb-10 desktop:backdrop-blur-[1.25rem]">
         <div className="flex flex-col gap-5 desktop:my-auto desktop:gap-[3.125rem]">
           <h1 className="hero-in text-32 leading-none font-bold desktop:text-84 desktop:leading-[0.952]">
             {tx(data.title, lang)}

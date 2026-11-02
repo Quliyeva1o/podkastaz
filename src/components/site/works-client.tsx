@@ -104,8 +104,8 @@ function PlayBadge({ size }: { size: "sm" | "lg" }) {
     <span
       aria-hidden
       className={cx(
-        "pointer-events-none absolute top-1/2 left-1/2 flex -translate-1/2 items-center justify-center rounded-full bg-[#444]/10 text-white backdrop-blur-[1.4rem]",
-        size === "lg" ? "size-15 desktop:backdrop-blur-[3.125rem]" : "size-8",
+        "pointer-events-none absolute top-1/2 left-1/2 flex -translate-1/2 items-center justify-center rounded-full bg-[#444]/10 text-white backdrop-blur-[0.7rem]",
+        size === "lg" ? "size-15 desktop:backdrop-blur-[1.5625rem]" : "size-8",
       )}
     >
       <Play
