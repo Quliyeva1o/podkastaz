@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useRef } from "react";
 import { keepFormSubmit } from "@/lib/forms/keep-form";
+import { useStartedAt } from "@/lib/forms/use-started-at";
 import { submitContact, type ContactState } from "@/lib/forms/contact";
 import { TextArea, TextField } from "./form-fields";
 import { Turnstile } from "./turnstile";
@@ -45,12 +46,8 @@ export function ContactForm({
     submitContact,
     null,
   );
-  const startedAt = useRef<HTMLInputElement>(null);
+  const startedAt = useStartedAt();
   const form = useRef<HTMLFormElement>(null);
-  // Set after hydration: the time trap measures how long a person took to fill the form.
-  useEffect(() => {
-    if (startedAt.current) startedAt.current.value = String(Date.now());
-  }, []);
   useEffect(() => {
     if (state?.ok) form.current?.reset();
   }, [state]);
@@ -63,7 +60,7 @@ export function ContactForm({
       className="flex flex-col gap-10 desktop:gap-8"
     >
       <input type="hidden" name="locale" value={lang} />
-      <input ref={startedAt} type="hidden" name="startedAt" defaultValue="" />
+      <input type="hidden" name="startedAt" value={startedAt} />
       <div aria-hidden className="absolute -left-[9999px]">
         <input type="text" name="website" tabIndex={-1} autoComplete="off" />
       </div>

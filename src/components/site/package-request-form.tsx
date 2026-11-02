@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { keepFormSubmit } from "@/lib/forms/keep-form";
+import { useStartedAt } from "@/lib/forms/use-started-at";
 import { submitPackageRequest, type PackageRequestState } from "@/lib/forms/package-request";
 import { Check, choiceBorder, choiceCard, formHeading, groupTitle, Radio, SuccessModal, TickBox, withLinks } from "./form-controls";
 import { TextField } from "./form-fields";
@@ -55,12 +56,8 @@ export function PackageRequestForm({ packages, addons, labels, lang, links, init
   const [accuracy, setAccuracy] = useState(false);
   const [terms, setTerms] = useState(false);
   const [done, setDone] = useState(false);
-  const startedAt = useRef<HTMLInputElement>(null);
+  const startedAt = useStartedAt();
   const form = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    if (startedAt.current) startedAt.current.value = String(Date.now());
-  }, []);
 
   const [handled, setHandled] = useState<PackageRequestState>(null);
   if (state !== handled) {
@@ -85,7 +82,7 @@ export function PackageRequestForm({ packages, addons, labels, lang, links, init
   return (
     <>
       <form ref={form} action={action} onSubmit={keepFormSubmit(action)} className="grid grid-cols-1 gap-[5.625rem] desktop:grid-cols-2 desktop:gap-20">
-        <input ref={startedAt} type="hidden" name="startedAt" defaultValue="" />
+        <input type="hidden" name="startedAt" value={startedAt} />
         <div aria-hidden className="absolute -left-[9999px]">
           <input type="text" name="website" tabIndex={-1} autoComplete="off" />
         </div>

@@ -62,6 +62,7 @@ export function Header({
           buttonClassName={dark ? "text-white" : "text-neutral-950"}
           icon={<MenuIcon className="size-10" />}
           current={activeTarget}
+          fullWidth={dark}
           nav={menu.nav.map(({ link }) => ({ label: tx(link.label, lang), href: linkHref(link, lang), target: link.target }))}
           booking={{
             title: tx(menu.bookingTitle, lang),

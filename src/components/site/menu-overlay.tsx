@@ -20,6 +20,7 @@ export function MenuOverlay({
   buttonClassName,
   icon,
   current,
+  fullWidth,
   nav,
   booking,
   contact,
@@ -30,6 +31,8 @@ export function MenuOverlay({
   buttonClassName: string;
   icon: ReactNode;
   current: string;
+  /** Home page: edge to edge like its header, so the close button sits where the menu button was. */
+  fullWidth?: boolean;
   nav: NavItem[];
   booking: Card & { background?: ReactNode };
   contact: Card;
@@ -78,7 +81,7 @@ export function MenuOverlay({
             aria-label={openLabel}
             className="menu-overlay fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-black text-white"
           >
-            <div className="container-page relative flex min-h-full flex-col px-4 pt-17.5 pb-5 desktop:grid desktop:grid-cols-[1fr_auto] desktop:grid-rows-[1fr_auto] desktop:px-15 desktop:pt-30 desktop:pb-15.25">
+            <div className={cx("relative flex min-h-full flex-col px-4 pt-17.5 pb-5 desktop:grid desktop:grid-cols-[1fr_auto] desktop:grid-rows-[1fr_auto] desktop:px-15 desktop:pt-30 desktop:pb-15.25", fullWidth ? "w-full" : "container-page")}>
               <button
                 ref={closeButton}
                 type="button"

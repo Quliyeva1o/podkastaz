@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useRef, useState, type ReactNode } from "react";
 import { createBooking, type BookingState } from "@/lib/booking/actions";
+import { useStartedAt } from "@/lib/forms/use-started-at";
 import { keepFormSubmit } from "@/lib/forms/keep-form";
 import type { DaySlots } from "@/lib/booking/slots";
 import { DatePicker, TimePicker } from "./booking-pickers";
@@ -63,17 +64,13 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
   const [accuracy, setAccuracy] = useState(false);
   const [terms, setTerms] = useState(false);
   const [done, setDone] = useState(false);
-  const startedAt = useRef<HTMLInputElement>(null);
+  const startedAt = useStartedAt();
   const form = useRef<HTMLFormElement>(null);
 
   const current = studios.find((s) => s.slug === studio);
   // Before a studio is chosen the decor cards still show (Figma "Rezervasiya et" from the home
   // page), disabled, with the first studio's decors; choosing a studio shows its own.
   const decorStudio = current ?? studios[0];
-
-  useEffect(() => {
-    if (startedAt.current) startedAt.current.value = String(Date.now());
-  }, []);
 
   // Free times of the chosen studio and day (again after a "taken" answer and whenever a time
   // picker opens: someone else may have booked in the meantime).
@@ -149,7 +146,7 @@ export function BookingForm({ studios, labels, links, initial, lang, turnstileKe
     <>
       <form ref={form} action={action} onSubmit={keepFormSubmit(action)} className="grid grid-cols-1 gap-[5.625rem] desktop:grid-cols-2 desktop:gap-20">
         <input type="hidden" name="locale" value={lang} />
-        <input ref={startedAt} type="hidden" name="startedAt" defaultValue="" />
+        <input type="hidden" name="startedAt" value={startedAt} />
         <input type="hidden" name="source" value={initial.decor ? "decor" : "direct"} />
         <div aria-hidden className="absolute -left-[9999px]">
           <input type="text" name="website" tabIndex={-1} autoComplete="off" />

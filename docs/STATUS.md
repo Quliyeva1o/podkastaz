@@ -8,8 +8,13 @@ Phases are in [PLAN.md §16](../PLAN.md). Update this file at the end of every p
 read-only. Never ask for a password or write one in chat. `.env.local` is never committed. Commit
 and push only when asked. Check with `node tests/visual/figma-diff.mjs desktop|mobile`.
 
-**State:** all code is on `main`. https://test.podkast.az runs commit `952db1a` (later commits only
-touch this file). Pickers, admin calendar cards and the test deploy are done; 62 E2E tests passed.
+**State:** all code is on `main`. Pickers, admin calendar cards and the test deploy are done; 64 E2E
+tests passed. Check which commit https://test.podkast.az runs with `ls -l ~/podkast-app/current` on the server.
+
+**Latest fixes (2026-11-02):** on the home page the header and menu run edge to edge above 1920px, in
+line with the hero (inner pages stay in the centred 1440 container); CSS blur is half of Figma's radius
+everywhere; the forms' time trap is held by React (`useStartedAt`), because writing it into the input
+from an effect lost it on about 1 client navigation in 100 and made the form E2E tests flaky.
 
 **Not in git, copy from the Mac by hand (never through the repo):**
 
