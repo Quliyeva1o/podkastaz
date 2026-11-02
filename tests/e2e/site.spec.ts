@@ -212,3 +212,37 @@ for (const width of [1440, 2560]) {
     expect(Math.abs(menu.x + menu.width - (socials.x + socials.width))).toBeLessThan(2);
   });
 }
+
+for (const [width, height] of [[1440, 900], [1440, 700], [1366, 650], [1536, 730], [1920, 950], [2560, 1300], [1024, 600], [768, 700], [390, 844], [320, 568]]) {
+  test(`@site menu fits the screen without scrolling at ${width}×${height}`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    await page.goto("/");
+    await page.addStyleTag({ content: "*,*::before,*::after{animation:none!important;transition:none!important}" });
+    const open = page.locator("header button[aria-expanded]");
+    const before = (await open.boundingBox())!;
+    await open.click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toBeVisible();
+    await expect.poll(() => dialog.evaluate((el) => el.scrollHeight - el.clientHeight)).toBeLessThanOrEqual(0);
+    await expect.poll(() => dialog.evaluate((el) => el.scrollWidth - el.clientWidth)).toBeLessThanOrEqual(0);
+    // The close button stays at the menu button's right edge.
+    const close = (await dialog.getByRole("button").first().boundingBox())!;
+    expect(Math.abs(close.x + close.width - (before.x + before.width))).toBeLessThan(4);
+    expect(Math.abs(close.width - 40)).toBeLessThan(16);
+    // Desktop: the close button keeps Figma's place; 1440×900 is Figma; a lower screen has equal top and bottom padding.
+    if (width >= 1024) {
+      const rem = await page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).fontSize));
+      expect(Math.abs(close.y - 1.875 * rem)).toBeLessThan(1);
+      const link = dialog.getByRole("link").first();
+      const top = (await link.boundingBox())!.y;
+      if (width === 1440 && height === 900) {
+        expect(top).toBe(120);
+        expect(await link.evaluate((el) => parseFloat(getComputedStyle(el).fontSize))).toBe(54);
+      } else if (height / rem < 51.5) {
+        expect(Math.abs(top - 3.8125 * rem)).toBeLessThan(1);
+      } else {
+        expect(Math.abs(top - 7.5 * rem)).toBeLessThan(1);
+      }
+    }
+  });
+}

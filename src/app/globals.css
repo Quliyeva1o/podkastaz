@@ -171,6 +171,36 @@ main > * + * {
   animation: menu-rise 0.35s cubic-bezier(0.16, 1, 0.3, 1) calc(0.05s + var(--i, 0) * 0.03s) backwards;
 }
 
+/*
+ * Menu on a low screen. rem follows the screen width, so a wide but low screen would need to scroll.
+ * While everything fits, nothing changes (Figma). When it does not, first the top padding drops to
+ * the bottom padding's size, then the link names and their gaps shrink: their unit is 1rem until the
+ * height runs out. --menu-rest = the height of all the rest with that smaller padding; on mobile the
+ * padding stays. Cards, legal links and the close button keep their size and place.
+ */
+.menu-nav {
+  --menu-rest: 19.6rem;
+  --menu-font: 1.5;
+  --menu-gap: 0.576;
+  --menu-list: calc(var(--menu-links) * var(--menu-font) * 1.5 + (var(--menu-links) - 1) * var(--menu-gap));
+  --menu-unit: clamp(0.6rem, (100dvh - var(--menu-rest)) / var(--menu-list), 1rem);
+}
+@media (min-width: 1024px) {
+  .menu-nav {
+    --menu-rest: 11.25rem;
+    --menu-font: 3.375;
+    --menu-gap: 1.25;
+    /* 7.5rem when the design fits as it is (14.9375rem + the links), else 3.8125rem like the bottom. */
+    padding-top: clamp(3.8125rem, 3.8125rem + (100dvh - 14.9375rem - var(--menu-list) * 1rem) * 10000, 7.5rem);
+  }
+}
+.menu-nav nav ul {
+  gap: calc(var(--menu-unit) * var(--menu-gap));
+}
+.menu-nav nav a {
+  font-size: calc(var(--menu-unit) * var(--menu-font));
+}
+
 /* Partner logos: faded out at both edges (Figma: 270 px white gradients over the row); on mobile an
    endless strip (two copies, moves by one copy), on desktop a still row. */
 @keyframes partners {

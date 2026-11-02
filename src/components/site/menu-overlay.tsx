@@ -13,6 +13,7 @@ type Card = { title: string; text: string; href: string };
  * Menu button + full-screen black overlay (Figma "Menu" 1440 and "Mob/Menu" 320), the same
  * on every screen size: big links on the left, the orange "Rezervasiya et" and dark "Əlaqə"
  * cards (bottom right on desktop, under the links on mobile), legal links at the bottom.
+ * On a low screen the top padding and then the links and their gaps shrink, so it fits (.menu-nav).
  */
 export function MenuOverlay({
   openLabel,
@@ -81,7 +82,7 @@ export function MenuOverlay({
             aria-label={openLabel}
             className="menu-overlay fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-black text-white"
           >
-            <div className={cx("relative flex min-h-full flex-col px-4 pt-17.5 pb-5 desktop:grid desktop:grid-cols-[1fr_auto] desktop:grid-rows-[1fr_auto] desktop:px-15 desktop:pt-30 desktop:pb-15.25", fullWidth ? "w-full" : "container-page")}>
+            <div style={{ "--menu-links": nav.length } as React.CSSProperties} className={cx("menu-nav relative flex min-h-full flex-col px-4 pt-17.5 pb-5 desktop:grid desktop:grid-cols-[1fr_auto] desktop:grid-rows-[1fr_auto] desktop:px-15 desktop:pb-15.25", fullWidth ? "w-full" : "container-page")}>
               <button
                 ref={closeButton}
                 type="button"
@@ -93,14 +94,14 @@ export function MenuOverlay({
               </button>
 
               <nav aria-label={openLabel} className="desktop:col-start-1 desktop:row-start-1">
-                <ul className="flex flex-col gap-[0.576rem] desktop:gap-5">
+                <ul className="flex flex-col">
                   {nav.map((item, i) => (
                     <li key={item.target} className="menu-rise" style={{ "--i": i } as React.CSSProperties}>
                       <Link
                         href={item.href}
                         onClick={close}
                         aria-current={item.target === current ? "page" : undefined}
-                        className="block text-24 leading-[1.5] font-medium transition-[color,translate] duration-300 hover:translate-x-2 hover:text-primary-400 desktop:text-54 desktop:font-semibold desktop:hover:translate-x-4"
+                        className="block leading-[1.5] font-medium transition-[color,translate] duration-300 hover:translate-x-2 hover:text-primary-400 desktop:font-semibold desktop:hover:translate-x-4"
                       >
                         {item.label}
                       </Link>
