@@ -50,7 +50,8 @@ export function Header({
           className={cx("block w-[8.6rem] transition-opacity hover:opacity-80 desktop:w-[11.4375rem]", dark && "hero-in")}
         >
           {logo ? (
-            <Picture media={logo} lang={lang} sizes="(min-width: 1024px) 12vw, 140px" priority alt="" className="h-auto w-full" />
+            // Home: fully white, as Figma's exposure filter makes the logo (the sound wave is orange in the file).
+            <Picture media={logo} lang={lang} sizes="(min-width: 1024px) 12vw, 140px" priority alt="" className={cx("h-auto w-full", dark && "brightness-0 invert")} />
           ) : (
             <span className={cx("text-24 font-bold", dark ? "text-white" : "text-neutral-950")}>{siteName}</span>
           )}

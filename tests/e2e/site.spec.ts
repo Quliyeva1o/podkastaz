@@ -246,3 +246,11 @@ for (const [width, height] of [[1440, 900], [1440, 700], [1366, 650], [1536, 730
     }
   });
 }
+
+test("@site the logo is fully white on the home page, in colour on the others", async ({ page }) => {
+  await page.goto("/");
+  const logo = page.locator("header a img");
+  await expect(logo).toHaveCSS("filter", "brightness(0) invert(1)");
+  await page.goto("/paketler");
+  await expect(logo).toHaveCSS("filter", "none");
+});
