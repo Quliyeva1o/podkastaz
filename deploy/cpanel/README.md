@@ -138,6 +138,9 @@ bash ~/podkast-src/deploy/cpanel/rollback.sh <id>     # həmin versiyaya qayıt
 
 - **Thread limiti**: CloudLinux hər thread-i proses sayır (150). `deploy.sh` və `app.js` bütün
   hovuzları 2-yə endirir; build tək CPU ilə gedir; `.next` hər dəfə silinir (köhnə CSS problemi).
+  Build ~115 thread işlədir; `deploy.sh` əvvəlcə köhnə versiyalardan qalmış Podkast server
+  proseslərini dayandırır (onlar build-i limitdən keçirirdi). Yenə `SIGABRT` olsa:
+  `ps -u $USER -o pid,nlwp,etime,args --sort=-nlwp` ilə kimin thread tutduğuna baxın.
 - **Media Node-dan keçmir**: `deploy.sh` `~/podkast-public/media` → `shared/uploads` linki qurur,
   LiteSpeed şəkil və videoları özü verir (`media.htaccess`: 1 il cache, PHP qadağan).
 - **Proxy öz saytına HTTP sorğu atmır** (marketinq.az-da ilişməyə səbəb olmuşdu) — studiya

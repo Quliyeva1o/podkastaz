@@ -34,6 +34,19 @@ main() {
   [ -f "$APP/shared/.env" ] || { echo "Missing $APP/shared/.env (see README.md)"; exit 1; }
   echo "→ node $(node -v), building $REF"
 
+  # A switch can leave the previous release's server processes running (seen: two of them, a day
+  # old, from a deleted release). Their threads count too and pushed the build over the limit.
+  # Stop every Podkast server whose folder is not the active release; other apps are untouched.
+  ACTIVE="$(readlink -f "$APP/current" 2>/dev/null || true)"
+  for pid in $(pgrep -u "$(id -u)" -f next-server || true); do
+    cwd="$(readlink "/proc/$pid/cwd" 2>/dev/null || true)"
+    case "$cwd" in
+      "$ACTIVE") ;;
+      "$APP"/releases/*) echo "→ stopping a stale server ($pid, $cwd)"; kill "$pid" 2>/dev/null || true ;;
+    esac
+  done
+  echo "→ $(ps -u "$(id -u)" -L --no-headers | wc -l) of 150 threads in use before the build"
+
   cd "$SRC"
   git fetch --quiet origin
   git checkout --quiet --force --detach "$REF"
