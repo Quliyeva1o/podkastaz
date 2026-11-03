@@ -300,11 +300,11 @@ main > * + * {
  * card's hover lift (`translate`) still works after it has appeared.
  */
 /* Home: behind the iPhone's toolbar and in the overscroll, the hero's colours instead of white. */
-html:has([data-section="hero"]) {
+html:has([data-section="hero"]), html:has([data-section="hero"]) body, html:has([data-section="hero"]) main {
   background: linear-gradient(90.2deg, #fc4601 0.13%, #fd5902 99.79%);
 }
 @media (min-width: 1024px) {
-  html:has([data-section="hero"]) {
+  html:has([data-section="hero"]), html:has([data-section="hero"]) body, html:has([data-section="hero"]) main {
     background: #000;
   }
 }
