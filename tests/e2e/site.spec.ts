@@ -323,3 +323,19 @@ test("@site the PRO frame and its tab are one colour, primary 600", async ({ pag
   await expect(frame).toHaveCSS("background-color", "rgb(254, 91, 0)");
   await expect(frame).toHaveCSS("background-image", "none");
 });
+
+/**
+ * iOS before 16.4 (e.g. an iPhone 11 not updated) cannot parse class static blocks or regex
+ * lookbehind: one such script stops all of React, so menus, radios and checkboxes do nothing.
+ * package.json's browserslist (safari 15.4) makes the build write them the old way.
+ */
+test("@site the page scripts run on Safari 15.4 (no syntax it cannot parse)", async ({ page, request }) => {
+  await page.goto("/rezervasiya");
+  const scripts = await page.locator("script[src]").evaluateAll((els) => els.map((e) => (e as HTMLScriptElement).src));
+  expect(scripts.length).toBeGreaterThan(0);
+  for (const src of scripts) {
+    const code = await (await request.get(src)).text();
+    expect(code, src).not.toMatch(/[{;}]static\s*\{/);
+    expect(code, src).not.toMatch(/\(\?<[=!]/);
+  }
+});

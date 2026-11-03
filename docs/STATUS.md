@@ -23,7 +23,11 @@ at 50%, colour on hover. Date and time panels always open above the field; their
 right, as in every Figma frame. Videos always show the play badge as in Figma; without a YouTube link or mp4
 (the seed has none) a click does nothing until the client adds links. Fonts are self-hosted from the repository
 (`src/lib/fonts/fonts.css` + `files/`, latin and latin-ext): the server build failed when Google answered
-next/font/google with a different CSS format.
+next/font/google with a different CSS format. `browserslist` adds Safari / iOS 15.4: Next 16 targets 16.4
+and its router used class static blocks, which older iOS cannot parse (no menu, radios or checkboxes
+there); a test checks the page scripts. The home hero is 100lvh tall so iOS Safari's floating toolbar
+shows the photo, not white; the social buttons are lifted by 100lvh − 100dvh. Neither is verified on a
+real iPhone yet.
 
 **Not in git, copy from the Mac by hand (never through the repo):**
 
