@@ -317,8 +317,9 @@ test("@site cards keep their colours while they scroll in (no fade)", async ({ p
   await expect(card.getByRole("link").first()).toHaveCSS("background-color", "rgb(254, 91, 0)");
 });
 
-test("@site the PRO frame uses Figma's gradient", async ({ page }) => {
+test("@site the PRO frame and its tab are one colour, primary 600", async ({ page }) => {
   await page.goto("/paketler");
-  const frame = page.locator("[data-section=packageList] li div[class*='linear-gradient']").first();
-  await expect(frame).toHaveCSS("background-image", "linear-gradient(157.51deg, rgb(253, 95, 4) 1.04%, rgb(221, 37, 1) 99.94%)");
+  const frame = page.locator("[data-section=packageList] li").filter({ hasText: "PRO" }).locator("> div").first();
+  await expect(frame).toHaveCSS("background-color", "rgb(254, 91, 0)");
+  await expect(frame).toHaveCSS("background-image", "none");
 });
