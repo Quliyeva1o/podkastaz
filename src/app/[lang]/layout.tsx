@@ -12,10 +12,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
 };
 
-export const viewport: Viewport = {
-  themeColor: "#ffffff",
-  // The page also paints the iPhone's bottom safe area (home indicator), not a white strip.
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
   viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fd5902" },
+    { media: "(prefers-color-scheme: dark)", color: "#fd5902" },
+  ],
 };
 
 export default async function SiteLayout({ children, params }: LayoutProps<"/[lang]">) {
