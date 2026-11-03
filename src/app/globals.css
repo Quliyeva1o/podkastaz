@@ -295,13 +295,13 @@ main > * + * {
 }
 
 /*
- * Cards and blocks rise in as they enter the screen (scroll-driven, no JavaScript). Browsers
+ * Cards and blocks rise into place as they enter the screen (scroll-driven, no JavaScript). Browsers
  * without scroll timelines show them as they are. Transform (not `translate`) is animated, so a
  * card's hover lift (`translate`) still works after it has appeared.
  */
+/* No fade: a half-entered card would show lighter colours than Figma's (Paketlər at the top). */
 @keyframes reveal {
   from {
-    opacity: 0;
     transform: translateY(2.5rem);
   }
 }

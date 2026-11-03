@@ -307,3 +307,18 @@ test("@site the play button reacts under the pointer, the video itself does not"
   await expect(badge).toHaveCSS("scale", "1.25");
   await expect(badge).toHaveCSS("cursor", "pointer");
 });
+
+test("@site cards keep their colours while they scroll in (no fade)", async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 640 });
+  await page.goto("/paketler");
+  const card = page.locator("[data-section=packageList] li").first();
+  // The card has only partly entered the screen at the top of the page.
+  await expect(card).toHaveCSS("opacity", "1");
+  await expect(card.getByRole("link").first()).toHaveCSS("background-color", "rgb(254, 91, 0)");
+});
+
+test("@site the PRO frame uses Figma's gradient", async ({ page }) => {
+  await page.goto("/paketler");
+  const frame = page.locator("[data-section=packageList] li div[class*='linear-gradient']").first();
+  await expect(frame).toHaveCSS("background-image", "linear-gradient(157.51deg, rgb(253, 95, 4) 1.04%, rgb(221, 37, 1) 99.94%)");
+});

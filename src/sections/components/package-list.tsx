@@ -52,7 +52,7 @@ export async function PackageListSection({ data, lang }: SectionProps<PackageLis
               {p.data.highlighted ? (
                 // Gradient frame outside the card (Figma stroke: 1px mobile, 2px desktop, 48px on top for the tab);
                 // the other cards start below the tab (on desktop Figma lets the tab stick out 13px above the row).
-                <div className="flex h-full flex-col rounded-[0.6875rem] bg-linear-to-br from-[#fd5f04] to-[#dd2501] p-px pt-0 desktop:rounded-[1.125rem] desktop:p-0.5 desktop:pt-0">
+                <div className="flex h-full flex-col rounded-[0.6875rem] bg-[linear-gradient(157.51deg,#fd5f04_1.04%,#dd2501_99.94%)] p-px pt-0 desktop:rounded-[1.125rem] desktop:p-0.5 desktop:pt-0">
                   <p className="flex h-12 items-center justify-center gap-1.5 text-16 leading-[1.5] font-semibold tracking-tight text-white">
                     <Sparkle aria-hidden weight="duotone" className="size-[1.375rem]" />
                     {tx(data.highlightLabel, lang)}
