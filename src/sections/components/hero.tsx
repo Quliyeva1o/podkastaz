@@ -10,7 +10,8 @@ import type { ContactsData, HeroData, SectionProps } from "../types";
  * Home page — one screen (Figma "Home" 1440×900, "Mob/Home Page" 320×574).
  * The section is as tall as the large viewport (100lvh), so on iOS Safari the photo also fills
  * the area under the floating toolbar instead of leaving it white; the social buttons and © are
- * lifted by the toolbar's height (100lvh − 100dvh) so they stay above it.
+ * lifted by the toolbar's height (100lvh − 100dvh) or the home indicator's safe area, whichever is
+ * larger, so they stay above it (viewport-fit=cover lets the page paint that area).
  * Desktop: full-screen photo, blurred dark panel on the left with the H1 and two buttons,
  * social buttons bottom right. Mobile: orange gradient, text on top, the photo (cropped
  * to the speaker) fills the lower part with the social buttons and © over it.
@@ -46,7 +47,7 @@ export function HeroSection({ data, lang, media, contacts }: SectionProps<HeroDa
         <p className="hero-fade hidden font-roboto text-16 leading-none desktop:block">{tx(contacts?.copyright, lang)}</p>
       </div>
 
-      <div className="hero-fade relative mt-auto flex flex-col gap-4 px-4 pb-[calc(1.25rem+100lvh-100dvh)] desktop:absolute desktop:right-15 desktop:bottom-10 desktop:p-0">
+      <div className="hero-fade relative mt-auto flex flex-col gap-4 px-4 pb-[calc(1.25rem+max(100lvh-100dvh,env(safe-area-inset-bottom)))] desktop:absolute desktop:right-15 desktop:bottom-10 desktop:p-0">
         <SocialLinks socials={contacts?.socials ?? []} />
         <p className="font-roboto text-14 leading-none desktop:hidden">{tx(contacts?.copyright, lang)}</p>
       </div>

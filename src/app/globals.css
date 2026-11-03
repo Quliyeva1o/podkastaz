@@ -299,6 +299,11 @@ main > * + * {
  * without scroll timelines show them as they are. Transform (not `translate`) is animated, so a
  * card's hover lift (`translate`) still works after it has appeared.
  */
+/* Home: behind the iPhone's toolbar and in the overscroll, the photo's bottom colour instead of white. */
+html:has([data-section="hero"]) {
+  background-color: #731301;
+}
+
 /* No fade: a half-entered card would show lighter colours than Figma's (Paketlər at the top). */
 @keyframes reveal {
   from {

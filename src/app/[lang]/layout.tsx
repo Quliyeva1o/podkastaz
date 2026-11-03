@@ -14,6 +14,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
+  // The page also paints the iPhone's bottom safe area (home indicator), not a white strip.
+  viewportFit: "cover",
 };
 
 export default async function SiteLayout({ children, params }: LayoutProps<"/[lang]">) {
