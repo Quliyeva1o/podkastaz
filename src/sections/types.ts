@@ -63,6 +63,8 @@ export type PageHeaderData = {
 };
 export type HeroData = {
   background: Img;
+  /** Mobile only: a cut-out photo over the orange gradient. */
+  mobileImage?: Img;
   seoHeading: L;
   title: L;
   subtitle: L;

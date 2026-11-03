@@ -13,8 +13,9 @@ import type { ContactsData, HeroData, SectionProps } from "../types";
  * lifted by the toolbar's height (100lvh − 100dvh) or the home indicator's safe area, whichever is
  * larger, so they stay above it (viewport-fit=cover lets the page paint that area).
  * Desktop: full-screen photo, blurred dark panel on the left with the H1 and two buttons,
- * social buttons bottom right. Mobile: orange gradient, text on top, the photo (cropped
- * to the speaker) fills the lower part with the social buttons and © over it.
+ * social buttons bottom right. Mobile: orange gradient, text on top, the photo (the cut-out
+ * "Mobil foto" when set, cropped to the speaker) fills the lower part with the social buttons
+ * and © over it.
  */
 export function HeroSection({ data, lang, media, contacts }: SectionProps<HeroData> & { contacts?: ContactsData }) {
   const bg = media[data.background ?? ""];
@@ -23,9 +24,9 @@ export function HeroSection({ data, lang, media, contacts }: SectionProps<HeroDa
   return (
     <section
       data-section="hero"
-      className="relative isolate flex min-h-lvh flex-col overflow-hidden bg-linear-to-r from-[#fc4601] to-[#fd5902] text-white desktop:min-h-[max(100dvh,40rem)] desktop:bg-black"
+      className="relative isolate flex min-h-lvh flex-col overflow-hidden bg-[linear-gradient(90.2deg,#fc4601_0.13%,#fd5902_99.79%)] text-white desktop:min-h-[max(100dvh,40rem)] desktop:bg-black"
     >
-      <Background media={bg} poster={poster} lang={lang} />
+      <Background media={bg} poster={poster} mobile={media[data.mobileImage ?? ""]} lang={lang} />
 
       {/* Desktop: Figma's panel is 32px padding + the 35px logo (the header draws it) above the centred block. CSS blur = half of Figma's radius (40), here and on every blurred element. */}
       <div className="hero-panel relative flex flex-col gap-5 px-4 pt-22.5 desktop:min-h-[inherit] desktop:w-[44.0625rem] desktop:justify-between desktop:gap-0 desktop:bg-black/14 desktop:px-15 desktop:pt-[4.1875rem] desktop:pb-10 desktop:backdrop-blur-[1.25rem]">
@@ -55,13 +56,13 @@ export function HeroSection({ data, lang, media, contacts }: SectionProps<HeroDa
   );
 }
 
-function Background({ media, poster, lang }: { media?: MediaItem; poster?: MediaItem; lang: "az" }) {
+function Background({ media, poster, mobile, lang }: { media?: MediaItem; poster?: MediaItem; mobile?: MediaItem; lang: "az" }) {
   if (!media) return null;
   return (
     // Mobile: the lower 325/574 of the screen, cropped like Figma (x 27–88% of the photo).
     <div aria-hidden className="hero-zoom absolute inset-x-0 bottom-0 -z-10 h-[56.6%] desktop:inset-0 desktop:h-auto">
       {poster && (
-        <Picture media={poster} lang={lang} sizes="100vw" priority alt="" className="size-full object-cover object-[70%_center] desktop:object-center" />
+        <Picture media={poster} mobile={mobile} lang={lang} sizes="100vw" priority alt="" className="size-full object-cover object-[70%_center] desktop:object-center" />
       )}
       {media.mime.startsWith("video/") && <BackgroundVideo media={media} className="absolute inset-0 size-full object-cover" />}
     </div>

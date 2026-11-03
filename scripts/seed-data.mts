@@ -107,6 +107,7 @@ export const sectionData: Record<string, { type: SectionType; data: Record<strin
     type: "hero",
     data: {
       background: null,
+      mobileImage: null,
       title: t("Səsini Brendə Çevir"),
       seoHeading: t("— Bakıda podcast studiyası: video və audio podcast çəkilişi, studiya icarəsi"),
       subtitle: t("Podcast, video və kontent üçün professional studio"),

@@ -213,6 +213,7 @@ export const sections = {
     label: "Hero (tək ekran)",
     fields: [
       imageOrVideo("background", "Fon (şəkil və ya video)"),
+      image("mobileImage", "Mobil foto — şəffaf fonlu PNG/WebP, gradient fonun üstündə (boşdursa yuxarıdakı fon)"),
       text("title", "Başlıq (H1)"),
       text("seoHeading", "H1 davamı — ekranda görünmür, Google üçün"),
       text("subtitle", "Alt mətn"),

@@ -32,6 +32,8 @@ const assets: Asset[] = [
     source: { ref: "c180fb7833d1daefa0b896605863a278cd98ec4c" },
     alt: t("Podcast studiyasında mikrofon qarşısında danışan qonaq"),
   },
+  // Mobile: the same photo cut out, over the orange gradient (Figma "Mob/Home Page").
+  { page: "home", slot: "hero", path: ["mobileImage"], source: { file: "hero/hero-mobile.webp" }, alt: t("Podcast studiyasında mikrofon qarşısında danışan qonaq") },
 ];
 
 const client = postgres(process.env.DATABASE_URL!, { max: 1 });

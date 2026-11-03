@@ -13,13 +13,15 @@ type Props = {
   priority?: boolean;
   /** Overrides the media alt text; "" marks the image as decorative (its text is given elsewhere). */
   alt?: string;
+  /** Another image below the desktop breakpoint (art direction): phones download only that one. */
+  mobile?: MediaItem;
 };
 
 /**
  * Responsive image: AVIF → WebP fallback, explicit width/height (no layout shift),
  * blurred placeholder while loading (opaque formats only), lazy by default.
  */
-export function Picture({ media, lang, sizes, className, priority, alt: altOverride }: Props) {
+export function Picture({ media, lang, sizes, className, priority, alt: altOverride, mobile }: Props) {
   if (!media) return null;
   const alt = altOverride ?? (media.alt[lang] || media.alt.az || "");
 
@@ -37,8 +39,8 @@ export function Picture({ media, lang, sizes, className, priority, alt: altOverr
     );
   }
 
-  const srcSet = (format: "avif" | "webp") =>
-    media.variants
+  const srcSet = (format: "avif" | "webp", item: MediaItem = media) =>
+    item.variants
       .filter((v) => v.format === format)
       .map((v) => `${mediaUrl(v.key)} ${v.width}w`)
       .join(", ");
@@ -48,6 +50,12 @@ export function Picture({ media, lang, sizes, className, priority, alt: altOverr
   return (
     // display:contents → the <img> sizes against the wrapper, as if <picture> were not there.
     <picture className="contents">
+      {mobile && mobile.variants.length > 0 && (
+        <>
+          <source media="(max-width: 1023.98px)" type="image/avif" srcSet={srcSet("avif", mobile)} sizes={sizes} />
+          <source media="(max-width: 1023.98px)" type="image/webp" srcSet={srcSet("webp", mobile)} sizes={sizes} />
+        </>
+      )}
       <source type="image/avif" srcSet={srcSet("avif")} sizes={sizes} />
       <source type="image/webp" srcSet={srcSet("webp")} sizes={sizes} />
       <img
@@ -62,7 +70,8 @@ export function Picture({ media, lang, sizes, className, priority, alt: altOverr
         decoding={priority ? "sync" : "async"}
         style={
           // Not behind PNG/GIF/SVG: their transparent areas would show it forever (a "shadow" round logos).
-          media.blurDataUrl && !/png|gif|svg/.test(media.mime)
+          // Nor when phones get another (cut-out) image: the desktop photo's blur would show through it.
+          media.blurDataUrl && !mobile && !/png|gif|svg/.test(media.mime)
             ? { backgroundImage: `url(${media.blurDataUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
             : undefined
         }
