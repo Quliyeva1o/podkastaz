@@ -21,7 +21,9 @@ their size and place, so an extremely low screen can still scroll. The home logo
 Figma's exposure filter on the same file). Partner logos: endless strip on every screen, black and white
 at 50%, colour on hover. Date and time panels always open above the field; their icons are `#fe5b00`, top
 right, as in every Figma frame. Videos always show the play badge as in Figma; without a YouTube link or mp4
-(the seed has none) a click does nothing until the client adds links.
+(the seed has none) a click does nothing until the client adds links. Fonts are self-hosted from the repository
+(`src/lib/fonts/fonts.css` + `files/`, latin and latin-ext): the server build failed when Google answered
+next/font/google with a different CSS format.
 
 **Not in git, copy from the Mac by hand (never through the repo):**
 

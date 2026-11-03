@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { inter } from "@/lib/fonts";
+import "@/lib/fonts/fonts.css";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function AdminRootLayout({ children }: LayoutProps<"/admin">) {
   return (
-    <html lang="az" className={`admin-root ${inter.variable} antialiased`}>
+    <html lang="az" className="admin-root antialiased">
       <body className="min-h-dvh bg-cms-bg font-cms text-[14px] text-cms-text" suppressHydrationWarning>
         {children}
       </body>
