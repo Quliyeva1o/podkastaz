@@ -17,13 +17,11 @@ html {
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
 }
-
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
 }
-
 @media (min-width: 1024px) {
   html {
     font-size: min(calc((100vw - var(--sbw)) / 1440 * 16), 21.333px);
@@ -136,7 +134,6 @@ html.admin-root {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
@@ -151,7 +148,7 @@ html.admin-root {
  * Fluid rem gives blocks fractional heights; on high-DPR phones the sub-pixel gap between
  * two full-bleed blocks shows the page background as a hairline. Overlap each by 1px.
  */
-main>*+* {
+main > * + * {
   margin-top: -1px;
 }
 
@@ -161,18 +158,15 @@ main>*+* {
     opacity: 0;
   }
 }
-
 @keyframes menu-rise {
   from {
     opacity: 0;
     transform: translateY(1rem);
   }
 }
-
 .menu-overlay {
   animation: menu-in 0.2s ease-out;
 }
-
 .menu-overlay .menu-rise {
   animation: menu-rise 0.35s cubic-bezier(0.16, 1, 0.3, 1) calc(0.05s + var(--i, 0) * 0.03s) backwards;
 }
@@ -191,7 +185,6 @@ main>*+* {
   --menu-list: calc(var(--menu-links) * var(--menu-font) * 1.5 + (var(--menu-links) - 1) * var(--menu-gap));
   --menu-unit: clamp(0.6rem, (100dvh - var(--menu-rest)) / var(--menu-list), 1rem);
 }
-
 @media (min-width: 1024px) {
   .menu-nav {
     --menu-rest: 11.25rem;
@@ -201,11 +194,9 @@ main>*+* {
     padding-top: clamp(3.8125rem, 3.8125rem + (100dvh - 14.9375rem - var(--menu-list) * 1rem) * 10000, 7.5rem);
   }
 }
-
 .menu-nav nav ul {
   gap: calc(var(--menu-unit) * var(--menu-gap));
 }
-
 .menu-nav nav a {
   font-size: calc(var(--menu-unit) * var(--menu-font));
 }
@@ -217,11 +208,9 @@ main>*+* {
     transform: translateX(-100%);
   }
 }
-
 .partners-marquee {
   mask-image: linear-gradient(to right, transparent, black 18.75%, black 81.25%, transparent);
 }
-
 .partners-track {
   --gap: 2.375rem;
   display: flex;
@@ -233,22 +222,18 @@ main>*+* {
   padding-right: var(--gap);
   animation: partners 30s linear infinite;
 }
-
 @media (min-width: 1024px) {
   .partners-track {
     --gap: 5.5625rem;
   }
 }
-
 .partners-marquee:hover .partners-track {
   animation-play-state: paused;
 }
-
 @media (prefers-reduced-motion: reduce) {
   .partners-marquee {
     overflow-x: auto;
   }
-
   .partners-track {
     animation: none;
   }
@@ -264,38 +249,31 @@ main>*+* {
     transform: translateX(-100%);
   }
 }
-
 @keyframes hero-in {
   from {
     opacity: 0.01;
     transform: translateX(-3rem);
   }
 }
-
 @keyframes hero-zoom {
   from {
     transform: scale(1.08);
   }
 }
-
 @keyframes fade-in {
   from {
     opacity: 0;
   }
 }
-
 .hero-in {
   animation: hero-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) calc(0.35s + var(--i, 0) * 0.12s) backwards;
 }
-
 .hero-zoom {
   animation: hero-zoom 1.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
-
 .hero-fade {
   animation: fade-in 0.8s ease-out 0.9s backwards;
 }
-
 @media (min-width: 1024px) {
   .hero-panel {
     animation: hero-panel 1s cubic-bezier(0.16, 1, 0.3, 1) backwards;
@@ -312,7 +290,6 @@ main>*+* {
     transform: translateY(1.25rem);
   }
 }
-
 .rise-in {
   animation: rise-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 0.08s) backwards;
 }
@@ -322,39 +299,12 @@ main>*+* {
  * without scroll timelines show them as they are. Transform (not `translate`) is animated, so a
  * card's hover lift (`translate`) still works after it has appeared.
  */
-/* Home: behind the iPhone's toolbar and in the overscroll, the hero's colours instead of white. */
-/* Home hero: orange background behind mobile browser toolbar and overscroll */
-html:has([data-section="hero"]) {
-  background: linear-gradient(90.2deg,
-      #fc4601 0.13%,
-      #fd5902 99.79%);
-  min-height: 100%;
-  background-attachment: scroll;
-}
-
-html:has([data-section="hero"]) body,
-html:has([data-section="hero"]) main {
-  background: transparent;
-}
-
-@media (min-width: 1024px) {
-  html:has([data-section="hero"]) {
-    background: #000;
-  }
-
-  html:has([data-section="hero"]) body,
-  html:has([data-section="hero"]) main {
-    background: #000;
-  }
-}
-
 /* No fade: a half-entered card would show lighter colours than Figma's (Paketlər at the top). */
 @keyframes reveal {
   from {
     transform: translateY(2.5rem);
   }
 }
-
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .reveal {
@@ -371,27 +321,22 @@ html:has([data-section="hero"]) main {
     scale: 1;
     rotate: 0deg;
   }
-
   40% {
     scale: 1.3;
     rotate: -8deg;
   }
-
   70% {
     scale: 1.2;
     rotate: 5deg;
   }
-
   100% {
     scale: 1.25;
     rotate: 0deg;
   }
 }
-
 .play-badge {
   transition: scale 0.25s ease-out, background-color 0.25s ease-out;
 }
-
 .play-badge:hover,
 .video-tile:focus-visible .play-badge {
   scale: 1.25;
@@ -410,7 +355,6 @@ html:has([data-section="hero"]) main {
     opacity: 0;
   }
 }
-
 .works-carousel :is(.works-current, .works-side) {
   animation: works-in 0.4s ease-out;
 }

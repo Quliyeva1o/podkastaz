@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { PageSections } from "@/sections/render";
 import type { Locale } from "@/i18n/config";
 import { staticPageMetadata } from "@/lib/seo";
@@ -7,11 +7,6 @@ export async function generateMetadata({ params }: PageProps<"/[lang]">): Promis
   const { lang } = await params;
   return staticPageMetadata("home", lang as Locale);
 }
-
-/** Safari tints its status bar with this: the hero's orange instead of white. */
-export const viewport: Viewport = {
-  themeColor: "#fc4601",
-};
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;

@@ -25,11 +25,9 @@ right, as in every Figma frame. Videos always show the play badge as in Figma; w
 (`src/lib/fonts/fonts.css` + `files/`, latin and latin-ext): the server build failed when Google answered
 next/font/google with a different CSS format. `browserslist` adds Safari / iOS 15.4: Next 16 targets 16.4
 and its router used class static blocks, which older iOS cannot parse (no menu, radios or checkboxes
-there); a test checks the page scripts. The home hero is 100lvh tall so iOS Safari's floating toolbar
-shows the photo, not white; the social buttons are lifted by 100lvh − 100dvh. `viewport-fit=cover` lets the page paint the
-home-indicator area too (the bottom strip stayed white without it); the home page also sets its theme
-colour to the hero orange and the page background to the photo's bottom colour (#731301). Not verified
-on a real iPhone yet.
+there); a test checks the page scripts. Attempts to paint the white strip under iOS Safari's
+toolbar (100lvh hero, viewport-fit=cover, theme and page colours) changed nothing in Safari and were
+reverted (2026-11-04). Mobile hero: orange gradient + the cut-out "Mobil foto".
 
 **Not in git, copy from the Mac by hand (never through the repo):**
 
