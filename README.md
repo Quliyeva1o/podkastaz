@@ -1,7 +1,7 @@
 # podkast.az
 
-Next.js 16 site + admin panel for the Podkast.az podcast studios, built 1:1 from the Figma file
-"Podcast.az" (key `YCsdeoCq9yoNPOKXYnBmWr`). Started from the marketinq.az codebase (same admin
+Next.js 16 site + admin panel for the Podkast.az podkast studios, built 1:1 from the Figma file
+"Podkast.az" (key `YCsdeoCq9yoNPOKXYnBmWr`). Started from the marketinq.az codebase (same admin
 core, media library, SEO and cPanel deploy). Full plan: [PLAN.md](PLAN.md); progress and
 decisions: [docs/STATUS.md](docs/STATUS.md).
 

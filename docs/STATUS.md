@@ -228,7 +228,7 @@ All pages built from the Figma JSON and measured in the browser against it at 14
 ## Phase 6 — SEO ✅ (2026-10-29)
 
 - Every page: admin-edited title (≤ 60) and description (≤ 160) with the search phrases
-  (podcast studiyası Bakı, podcast çəkilişi, studiya icarəsi…), canonical (query strings such
+  (podkast studiyası Bakı, podkast çəkilişi, studiya icarəsi…), canonical (query strings such
   as `?studiya=` keep the clean URL), `lang="az"`, hreflang + x-default, Open Graph + Twitter card,
   one H1 with a hidden keyword continuation, robots.txt (no /admin, /api), sitemap with the
   studio pages, `SITE_NOINDEX=1` for the test domain.
@@ -377,7 +377,7 @@ the client questions below, and the launch to podkast.az.
 
 ## Open questions for the client (PLAN.md §17)
 
-1. Domain: podkast.az (logo) or podcast.az (©)?
+1. Domain: podkast.az (logo) or podkast.az (©)?
 2. Languages: AZ only, or EN/RU too?
 3. Hosting: same cPanel account as marketinq.az?
 4. Studio hourly price on the booking form?

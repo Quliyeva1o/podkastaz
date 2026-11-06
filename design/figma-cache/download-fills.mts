@@ -1,4 +1,4 @@
-// One-off: downloads every image fill of the Podcast.az Figma file into design/assets/figma/<ref>.<ext>.
+// One-off: downloads every image fill of the Podkast.az Figma file into design/assets/figma/<ref>.<ext>.
 import { mkdir, writeFile } from "node:fs/promises";
 import { download, imageFillUrls, sniffImage } from "../../scripts/figma/api.mts";
 const dir = "design/assets/figma";

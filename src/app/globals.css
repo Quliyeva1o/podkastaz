@@ -28,7 +28,7 @@ html {
   }
 }
 
-/* Design tokens — Figma "Podcast.az" Page 2 → Colours, text styles */
+/* Design tokens — Figma "Podkast.az" Page 2 → Colours, text styles */
 @theme {
   --color-*: initial;
   --color-white: #ffffff;

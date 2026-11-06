@@ -205,7 +205,7 @@ export const sections = {
       select("alignDesktop", "Düzülüş (desktop)", align),
       select("alignMobile", "Düzülüş (mobil)", align),
       text("crumb", "Breadcrumb adı (boşdursa başlıq)"),
-      text("headingSuffix", "H1 davamı — ekranda görünmür, Google üçün (məs. “— Bakıda podcast studiyası”)"),
+      text("headingSuffix", "H1 davamı — ekranda görünmür, Google üçün (məs. “— Bakıda podkast studiyası”)"),
     ],
   },
   hero: {

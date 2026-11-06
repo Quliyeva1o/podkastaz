@@ -10,7 +10,7 @@ test("contact form stores a message", async ({ page }) => {
   await page.getByLabel("Ad", { exact: true }).fill("E2E");
   await page.getByLabel("Soyad").fill("Test");
   await page.getByLabel("E-mail ünvanı").fill("form@e2e.test");
-  await page.getByLabel("Mövzu").fill("Video podcast");
+  await page.getByLabel("Mövzu").fill("Video podkast");
   await page.getByLabel("Mesajınız").fill("Salam, test mesajıdır.");
   await page.getByRole("button", { name: "Mesajını göndər" }).click();
   await expect(page.getByText("Mesajınız göndərildi.", { exact: false })).toBeVisible();
@@ -19,7 +19,7 @@ test("contact form stores a message", async ({ page }) => {
   const rows = await sql`select data from submissions where data->>'email' = 'form@e2e.test'`;
   await sql.end();
   expect(rows.length).toBeGreaterThan(0);
-  expect(rows.at(-1)!.data).toMatchObject({ name: "E2E Test", subject: "Video podcast" });
+  expect(rows.at(-1)!.data).toMatchObject({ name: "E2E Test", subject: "Video podkast" });
 });
 
 /** Bots: a filled honeypot and a form sent at once both get the success text but are not stored. */

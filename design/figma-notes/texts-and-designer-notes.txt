@@ -7,16 +7,16 @@ Səsdən yayıma qədər bütün xidmətlər bir məkanda.
 Müraciət et
 Studio icarəsi
 Studiya saatlıq istifadəyə verilir. Öz komandası ilə gələnlər və ya yalnız məkan axtaranlar üçün idealdır.
-Video podcast çəkilişi
-Podcast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü.
-Audio Podcast Yazımı
+Video podkast çəkilişi
+Podkast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü.
+Audio Podkast Yazımı
 Təmiz və balanslı səs üçün akustik izolyasiyalı mühit və professional avadanlıq.
 Montaj & Post-Production
-Podcast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü.
+Podkast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü.
 Shorts / Reels
-Uzun podcast-lardan qısa və dinamik kontent hazırlanması.
-Podcast Start
-Podcast-ınızı 0-dan professional səviyyəyə qaldırırıq.
+Uzun podkast-lardan qısa və dinamik kontent hazırlanması.
+Podkast Start
+Podkast-ınızı 0-dan professional səviyyəyə qaldırırıq.
 Canlı Yayım
 Səyyar studio
 Səsiniz burada öz auditoriyasını tapır.
@@ -131,7 +131,7 @@ Qiymət: 199 AZN
 
 👑 PREMIUM
 
-Brendlər və serial podcast-lar üçün
+Brendlər və serial podkast-lar üçün
 
 ⏱️ 3 saat studiya
 
@@ -165,7 +165,7 @@ Bunları ayrıca blok kimi ver:
 
 📝 Subtitrlər (AZ / EN / RU) – +30 AZN
 
-🎧 Podcast intro/outro – +50 AZN
+🎧 Podkast intro/outro – +50 AZN
 
 📦 Aylıq paket – fərdi qiymət
 XİDMƏTLƏR
@@ -175,7 +175,7 @@ Biz nə edirik? — 10 saniyədə cavab
 🔥 Hero
 
 Səsini brendə çevir.
-Podcast, video və kontent üçün professional studio
+Podkast, video və kontent üçün professional studio
 
 👉 Rezervasiya et
 
@@ -186,7 +186,7 @@ Studiya saatlıq istifadəyə verilir. Öz komandası ilə gələnlər və ya ya
 
 Daxildir:
 
-Professional podcast studio
+Professional podkast studio
 
 4 fərqli dekor seçimi
 
@@ -196,9 +196,9 @@ Texniki setup
 
 📌 Sadəcə studiya. Sadəcə fokus.
 
-🎥 Video Podcast Çəkilişi
+🎥 Video Podkast Çəkilişi
 
-Podcast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü.
+Podkast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü.
 
 2–3 kamera
 
@@ -206,7 +206,7 @@ Full HD / 4K
 
 Işıq və kadr quruluşu
 
-🎙️ Audio Podcast Yazımı
+🎙️ Audio Podkast Yazımı
 
 Təmiz və balanslı səs üçün akustik izolyasiyalı mühit və professional avadanlıq.
 
@@ -218,7 +218,7 @@ Təmiz audio fayllar
 
 🎬 Montaj & Post-Production
 
-Çəkilişdən sonra podcast-ın tam hazır məhsula çevrilməsi.
+Çəkilişdən sonra podkast-ın tam hazır məhsula çevrilməsi.
 
 Audio mastering
 
@@ -230,7 +230,7 @@ Intro / outro əlavə etmə
 
 ✂️ Shorts / Reels
 
-Uzun podcast-lardan qısa və dinamik kontent hazırlanması.
+Uzun podkast-lardan qısa və dinamik kontent hazırlanması.
 
 TikTok, Reels, YouTube Shorts
 
@@ -238,11 +238,11 @@ Vertical format
 
 Subtitle və vizual vurğular
 
-📌 Bir podcast → onlarla kontent.
+📌 Bir podkast → onlarla kontent.
 
-🚀 Podcast Start
+🚀 Podkast Start
 
-Podcast-ınızı 0-dan professional səviyyəyə qaldırırıq.
+Podkast-ınızı 0-dan professional səviyyəyə qaldırırıq.
 
 Konsept və format
 
@@ -262,7 +262,7 @@ Bunlar menyuda gizli, ya da Add-on / Extra Services kimi çox yaxşı satılır:
 
 YouTube / Instagram / Facebook Live
 
-Event və podcast yayımı
+Event və podkast yayımı
 
 Multi-camera switching
 
@@ -272,7 +272,7 @@ Eventlər
 
 Konfranslar
 
-Ofis içi podcast çəkilişləri
+Ofis içi podkast çəkilişləri
 
 ==== Components (221:1426)
 Change Label

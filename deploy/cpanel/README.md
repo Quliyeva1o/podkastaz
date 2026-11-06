@@ -10,7 +10,7 @@ sınanıb: 1 CPU, 150 proses limiti, Node 22, PostgreSQL 13.
 
 ## Əvvəlcədən lazım olanlar
 
-1. **Domen** qərarı: `podkast.az` yoxsa `podcast.az` əsasdır (digəri 301). Aşağıda `podkast.az` yazılıb.
+1. **Domen** qərarı: `podkast.az` yoxsa `podkast.az` əsasdır (digəri 301). Aşağıda `podkast.az` yazılıb.
 2. **Kod GitHub-da**: yeni private repo (məs. `Quliyeva1o/podkastaz`), `main` branch-ə push.
 3. **cPanel girişi** (müştərinin hesabı) — parolları heç vaxt yazışmada göndərmə.
 4. Bu kompüterdə məzmun hazırdır (`npm run check:launch` — nə qaldığını göstərir).
@@ -116,9 +116,9 @@ cPanel → **Cron Jobs** (gündə 03:15):
 4. `.env`: `SITE_URL=https://podkast.az`, `SITE_NOINDEX` sətrini sil →
    `bash ~/podkast-src/deploy/cpanel/deploy.sh` (sitemap, canonical, robots yenilənir).
 5. `.htaccess`-də `test.podkast.az` → `podkast.az`.
-6. Digər domen (`podcast.az`) → cPanel → **Redirects**: Permanent 301 → `https://podkast.az/`,
+6. Digər domen (`podkast.az`) → cPanel → **Redirects**: Permanent 301 → `https://podkast.az/`,
    "with or without www", "Wild Card Redirect".
-7. Yoxla: `https://podkast.az`, `https://www.podkast.az` (→ 301), `http://` (→ https), `podcast.az` (→ 301).
+7. Yoxla: `https://podkast.az`, `https://www.podkast.az` (→ 301), `http://` (→ https), `podkast.az` (→ 301).
 8. Google: **Search Console** (Domain property, sitemap `https://podkast.az/sitemap.xml`),
    **Google Business Profile** (ad, ünvan, telefon, iş saatları saytdakı ilə eyni olsun).
 

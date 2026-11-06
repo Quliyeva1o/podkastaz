@@ -65,7 +65,7 @@ export async function pageGraph(route: RouteKey, lang: Locale): Promise<Json[]> 
         {
           "@type": "OfferCatalog",
           "@id": `${siteUrl}${href("packages", lang)}#offers`,
-          name: `${siteName} — podcast paketləri`,
+          name: `${siteName} — podkast paketləri`,
           itemListElement: [
             ...packages.map((p) =>
               offer(

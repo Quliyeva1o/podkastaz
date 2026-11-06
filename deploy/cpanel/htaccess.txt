@@ -4,7 +4,7 @@
 #
 # One canonical address for Google: https://podkast.az (no www, always HTTPS). Replace
 # podkast.az by the domain the client chooses (PLAN.md §17.1) — and by the test address
-# (e.g. test.podkast.az) while testing. The other domain (podcast.az) is a cPanel Redirect.
+# (e.g. test.podkast.az) while testing. The other domain (podkast.az) is a cPanel Redirect.
 # Certificate checks (/.well-known/…) stay reachable over plain HTTP for AutoSSL.
 
 RewriteEngine On

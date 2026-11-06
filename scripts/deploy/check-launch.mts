@@ -42,7 +42,7 @@ for (const r of sectionRows) {
   for (const [re, what] of placeholders) {
     if (re.test(t)) (what.includes("fine if") || what.includes("sample address") ? warnings : errors).push(`${r.page}.${r.slot}: ${what}`);
   }
-  if (r.page === "about" && r.slot === "intro" && /Podkast\.az Bakıda podcast, video və kontent çəkilişi üçün qurulmuş/.test(t)) {
+  if (r.page === "about" && r.slot === "intro" && /Podkast\.az Bakıda podkast, video və kontent çəkilişi üçün qurulmuş/.test(t)) {
     warnings.push("about.intro: the seeded draft text — replace with the client's");
   }
   if (r.slot === "contacts") {

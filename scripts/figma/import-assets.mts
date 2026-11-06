@@ -22,7 +22,7 @@ const assets: Asset[] = [
   { page: "global", slot: "header", path: ["logoDark"], source: { file: "logo/logo-header.png" }, alt: brand },
   // Orange gradient behind the "Rezervasiya et" menu card.
   { page: "global", slot: "menu", path: ["bookingBackground"], source: { ref: "72153309ad7fde19b0147f4a24d46c2594fefcd7" } },
-  { page: "about", slot: "intro", path: ["image"], source: { ref: "4b523d0a5465a0b88a198b8c1ed00a2947a5bd5e" }, alt: t("Podkast.az studiyasında podcast çəkilişi") },
+  { page: "about", slot: "intro", path: ["image"], source: { ref: "4b523d0a5465a0b88a198b8c1ed00a2947a5bd5e" }, alt: t("Podkast.az studiyasında podkast çəkilişi") },
   // Orange gradient of the 4K / Production cards (same image as the menu card).
   { page: "about", slot: "advantages", path: ["background"], source: { ref: "72153309ad7fde19b0147f4a24d46c2594fefcd7" } },
   {
@@ -30,10 +30,10 @@ const assets: Asset[] = [
     slot: "hero",
     path: ["background"],
     source: { ref: "c180fb7833d1daefa0b896605863a278cd98ec4c" },
-    alt: t("Podcast studiyasında mikrofon qarşısında danışan qonaq"),
+    alt: t("Podkast studiyasında mikrofon qarşısında danışan qonaq"),
   },
   // Mobile: the same photo cut out, over the orange gradient (Figma "Mob/Home Page").
-  { page: "home", slot: "hero", path: ["mobileImage"], source: { file: "hero/hero-mobile.webp" }, alt: t("Podcast studiyasında mikrofon qarşısında danışan qonaq") },
+  { page: "home", slot: "hero", path: ["mobileImage"], source: { file: "hero/hero-mobile.webp" }, alt: t("Podkast studiyasında mikrofon qarşısında danışan qonaq") },
 ];
 
 const client = postgres(process.env.DATABASE_URL!, { max: 1 });

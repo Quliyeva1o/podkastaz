@@ -40,11 +40,11 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/studios/[s
     cover,
     slugs: { az: found.studio.slugAz },
     title: tx(seo.seoTitle, l) || `${tx(found.studio.name, l)} — ${await decorsTitle(l)}`,
-    // Fallback: "Studiya 1 (Bakı) podcast studiyası: Həkimlər üçün, Marketoloqlar üçün … dekorları. Onlayn rezervasiya."
+    // Fallback: "Studiya 1 (Bakı) podkast studiyası: Həkimlər üçün, Marketoloqlar üçün … dekorları. Onlayn rezervasiya."
     description:
       tx(seo.seoDescription, l) ||
       tx(found.studio.description, l) ||
-      `${tx(found.studio.name, l)}${tx(found.studio.address, l) ? ` (${tx(found.studio.address, l)})` : ""} podcast studiyası: ${found.decors
+      `${tx(found.studio.name, l)}${tx(found.studio.address, l) ? ` (${tx(found.studio.address, l)})` : ""} podkast studiyası: ${found.decors
         .map((d) => tx(d.shortName, l) || tx(d.name, l))
         .join(", ")} dekorları. Dekoru seçin və onlayn rezervasiya edin.`,
   });

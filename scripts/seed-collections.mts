@@ -49,16 +49,16 @@ async function seedCollection(name: CollectionName, items: Record<string, unknow
 
 // ---------- Services (Figma "Xidmətlər" + the designer's "Daxildir" lists) ----------
 const services: [string, string, string, string[]][] = [
-  ["studio-icaresi", "Studio icarəsi", "Studiya saatlıq istifadəyə verilir. Öz komandası ilə gələnlər və ya yalnız məkan axtaranlar üçün idealdır.", ["Professional podcast studio", "4 fərqli dekor seçimi", "Mikrofonlar və işıqlandırma", "Texniki setup"]],
-  ["video-podcast", "Video podcast çəkilişi", "Podcast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü.", ["2–3 kamera", "Full HD / 4K", "Işıq və kadr quruluşu"]],
-  ["audio-podcast", "Audio Podcast Yazımı", "Təmiz və balanslı səs üçün akustik izolyasiyalı mühit və professional avadanlıq.", ["Professional mikrofonlar", "Səs balansı", "Təmiz audio fayllar"]],
+  ["studio-icaresi", "Studio icarəsi", "Studiya saatlıq istifadəyə verilir. Öz komandası ilə gələnlər və ya yalnız məkan axtaranlar üçün idealdır.", ["Professional podkast studio", "4 fərqli dekor seçimi", "Mikrofonlar və işıqlandırma", "Texniki setup"]],
+  ["video-podkast", "Video podkast çəkilişi", "Podkast-lar üçün multi-camera video çəkilişi. Brendlər və kontent yaradıcılar üçün peşəkar görüntü.", ["2–3 kamera", "Full HD / 4K", "Işıq və kadr quruluşu"]],
+  ["audio-podkast", "Audio Podkast Yazımı", "Təmiz və balanslı səs üçün akustik izolyasiyalı mühit və professional avadanlıq.", ["Professional mikrofonlar", "Səs balansı", "Təmiz audio fayllar"]],
   // Figma repeats the video card's text here; the designer's note has this one.
-  ["montaj", "Montaj & Post-Production", "Çəkilişdən sonra podcast-ın tam hazır məhsula çevrilməsi.", ["Audio mastering", "Video montaj", "Rəng korreksiyası", "Intro / outro əlavə etmə"]],
-  ["shorts-reels", "Shorts / Reels", "Uzun podcast-lardan qısa və dinamik kontent hazırlanması.", ["TikTok, Reels, YouTube Shorts", "Vertical format", "Subtitle və vizual vurğular"]],
-  ["podcast-start", "Podcast Start", "Podcast-ınızı 0-dan professional səviyyəyə qaldırırıq.", ["Konsept və format", "Intro / outro", "İlk çəkiliş", "Yayım üçün hazır paket"]],
+  ["montaj", "Montaj & Post-Production", "Çəkilişdən sonra podkast-ın tam hazır məhsula çevrilməsi.", ["Audio mastering", "Video montaj", "Rəng korreksiyası", "Intro / outro əlavə etmə"]],
+  ["shorts-reels", "Shorts / Reels", "Uzun podkast-lardan qısa və dinamik kontent hazırlanması.", ["TikTok, Reels, YouTube Shorts", "Vertical format", "Subtitle və vizual vurğular"]],
+  ["podkast-start", "Podkast Start", "Podkast-ınızı 0-dan professional səviyyəyə qaldırırıq.", ["Konsept və format", "Intro / outro", "İlk çəkiliş", "Yayım üçün hazır paket"]],
   // No description in Figma: one line from the designer's notes.
-  ["canli-yayim", "Canlı Yayım", "YouTube, Instagram və Facebook-da canlı yayım: event və podcast yayımı.", ["YouTube / Instagram / Facebook Live", "Event və podcast yayımı", "Multi-camera switching"]],
-  ["seyyar-studio", "Səyyar studio", "Tədbirlər, konfranslar və ofis içi podcast çəkilişləri.", ["Tədbirlər", "Konfranslar", "Ofis içi podcast çəkilişləri"]],
+  ["canli-yayim", "Canlı Yayım", "YouTube, Instagram və Facebook-da canlı yayım: event və podkast yayımı.", ["YouTube / Instagram / Facebook Live", "Event və podkast yayımı", "Multi-camera switching"]],
+  ["seyyar-studio", "Səyyar studio", "Tədbirlər, konfranslar və ofis içi podkast çəkilişləri.", ["Tədbirlər", "Konfranslar", "Ofis içi podkast çəkilişləri"]],
 ];
 
 await seedCollection(
@@ -90,7 +90,7 @@ await seedCollection("packages", [
   },
   {
     title: t("PREMIUM"),
-    audience: t("Brendlər və serial podcast-lar üçün"),
+    audience: t("Brendlər və serial podkast-lar üçün"),
     price: "299",
     features: texts("3 saat studiya", "2–3 dekor dəyişimi", "4 mikrofon", "3 kamera (4K)", "Pro audio mastering", "Full video montaj", "4 qısa video (Shorts)", "Thumbnail + intro/outro"),
   },
@@ -101,7 +101,7 @@ await seedCollection("addons", [
   { title: t("Əlavə kamera"), price: "20" },
   { title: t("Əlavə short video"), price: "20" },
   { title: t("Subtitrlər (AZ / EN / RU)"), price: "30" },
-  { title: t("Podcast intro/outro"), price: "50" },
+  { title: t("Podkast intro/outro"), price: "50" },
   { title: t("Aylıq paket"), price: "", customPriceLabel: t("Fərdi qiymət") },
 ]);
 
@@ -122,13 +122,13 @@ const videos = [
   "609d79fcd4f3166cd3f6190254143cbd05f9a5e6", "0d1a8cfa53f22d1cd9d0a1fc5ded19d594d0b77e", "a60c5918b806803e130ae4dcde0f38a967abf6c2",
   "c0a9bbdb1885fa70c6b699aef6714ec1df0388a8", "35d6988f437c8ca25cee37e4b17ba46315d65a38",
 ];
-const photoAlt = "Podkast.az studiyasında podcast çəkilişi";
+const photoAlt = "Podkast.az studiyasında podkast çəkilişi";
 await seedCollection("works", [
   ...(await Promise.all(
-    photos.map(async (ref, i) => ({ title: t(`Podcast çəkilişi ${i + 1}`), kind: "photo", cover: await fig(ref, photoAlt) })),
+    photos.map(async (ref, i) => ({ title: t(`Podkast çəkilişi ${i + 1}`), kind: "photo", cover: await fig(ref, photoAlt) })),
   )),
   ...(await Promise.all(
-    videos.map(async (ref, i) => ({ title: t(`Video podcast ${i + 1}`), kind: "video", cover: await fig(ref, "Video podcast çəkilişindən kadr") })),
+    videos.map(async (ref, i) => ({ title: t(`Video podkast ${i + 1}`), kind: "video", cover: await fig(ref, "Video podkast çəkilişindən kadr") })),
   )),
 ]);
 
@@ -168,7 +168,7 @@ if (studioCount > 0) {
   console.log(`studios: ${studioCount} exist, skipped`);
 } else {
   for (const [position, s] of studioSeed.entries()) {
-    const ids = await Promise.all(s.photos.map((ref) => fig(ref, `${s.name} — podcast studiyası dekoru`)));
+    const ids = await Promise.all(s.photos.map((ref) => fig(ref, `${s.name} — podkast studiyası dekoru`)));
     const [studio] = await db
       .insert(studios)
       .values({

@@ -1,4 +1,4 @@
-// Initial content for every section, copied from Figma (Podcast.az, Page 1). Where Figma still
+// Initial content for every section, copied from Figma (Podkast.az, Page 1). Where Figma still
 // has lorem ipsum (legal pages) a short draft note is used instead, so placeholder Latin never
 // reaches the live site; the client replaces it in the admin panel.
 import type { Localized } from "../src/i18n/config";
@@ -69,7 +69,7 @@ export const sectionData: Record<string, { type: SectionType; data: Record<strin
         { network: "whatsapp", url: "https://wa.me/994125657777" },
         { network: "x", url: "https://x.com/" },
       ],
-      copyright: t("© 2026 Podcast.az"),
+      copyright: t("© 2026 Podkast.az"),
     },
   },
   "global.labels": {
@@ -109,34 +109,34 @@ export const sectionData: Record<string, { type: SectionType; data: Record<strin
       background: null,
       mobileImage: null,
       title: t("Səsini Brendə Çevir"),
-      seoHeading: t("— Bakıda podcast studiyası: video və audio podcast çəkilişi, studiya icarəsi"),
-      subtitle: t("Podcast, video və kontent üçün professional studio"),
+      seoHeading: t("— Bakıda podkast studiyası: video və audio podkast çəkilişi, studiya icarəsi"),
+      subtitle: t("Podkast, video və kontent üçün professional studio"),
       primary: lnk("Rezervasiya et", "booking"),
       secondary: lnk("Paketlər", "packages"),
     },
   },
-  "about.header": header("Haqqımızda", "", "— Bakıda podcast və video studiya", left),
+  "about.header": header("Haqqımızda", "", "— Bakıda podkast və video studiya", left),
   "services.header": header(
     "Xidmətlər",
     "Səsdən yayıma qədər bütün xidmətlər bir məkanda.",
-    "— podcast çəkilişi, montaj, studiya icarəsi və canlı yayım",
+    "— podkast çəkilişi, montaj, studiya icarəsi və canlı yayım",
     { ...left, cta: ["Müraciət et", "contact"] },
   ),
   "studios.header": header(
     "Studiyalar",
     "Studiyalarımız peşəkar səs avadanlıqları, optimal akustika və rahat çəkiliş mühiti ilə təchiz olunub.",
-    "— Bakıda podcast studiyası icarəsi",
+    "— Bakıda podkast studiyası icarəsi",
   ),
   "decors.header": header("Dekorlar", "Sizə uyğun olan dekoru seçib rezervasiya edin!", "", { desktop: "left" }),
   "packages.header": header(
     "Paketlər",
     "Hər büdcəyə uyğun seçim, hər səviyyədə peşəkar studiya.",
-    "— podcast çəkilişi qiymətləri",
+    "— podkast çəkilişi qiymətləri",
   ),
   "packageRequest.header": header("Paketə qoşul", "Büdcəyə uyğun paketi seçib bizə müraciət edin", "", { mobile: "left", desktop: "left", crumb: "Müraciət et" }),
-  "works.header": header("İşlərimiz", "Kadrların arxasında duran keyfiyyəti kəşf et.", "— podcast və video çəkiliş nümunələri"),
-  "worksVideos.header": header("İşlərimiz", "Kadrların arxasında duran keyfiyyəti kəşf et.", "— video podcast nümunələri"),
-  "booking.header": header("Rezervasiya et", "Vaxtını seç, studiyanı təmin et.", "— podcast studiyası onlayn rezervasiya", { mobile: "left", desktop: "left" }),
+  "works.header": header("İşlərimiz", "Kadrların arxasında duran keyfiyyəti kəşf et.", "— podkast və video çəkiliş nümunələri"),
+  "worksVideos.header": header("İşlərimiz", "Kadrların arxasında duran keyfiyyəti kəşf et.", "— video podkast nümunələri"),
+  "booking.header": header("Rezervasiya et", "Vaxtını seç, studiyanı təmin et.", "— podkast studiyası onlayn rezervasiya", { mobile: "left", desktop: "left" }),
   "contact.header": header("Əlaqə", "Podkast layihəniz üçün bizimlə əlaqə saxlayın.", "", left),
   "about.intro": {
     type: "aboutIntro",
@@ -145,7 +145,7 @@ export const sectionData: Record<string, { type: SectionType; data: Record<strin
       title: t("Səsiniz burada öz auditoriyasını tapır."),
       // Draft (Figma has lorem ipsum): replace with the client's text in the admin panel.
       body: t(
-        "Podkast.az Bakıda podcast, video və kontent çəkilişi üçün qurulmuş peşəkar studiyalar şəbəkəsidir. Akustik izolyasiyalı otaqlar, peşəkar mikrofonlar, 4K kameralar və işıqlandırma ilə ideyanızı yüksək keyfiyyətli kontentə çeviririk.\n\nStudiyanı saatlıq icarəyə götürə, hazır paketlərdən birini seçə və ya çəkilişdən montaja, qısa videolardan canlı yayıma qədər bütün işi komandamıza həvalə edə bilərsiniz. Hər studiyada fərqli auditoriyalar üçün hazırlanmış dekorlar var — həkimlər, marketoloqlar, dizaynerlər və müəllimlər üçün.",
+        "Podkast.az Bakıda podkast, video və kontent çəkilişi üçün qurulmuş peşəkar studiyalar şəbəkəsidir. Akustik izolyasiyalı otaqlar, peşəkar mikrofonlar, 4K kameralar və işıqlandırma ilə ideyanızı yüksək keyfiyyətli kontentə çeviririk.\n\nStudiyanı saatlıq icarəyə götürə, hazır paketlərdən birini seçə və ya çəkilişdən montaja, qısa videolardan canlı yayıma qədər bütün işi komandamıza həvalə edə bilərsiniz. Hər studiyada fərqli auditoriyalar üçün hazırlanmış dekorlar var — həkimlər, marketoloqlar, dizaynerlər və müəllimlər üçün.",
       ),
     },
   },
@@ -197,7 +197,7 @@ export const sectionData: Record<string, { type: SectionType; data: Record<strin
       email: t("E-mail ünvanı"),
       emailPlaceholder: t("raminquliyev@gmail.com"),
       subject: t("Mövzu"),
-      subjectPlaceholder: t("Video podcast çəkilişi xidməti"),
+      subjectPlaceholder: t("Video podkast çəkilişi xidməti"),
       message: t("Mesajınız"),
       messagePlaceholder: t("Mesajınızı daxil edin"),
       submit: t("Mesajını göndər"),
@@ -349,41 +349,41 @@ const seo = (title: string, description: string): PageSeo => ({ title: t(title),
 export const pageSeo: Record<PageKey, PageSeo> = {
   global: seo("", ""),
   home: seo(
-    "Podkast.az — Bakıda podcast studiyası",
-    "Video və audio podcast çəkilişi, studiya icarəsi, montaj və Reels hazırlanması. Bakıda peşəkar podcast studiyasını onlayn rezervasiya edin.",
+    "Podkast.az — Bakıda podkast studiyası",
+    "Video və audio podkast çəkilişi, studiya icarəsi, montaj və Reels hazırlanması. Bakıda peşəkar podkast studiyasını onlayn rezervasiya edin.",
   ),
   about: seo(
-    "Haqqımızda — podcast studiyası Bakıda | Podkast.az",
+    "Haqqımızda — podkast studiyası Bakıda | Podkast.az",
     "Podkast.az: 4K çəkiliş, çevik rezervasiya, sürətli production və sizə yaxın studiyalar. Səsiniz burada öz auditoriyasını tapır.",
   ),
   services: seo(
-    "Xidmətlər: podcast çəkilişi, montaj | Podkast.az",
-    "Studiya icarəsi, video və audio podcast çəkilişi, montaj və post-production, Shorts/Reels, canlı yayım və səyyar studiya — bir məkanda.",
+    "Xidmətlər: podkast çəkilişi, montaj | Podkast.az",
+    "Studiya icarəsi, video və audio podkast çəkilişi, montaj və post-production, Shorts/Reels, canlı yayım və səyyar studiya — bir məkanda.",
   ),
   studios: seo(
-    "Studiyalar — podcast studiya icarəsi Bakıda | Podkast.az",
-    "Peşəkar səs avadanlığı, optimal akustika və rahat çəkiliş mühiti olan podcast studiyalarımız və dekorlarımızla tanış olun.",
+    "Studiyalar — podkast studiya icarəsi Bakıda | Podkast.az",
+    "Peşəkar səs avadanlığı, optimal akustika və rahat çəkiliş mühiti olan podkast studiyalarımız və dekorlarımızla tanış olun.",
   ),
   decors: seo("", ""),
   packages: seo(
-    "Paketlər və qiymətlər — podcast çəkilişi | Podkast.az",
-    "START, PRO və PREMIUM podcast paketləri: studiya, kamera, mikrofon, montaj və qısa videolar. Əlavə xidmətlərlə büdcənizə uyğun seçin.",
+    "Paketlər və qiymətlər — podkast çəkilişi | Podkast.az",
+    "START, PRO və PREMIUM podkast paketləri: studiya, kamera, mikrofon, montaj və qısa videolar. Əlavə xidmətlərlə büdcənizə uyğun seçin.",
   ),
   packageRequest: seo(
     "Paketə müraciət | Podkast.az",
-    "Podcast paketini və əlavə xidmətləri seçin, ümumi məbləği görün və müraciət göndərin — sizinlə tezliklə əlaqə saxlayacağıq.",
+    "Podkast paketini və əlavə xidmətləri seçin, ümumi məbləği görün və müraciət göndərin — sizinlə tezliklə əlaqə saxlayacağıq.",
   ),
   works: seo(
-    "İşlərimiz — podcast çəkiliş nümunələri | Podkast.az",
-    "Podkast.az studiyalarında çəkilmiş podcast-lardan kadrlar: kadrların arxasında duran keyfiyyəti kəşf edin.",
+    "İşlərimiz — podkast çəkiliş nümunələri | Podkast.az",
+    "Podkast.az studiyalarında çəkilmiş podkast-lardan kadrlar: kadrların arxasında duran keyfiyyəti kəşf edin.",
   ),
   worksVideos: seo(
-    "Video podcast nümunələri | Podkast.az",
-    "Video podcast çəkilişi, audio podcast yazımı və səyyar studiya işlərimizdən nümunələr.",
+    "Video podkast nümunələri | Podkast.az",
+    "Video podkast çəkilişi, audio podkast yazımı və səyyar studiya işlərimizdən nümunələr.",
   ),
   booking: seo(
     "Studiya rezervasiyası — onlayn | Podkast.az",
-    "Studiya, dekor, tarix və saatı seçin — podcast studiyasını onlayn rezervasiya edin. Təsdiq üçün sizinlə əlaqə saxlayacağıq.",
+    "Studiya, dekor, tarix və saatı seçin — podkast studiyasını onlayn rezervasiya edin. Təsdiq üçün sizinlə əlaqə saxlayacağıq.",
   ),
   contact: seo(
     "Əlaqə — Podkast.az, Bakı",

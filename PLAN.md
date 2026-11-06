@@ -5,7 +5,7 @@
 > marketinq.az-da yaşanan bütün problemlər və onların həlli aşağıda (§14) yazılıb — **hamısını əvvəldən tətbiq et**, sonradan düzəltmə.
 >
 > - marketinq.az kodu: `C:\Users\Microsol\Desktop\marketing` (GitHub `Quliyeva1o/marketingaz`), təhvil qeydləri: `docs/HANDOFF.md`, cPanel deploy: `deploy/cpanel/README.md`
-> - Figma: https://www.figma.com/design/YCsdeoCq9yoNPOKXYnBmWr/Podcast.az (file key `YCsdeoCq9yoNPOKXYnBmWr`)
+> - Figma: https://www.figma.com/design/YCsdeoCq9yoNPOKXYnBmWr/Podkast.az (file key `YCsdeoCq9yoNPOKXYnBmWr`)
 > - Bu qovluqda: `design/reference/*.jpg` (Figma ekranlarının şəkilləri), `design/figma-notes/` (bütün mətnlər, bölmə quruluşu, dizaynerin qeydləri)
 
 ---
@@ -105,12 +105,12 @@ Dil: Figma yalnız **AZ**-dır. Tövsiyə: başlanğıcda yalnız AZ (prefikssiz
 
 1. **Ana səhifə:** Hero (fon şəkli və ya video, H1, alt mətn, 2 düymə + linkləri, © mətni, sosial ikonlar). SEO üçün gizli açar sözlü H1 davamı (marketinq.az-dakı kimi `seoHeading`).
 2. **Haqqımızda:** Səhifə başlığı → şəkil + "Səsiniz burada öz auditoriyasını tapır." + uzun mətn → tərəfdaş loqoları (mobil-də görünür: Mado, Starbucks, Baku Electronics, Peynirci Baba…) → 4 üstünlük kartı (4K Keyfiyyət, Çevik Rezervasiya, Sürətli Production, Uyğun Ünvanlar; 2-si narıncı, 2-si ağ).
-3. **Xidmətlər:** başlıq + alt mətn + "Müraciət et" düyməsi → 8 xidmət kartı (ikon/illüstrasiya, ad, qısa təsvir): Studio icarəsi, Video podcast çəkilişi, Audio Podcast Yazımı, Montaj & Post-Production, Shorts/Reels, Podcast Start, Canlı Yayım, Səyyar studio → "Səsiniz burada…" + 4 üstünlük kartı (Haqqımızda ilə **paylaşılan bölmə**). Dizaynerin qeydlərində hər xidmət üçün "Daxildir" siyahısı var — kart açılanda/detalda göstərmək olar (müştəri ilə dəqiqləşdir).
+3. **Xidmətlər:** başlıq + alt mətn + "Müraciət et" düyməsi → 8 xidmət kartı (ikon/illüstrasiya, ad, qısa təsvir): Studio icarəsi, Video podkast çəkilişi, Audio Podkast Yazımı, Montaj & Post-Production, Shorts/Reels, Podkast Start, Canlı Yayım, Səyyar studio → "Səsiniz burada…" + 4 üstünlük kartı (Haqqımızda ilə **paylaşılan bölmə**). Dizaynerin qeydlərində hər xidmət üçün "Daxildir" siyahısı var — kart açılanda/detalda göstərmək olar (müştəri ilə dəqiqləşdir).
 4. **Studiyalar:** başlıq + alt mətn → hər studiya: ad, qısa mətn, "Dekorlara bax" düyməsi, böyük şəkil + 3 dar şəkil, şəkil üstündə dekor adı/təsviri. **Studiyalar kolleksiyadır** (admin-dən əlavə/sil/sırala).
 5. **Dekorlar (studiyaya görə):** başlıq + alt mətn → hər dekor: ad, təsvir, "Rezervasiya et" (→ `/rezervasiya?studiya=…&dekor=…`), 8 şəkillik qalereya (desktop 4×2, mobil 1 sütun). **Dekorlar kolleksiyadır** (studiyaya bağlı).
 6. **Paketlər:** başlıq + alt mətn → 3 paket kartı (ad, kimin üçün, qiymət AZN, "Müraciət et", xüsusiyyət siyahısı, "Ən çox seçilən" lent) → "ADD-ON XİDMƏTLƏR" (ad + qiymət; "Aylıq paket — Fərdi qiymət"). **Paketlər və add-on-lar kolleksiyadır.**
 7. **Paket müraciəti:** sol: paket seçimi (radio-kart), add-on-lar (checkbox-kart), "Ümumi X AZN" (canlı hesablanır); sağ: Ad, Soyad, Telefon, Email, 2 checkbox (məlumatların doğruluğu; qaydalar və məxfilik — linklərlə), "Müraciət et".
-8. **İşlərimiz:** başlıq + alt mətn + tab-lar. **Şəkillər:** masonry (desktop 3 sütun, mobil 1), lightbox. **Videolar:** böyük kartlar (video/şəkil + başlıq + mətn + xüsusiyyətlər) — Video Podcast Çəkilişi, Audio Podcast Yazımı, Səyyar studio — + kiçik şəkil kollajı. Videolar: media kitabxanasından mp4 (səssiz loop) və ya YouTube linki (lite-embed, klikdə yüklənsin).
+8. **İşlərimiz:** başlıq + alt mətn + tab-lar. **Şəkillər:** masonry (desktop 3 sütun, mobil 1), lightbox. **Videolar:** böyük kartlar (video/şəkil + başlıq + mətn + xüsusiyyətlər) — Video Podkast Çəkilişi, Audio Podkast Yazımı, Səyyar studio — + kiçik şəkil kollajı. Videolar: media kitabxanasından mp4 (səssiz loop) və ya YouTube linki (lite-embed, klikdə yüklənsin).
 9. **Rezervasiya:** sol: Studiya (radio-kart: ad + ünvan), Dekor (radio-kart: kiçik şəkil + ad; seçilmiş studiyanın dekorları + "Digər — İstəyinizə uyğun dekorun düzəlməsi"), Tarix, Başlama vaxtı, Bitmə vaxtı; sağ: şəxsi məlumatlar + 2 checkbox + "Müraciət et" → modal "Qəbul olundu!".
 10. **Əlaqə:** başlıq + alt mətn → sol: "Əlaqə saxlayın…", Ünvan, Telefon, E-poçt, sosial ikonlar; sağ: Ad, Soyad, Telefon, Email, Mövzu, Mesaj, "Mesajını göndər".
 11. **İstifadəçi qaydaları / Məxfilik siyasəti:** başlıq + zəngin mətn (admin-dən rich text). Mətnlər müştərinin hüquqşünasından.
@@ -199,7 +199,7 @@ Studiyalar/dekorlar/paketlər `collection_items`-də də saxlanıla bilər (mark
 
 ## 10. Stack və başlanğıc
 
-- **marketinq.az repo-sunu şablon kimi götür** (sıfırdan yazma): `git clone` → yeni repo `podcastaz` (və ya `podkastaz`) → marketinq.az-a xas bölmələri (hero, team, process, pricing, portfolio, blog…) sil, admin nüvəsini, media sistemini, formaları, SEO-nu, deploy skriptlərini saxla.
+- **marketinq.az repo-sunu şablon kimi götür** (sıfırdan yazma): `git clone` → yeni repo `podkastaz` (və ya `podkastaz`) → marketinq.az-a xas bölmələri (hero, team, process, pricing, portfolio, blog…) sil, admin nüvəsini, media sistemini, formaları, SEO-nu, deploy skriptlərini saxla.
 - Next.js **16.4.x** App Router, Cache Components (`'use cache'`, `cacheLife('max')`, `cacheTag`, `updateTag`), `src/proxy.ts` (middleware yox). Next kodu yazmazdan əvvəl `node_modules/next/dist/docs/` oxu (AGENTS.md qaydası).
 - Tailwind v4 + Figma token-ləri; **fluid rem** şkalası (1rem = aktiv frame-in 16px-i); `--sbw` scrollbar düzəlişi.
 - Drizzle ORM + Postgres 16 (lokal Docker port 5440 — marketinq.az-ın bazası ilə toqquşmasın deyə **5441** istifadə et), Mailpit (lokal email), Playwright E2E, sharp (şəkil), ffmpeg (video).
@@ -207,14 +207,14 @@ Studiyalar/dekorlar/paketlər `collection_items`-də də saxlanıla bilər (mark
 
 ---
 
-## 11. SEO planı (hədəf: Lighthouse SEO 100, Google-da "podcast studio Bakı" üçün yuxarıda)
+## 11. SEO planı (hədəf: Lighthouse SEO 100, Google-da "podkast studio Bakı" üçün yuxarıda)
 
-- Hər səhifə: unikal title (≤60) və description (≤160), açar sözlər: *podcast studiya Bakı, podcast çəkilişi, video podcast, studiya icarəsi, səsyazma studiyası, podcast montaj, reels çəkilişi*.
+- Hər səhifə: unikal title (≤60) və description (≤160), açar sözlər: *podkast studiya Bakı, podkast çəkilişi, video podkast, studiya icarəsi, səsyazma studiyası, podkast montaj, reels çəkilişi*.
 - **Bir H1** hər səhifədə; ana səhifənin H1-i qısadır ("Səsini Brendə Çevir") → gizli açar sözlü davam (`sr-only`, admin-dən), daxili səhifələrdə də `headingSuffix`.
 - **JSON-LD:** `LocalBusiness` + `ProfessionalService` (ad, ünvan, telefon, iş saatları, geo, sameAs), `WebSite`, `BreadcrumbList`, `Service` (xidmətlər), `Offer`/`OfferCatalog` (paketlər, AZN), `ImageGallery`/`VideoObject` (işlərimiz), hər studiya üçün `Place`.
 - `sitemap.xml` (studiya və dekor səhifələri daxil), `robots.txt`, canonical, OG şəkli (default + səhifəyə görə), Twitter card.
 - **Test domenində noindex** (`SITE_NOINDEX=1`) — canlıya keçəndə söndür.
-- Domen: **podkast.az vs podcast.az** (§17) — biri əsas, digərləri + `www` 301 ilə əsasa.
+- Domen: **podkast.az vs podkast.az** (§17) — biri əsas, digərləri + `www` 301 ilə əsasa.
 - Alt mətnlər: media kitabxanasında, açar sözlü; dekorativ şəkillər `alt=""`.
 - Ana səhifə tək ekran olduğundan mətn azdır → **Google Business Profile**, yerli kataloqlar, YouTube kanalı, sosial profillər mütləqdir (müştəriyə tövsiyə).
 - Footer olmadığı üçün NAP (ad/ünvan/telefon) yalnız Əlaqə səhifəsində və JSON-LD-dədir — kifayətdir, amma JSON-LD hər səhifədə olsun.
@@ -300,7 +300,7 @@ Hər fazanın sonunda: lint + typecheck + build + E2E yaşıl → istifadəçid�
 ## 17. Müştəridən lazım olanlar / açıq suallar
 
 **Qərar tələb edən:**
-1. **Domen:** `podkast.az` (loqoda belədir) yoxsa `podcast.az` (©-də belədir)? Hər ikisi alınıbsa biri əsas, digəri 301.
+1. **Domen:** `podkast.az` (loqoda belədir) yoxsa `podkast.az` (©-də belədir)? Hər ikisi alınıbsa biri əsas, digəri 301.
 2. **Dil:** yalnız AZ, yoxsa EN/RU da? (Kod hər halda hazır olacaq.)
 3. **Hostinq:** marketinq.az ilə eyni cPanel hesabı? (ffmpeg və təcrübə hazırdır.)
 4. **Studiya icarəsinin qiyməti** rezervasiyada göstərilsin/hesablansın? Saatlıq qiymət nədir?

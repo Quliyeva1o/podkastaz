@@ -29,7 +29,7 @@ test("admin: seeded collections are listed and a package price must be a number"
     ["services", "Studio icarəsi"],
     ["packages", "PRO"],
     ["addons", "Aylıq paket"],
-    ["works", "Video podcast 1"],
+    ["works", "Video podkast 1"],
     ["partners", "Starbucks"],
   ]) {
     await page.goto(`/admin/collections/${name}`);
