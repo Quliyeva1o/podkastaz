@@ -393,9 +393,9 @@ the client questions below, and the launch to podkast.az.
 - Checks: lint, typecheck, build, 105 E2E (16 new for English: every page, hreflang, switcher, 404,
   sitemap, an English booking with the English customer email).
 
-Still to do: the client checks the English texts (first translation), the designer's switcher;
-on the server run `deploy.sh` (migration 0002), then once `cd ~/podkast-src && npm run i18n:fill-en`
-(the running app drops its cached pages within seconds).
+Live on https://test.podkast.az/en since 2026-11-08 (commit `c7f2992`, 423 English texts filled on
+the server). Still to do: the client checks the English texts (first translation), the designer's
+switcher. New AZ texts typed later need their English in the admin (or `en.mts` + `i18n:fill-en`).
 
 ## SEO pass (2026-11-08, screen texts unchanged)
 
