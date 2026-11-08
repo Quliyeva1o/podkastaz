@@ -2,6 +2,7 @@ import "server-only";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 import { db } from "@/db";
+import { defaultLocale, hasLocale, type Locale } from "@/i18n/config";
 import { bookings } from "@/db/schema";
 import { getPageContent } from "@/lib/content/queries";
 import { sendMail, tableEmail } from "@/lib/mail";
@@ -22,18 +23,27 @@ const when = (b: Booking) => ({
   saat: `${formatTime(bakuMinutes(b.startsAt))} – ${formatTime(bakuMinutes(b.endsAt) || 1440)}`,
 });
 
-function rows(b: Booking): [string, string][] {
+const rowLabels: Record<Locale, string[]> = {
+  az: ["Studiya", "Dekor", "İstək", "Tarix", "Saat", "Ad, soyad", "Telefon", "E-poçt"],
+  en: ["Studio", "Decor", "Request", "Date", "Time", "Name", "Phone", "Email"],
+};
+
+/** The customer's language (admin emails are always Azerbaijani). */
+const langOf = (b: Booking): Locale => (hasLocale(b.lang) ? b.lang : defaultLocale);
+
+function rows(b: Booking, lang: Locale = defaultLocale): [string, string][] {
   const w = when(b);
-  return [
-    ["Studiya", `${b.studioSnapshot.name}${b.studioSnapshot.address ? ` (${b.studioSnapshot.address})` : ""}`],
-    ["Dekor", b.decorSnapshot?.name ?? ""],
-    ["İstək", b.customRequest ?? ""],
-    ["Tarix", w.tarix],
-    ["Saat", w.saat],
-    ["Ad, soyad", `${b.firstName} ${b.lastName}`.trim()],
-    ["Telefon", b.phone],
-    ["E-poçt", b.email],
+  const values = [
+    `${b.studioSnapshot.name}${b.studioSnapshot.address ? ` (${b.studioSnapshot.address})` : ""}`,
+    b.decorSnapshot?.name ?? "",
+    b.customRequest ?? "",
+    w.tarix,
+    w.saat,
+    `${b.firstName} ${b.lastName}`.trim(),
+    b.phone,
+    b.email,
   ];
+  return rowLabels[lang].map((label, i) => [label, values[i]]);
 }
 
 /** {ad} {studiya} {dekor} {tarix} {saat} in an admin template. */
@@ -64,12 +74,17 @@ export async function notifyAdmin(b: Booking) {
   return sent;
 }
 
-/** The customer's email for a status (admin templates). Returns false when nothing was sent. */
+/**
+ * The customer's email for a status (admin templates, in the language the booking was made in;
+ * an empty translation falls back to Azerbaijani). Returns false when nothing was sent.
+ */
 export async function notifyCustomer(b: Booking, status: CustomerStatus) {
   if (!b.email) return false;
   const templates = await globalSection<BookingEmailsData>("bookingEmails");
-  const subject = fill(templates?.[`${status}Subject`]?.az || "Rezervasiya", b);
-  const body = fill(templates?.[`${status}Body`]?.az || "", b);
-  const mail = tableEmail(subject, rows(b).slice(0, 5), undefined, body.split(/\n\s*\n/).filter(Boolean));
+  const lang = langOf(b);
+  const pick = (key: `${CustomerStatus}${"Subject" | "Body"}`) => templates?.[key]?.[lang] || templates?.[key]?.az || "";
+  const subject = fill(pick(`${status}Subject`) || (lang === "en" ? "Booking" : "Rezervasiya"), b);
+  const body = fill(pick(`${status}Body`), b);
+  const mail = tableEmail(subject, rows(b, lang).slice(0, 5), undefined, body.split(/\n\s*\n/).filter(Boolean));
   return sendMail({ to: [b.email], subject, ...mail });
 }

@@ -23,7 +23,7 @@ const labelKeys = [
 export async function PackageRequestSection({ data, lang }: SectionProps<PackageRequestFormData>) {
   const [packages, addons] = await Promise.all([listPublished<PackageData>("packages"), listPublished<AddonData>("addons")]);
   const props = {
-    packages: packages.map((p) => ({ slug: p.slugs[lang], name: tx(p.data.title, lang), price: Number(p.data.price) || 0 })),
+    packages: packages.map((p) => ({ slug: p.slug, name: tx(p.data.title, lang), price: Number(p.data.price) || 0 })),
     addons: addons.map((a) => ({
       id: a.id,
       name: tx(a.data.title, lang),

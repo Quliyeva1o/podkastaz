@@ -46,14 +46,14 @@ export async function proxy(request: NextRequest) {
       return NextResponse.redirect(url, 308);
     case "rewrite":
       if (!(await detailExists(resolved, resolved.internal.split("/")[1] as Locale))) {
-        url.pathname = `/${resolved.internal.split("/")[1]}/__not-found`;
+        url.pathname = `/${resolved.internal.split("/")[1]}/404`;
         return NextResponse.rewrite(url);
       }
       url.pathname = resolved.internal;
       return NextResponse.rewrite(url);
     case "notFound":
       // Unknown or wrong-language segment: render the localized 404 page.
-      url.pathname = `/${resolved.locale}/__not-found`;
+      url.pathname = `/${resolved.locale}/404`;
       return NextResponse.rewrite(url);
   }
 }

@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { after } from "next/server";
 import { z } from "zod";
 import { db } from "@/db";
+import { defaultLocale, hasLocale, locales, type Locale } from "@/i18n/config";
 import { packageRequests } from "@/db/schema";
 import { listPublished } from "@/collections/queries";
 import type { AddonData, PackageData } from "@/collections/registry";
@@ -23,6 +24,7 @@ const schema = z.object({
   email: z.email().max(200),
   accuracy: z.literal("on"),
   terms: z.literal("on"),
+  locale: z.enum(locales).catch(defaultLocale),
   // Honeypot: real visitors never see or fill this field.
   website: z.string().max(0).optional(),
 });
@@ -31,6 +33,11 @@ export type PackageRequestState = { ok: true } | { ok: false; error: "invalid" |
 
 const RATE_WINDOW_MS = 10 * 60_000;
 const RATE_MAX = 5;
+
+const emailText: Record<Locale, { rows: string[]; custom: string; subject: string }> = {
+  az: { rows: ["Paket", "Add-on-lar", "Ümumi", "Ad, soyad", "Telefon", "E-poçt"], custom: "fərdi qiymət", subject: "Müraciətiniz qəbul olundu" },
+  en: { rows: ["Package", "Add-ons", "Total", "Name", "Phone", "Email"], custom: "custom price", subject: "We received your request" },
+};
 
 /** AZN price of an add-on, or null for "Fərdi qiymət". */
 const priceOf = (v: string) => (/^\d{1,6}$/.test(v.trim()) ? Number(v) : null);
@@ -58,7 +65,7 @@ export async function submitPackageRequest(_prev: PackageRequestState, formData:
 
   const d = parsed.data;
   const [packages, addons] = await Promise.all([listPublished<PackageData>("packages"), listPublished<AddonData>("addons")]);
-  const pkg = packages.find((p) => p.slugs.az === d.package);
+  const pkg = packages.find((p) => p.slug === d.package);
   const chosen = addons.filter((a) => d.addons.includes(a.id));
   if (!pkg || chosen.length !== new Set(d.addons).size) return { ok: false, error: "invalid" };
 
@@ -78,6 +85,7 @@ export async function submitPackageRequest(_prev: PackageRequestState, formData:
         lastName: d.lastName,
         phone: d.phone,
         email: d.email,
+        lang: d.locale,
         ipHash,
       })
       .returning();
@@ -104,28 +112,34 @@ async function notify(r: typeof packageRequests.$inferSelect) {
   const templates = find<RequestEmailsData>("requestEmails");
   const name = `${r.firstName} ${r.lastName}`.trim();
   const custom = r.addonsSnapshot.some((a) => a.price === null);
-  const totalText = `${r.total} AZN${custom ? " + fərdi qiymət" : ""}`;
-  const rows: [string, string][] = [
-    ["Paket", `${r.packageSnapshot.name} — ${r.packageSnapshot.price} AZN`],
-    ["Add-on-lar", r.addonsSnapshot.map((a) => `${a.name} — ${a.price === null ? "fərdi qiymət" : `+${a.price} AZN`}`).join("\n")],
-    ["Ümumi", totalText],
-    ["Ad, soyad", name],
-    ["Telefon", r.phone],
-    ["E-poçt", r.email],
-  ];
-  const fill = (t: string) =>
-    t.replace(/\{(ad|paket|məbləğ)\}/g, (_, k: string) => ({ ad: r.firstName, paket: r.packageSnapshot.name, məbləğ: totalText })[k]!);
+  // Admin emails are Azerbaijani; the customer's follow the site language of the request.
+  const lang: Locale = hasLocale(r.lang) ? r.lang : defaultLocale;
+  const t = emailText[lang];
+  const totalText = (l: Locale) => `${r.total} AZN${custom ? ` + ${emailText[l].custom}` : ""}`;
+  const rows = (l: Locale): [string, string][] => {
+    const e = emailText[l];
+    return [
+      [e.rows[0], `${r.packageSnapshot.name} — ${r.packageSnapshot.price} AZN`],
+      [e.rows[1], r.addonsSnapshot.map((a) => `${a.name} — ${a.price === null ? e.custom : `+${a.price} AZN`}`).join("\n")],
+      [e.rows[2], totalText(l)],
+      [e.rows[3], name],
+      [e.rows[4], r.phone],
+      [e.rows[5], r.email],
+    ];
+  };
+  const fill = (text: string, l: Locale) =>
+    text.replace(/\{(ad|paket|məbləğ)\}/g, (_, k: string) => ({ ad: r.firstName, paket: r.packageSnapshot.name, məbləğ: totalText(l) })[k]!);
 
   const to = (settings?.recipients?.trim() || process.env.NOTIFY_EMAIL || "")
     .split(/[,;\s]+/)
     .filter((a) => z.email().safeParse(a).success);
-  const subject = `${fill(templates?.adminSubject?.az || "Yeni paket müraciəti")}: ${r.packageSnapshot.name}, ${name}`;
-  const mail = tableEmail(subject, rows, { label: "Admin paneldə aç", href: `${siteUrl}/admin/package-requests/${r.id}` });
+  const subject = `${fill(templates?.adminSubject?.az || "Yeni paket müraciəti", "az")}: ${r.packageSnapshot.name}, ${name}`;
+  const mail = tableEmail(subject, rows("az"), { label: "Admin paneldə aç", href: `${siteUrl}/admin/package-requests/${r.id}` });
   if (await sendMail({ to, subject, ...mail, replyTo: r.email })) {
     await db.update(packageRequests).set({ notifiedAt: new Date() }).where(eq(packageRequests.id, r.id));
   }
 
-  const customerSubject = fill(templates?.customerSubject?.az || "Müraciətiniz qəbul olundu");
-  const body = fill(templates?.customerBody?.az || "").split(/\n\s*\n/).filter(Boolean);
-  await sendMail({ to: [r.email], subject: customerSubject, ...tableEmail(customerSubject, rows.slice(0, 3), undefined, body) });
+  const customerSubject = fill(templates?.customerSubject?.[lang] || templates?.customerSubject?.az || t.subject, lang);
+  const body = fill(templates?.customerBody?.[lang] || templates?.customerBody?.az || "", lang).split(/\n\s*\n/).filter(Boolean);
+  await sendMail({ to: [r.email], subject: customerSubject, ...tableEmail(customerSubject, rows(lang).slice(0, 3), undefined, body) });
 }

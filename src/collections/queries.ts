@@ -3,22 +3,19 @@ import { and, asc, eq } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
 import { db } from "@/db";
 import { collectionItems } from "@/db/schema";
-import type { Locale, Localized } from "@/i18n/config";
 import { collectionTag, type CollectionName } from "./registry";
 
 export type Item<T> = {
   id: string;
-  slugs: Localized;
+  /** One slug for every language (only used in `?paket=`, never as a page URL). */
+  slug: string;
   data: T;
   publishedAt: string;
 };
 
-/** Slug column per language (a new locale gets its own column). */
-export const slugColumn = { az: collectionItems.slugAz } satisfies Record<Locale, unknown>;
-
 const toItem = <T,>(r: typeof collectionItems.$inferSelect): Item<T> => ({
   id: r.id,
-  slugs: { az: r.slugAz },
+  slug: r.slugAz,
   data: r.data as T,
   publishedAt: r.publishedAt.toISOString(),
 });

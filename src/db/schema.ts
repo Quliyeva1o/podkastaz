@@ -314,6 +314,8 @@ export const bookings = pgTable(
     adminNote: text("admin_note").notNull().default(""),
     /** Where the visitor came from: "decor" page link or "direct". */
     source: text("source").notNull().default("direct"),
+    /** Language of the site the request came from: the customer's emails use it. */
+    lang: text("lang").notNull().default("az"),
     ipHash: text("ip_hash"),
     read: boolean("read").notNull().default(false),
     notifiedAt: timestamp("notified_at", { withTimezone: true }),
@@ -362,6 +364,8 @@ export const packageRequests = pgTable(
     email: text("email").notNull(),
     status: packageRequestStatus("status").notNull().default("new"),
     adminNote: text("admin_note").notNull().default(""),
+    /** Language of the site the request came from: the customer's emails use it. */
+    lang: text("lang").notNull().default("az"),
     ipHash: text("ip_hash"),
     read: boolean("read").notNull().default(false),
     notifiedAt: timestamp("notified_at", { withTimezone: true }),

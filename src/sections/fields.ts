@@ -26,11 +26,9 @@ export type LinkValue = { label: Localized; target: string };
 
 export const linkTargets = Object.keys(staticRoutes);
 
+// Azerbaijani is required; a translation may be missing (content saved before the language existed).
 const localizedSchema = z.object(
-  Object.fromEntries(locales.map((l) => [l, z.string().max(20_000)])) as Record<
-    (typeof locales)[number],
-    z.ZodString
-  >,
+  Object.fromEntries(locales.map((l) => [l, l === "az" ? z.string().max(20_000) : z.string().max(20_000).optional()])),
 );
 
 export function fieldSchema(field: Field): z.ZodType {

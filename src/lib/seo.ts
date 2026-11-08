@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { defaultLocale, htmlLang, locales, type Locale } from "@/i18n/config";
-import { alternates, href, type RouteKey } from "@/i18n/routes";
+import { alternates, type RouteKey } from "@/i18n/routes";
 import { getMediaItems, getPageContent, type MediaItem } from "@/lib/content/queries";
 import { collectImageIds } from "@/sections/fields";
 import { isSectionType, sections } from "@/sections/registry";
@@ -29,7 +29,7 @@ export async function staticPageMetadata(route: RouteKey, lang: Locale): Promise
 export function itemMetadata(
   route: RouteKey,
   lang: Locale,
-  item: { slugs: Record<Locale, string>; title: string; description?: string; cover?: MediaItem },
+  item: { slugs: Partial<Record<Locale, string>>; title: string; description?: string; cover?: MediaItem },
 ): Metadata {
   return pageMetadata({
     route,
@@ -63,7 +63,7 @@ export const siteUrl = (process.env.SITE_URL ?? "http://localhost:3000").replace
 export const siteNoindex = process.env.SITE_NOINDEX === "1";
 export const siteName = "Podkast.az";
 
-const ogLocale: Record<Locale, string> = { az: "az_AZ" };
+const ogLocale: Record<Locale, string> = { az: "az_AZ", en: "en_US" };
 
 type PageSeoInput = {
   route: RouteKey;
@@ -82,7 +82,7 @@ type PageSeoInput = {
 export function pageMetadata(input: PageSeoInput): Metadata {
   const { route, lang, title, description, itemSlugs, ogImage, noindex } = input;
   const urls = alternates(route, itemSlugs);
-  const canonical = href(route, lang, itemSlugs?.[lang]);
+  const canonical = urls[lang];
 
   return {
     title,

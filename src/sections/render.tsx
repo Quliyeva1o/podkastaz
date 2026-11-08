@@ -2,8 +2,8 @@ import type { ComponentType, ReactNode } from "react";
 import { Breadcrumb, type Crumb } from "@/components/site/breadcrumb";
 import { Header } from "@/components/site/header";
 import { cx } from "@/components/site/ui";
-import type { Locale } from "@/i18n/config";
-import { href, type RouteKey } from "@/i18n/routes";
+import { locales, type Locale } from "@/i18n/config";
+import { alternates, href, type RouteKey } from "@/i18n/routes";
 import { getMediaItems, getPageContent, type MediaItem, type RenderedSection } from "@/lib/content/queries";
 import { breadcrumbGraph, JsonLd, siteGraph } from "@/lib/structured-data";
 import { pageGraph } from "@/lib/page-graph";
@@ -96,6 +96,7 @@ async function crumbName(route: RouteKey, lang: Locale, menu: MenuData | undefin
 export async function SiteFrame({
   route,
   lang,
+  itemSlug,
   trail,
   breadcrumb,
   graph = [],
@@ -103,6 +104,8 @@ export async function SiteFrame({
 }: {
   route: RouteKey;
   lang: Locale;
+  /** The studio of a decors page: the language switcher keeps it. */
+  itemSlug?: string;
   trail?: Crumb[];
   /** Replaces the breadcrumb (gets the default trail): the booking page picks its own. */
   breadcrumb?: (crumbs: Crumb[], label: string) => ReactNode;
@@ -111,7 +114,7 @@ export async function SiteFrame({
   children: ReactNode;
 }) {
   const { media, header, menu, contacts, labels, business } = await loadGlobal();
-  const home = { name: tx(header?.homeLabel, lang) || "Ana səhifə", path: href("home", lang) };
+  const home = { name: tx(header?.homeLabel, lang) || (lang === "en" ? "Home" : "Ana səhifə"), path: href("home", lang) };
   const parent = parents[route];
   const crumbs: Crumb[] =
     route === "home"
@@ -125,6 +128,8 @@ export async function SiteFrame({
             ]),
         ];
   const isHome = route === "home";
+  const urls = alternates(route, itemSlug ? { az: itemSlug } : undefined);
+  const languages = locales.map((l) => ({ lang: l, href: urls[l] }));
   // Inner pages: the "İşlərimiz / Videolar" tab is still the İşlərimiz menu item.
   const activeTarget = route === "worksVideos" ? "works" : route === "packageRequest" ? "packages" : route;
 
@@ -139,6 +144,7 @@ export async function SiteFrame({
           media={media}
           theme={isHome ? "dark" : "light"}
           activeTarget={activeTarget}
+          languages={languages}
         />
       )}
       {!isHome &&

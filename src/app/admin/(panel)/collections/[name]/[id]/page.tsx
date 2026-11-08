@@ -41,7 +41,7 @@ export default async function EditItemPage({ params }: PageProps<"/admin/collect
         id={row.id}
         fields={def.fields}
         initialData={withDefaults(def.fields, row.data)}
-        slugs={{ az: row.slugAz }}
+        slug={row.slugAz}
         published={row.published}
         publishedAt={row.publishedAt.toISOString().slice(0, 10)}
         aside={

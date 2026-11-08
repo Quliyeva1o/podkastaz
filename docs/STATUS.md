@@ -375,6 +375,38 @@ Still open: Lighthouse itself (downloading it is blocked by the session's permis
 run `npx lighthouse` by hand), the optional `.ics` / WhatsApp / SMS (PLAN §5.4, client's call),
 the client questions below, and the launch to podkast.az.
 
+## English version (2026-11-08)
+
+- `/en/...` with English URLs (`/en/about`, `/en/studios/<slug>`, `/en/packages/request`…), hreflang
+  az/en + x-default (AZ), `lang="en"`, OG `en_US`, sitemap with both languages, JSON-LD names per language.
+- Every admin text has an AZ / EN tab; an empty English text falls back to Azerbaijani. Slugs are
+  one per item for both languages (studios keep `studiya-1` in `/en/studios/studiya-1`).
+- `npm run i18n:fill-en` (`scripts/i18n/fill-en.mts` + dictionary `en.mts`) writes the first English
+  translation into the database by the AZ text and lists texts it has no translation for (`--dry`).
+  Texts already translated (e.g. edited in the admin) are kept unless `--force`.
+- Customer emails go out in the language the booking / package request was made in (`lang` column,
+  migration 0002); admin emails stay Azerbaijani. Item names in emails are the AZ snapshot.
+- Language switcher: plain "AZ / EN" next to the menu button — a placeholder until the designer
+  draws one.
+- 404: unknown URLs now show the site's own 404 page (the proxy rewrote to `__not-found`, a private
+  folder in the App Router, so Next's default page appeared); English under `/en`.
+- Checks: lint, typecheck, build, 105 E2E (16 new for English: every page, hreflang, switcher, 404,
+  sitemap, an English booking with the English customer email).
+
+Still to do: the client checks the English texts (first translation), the designer's switcher;
+on the server run `deploy.sh` (migration 0002), then once `cd ~/podkast-src && npm run i18n:fill-en`
+(the running app drops its cached pages within seconds).
+
+## SEO pass (2026-11-08, screen texts unchanged)
+
+- Studio pages: own title and description per studio ("Studiya 1 — podkast studiyası və dekorlar",
+  name + address + decors, "(podcast)" once); the admin's studio SEO fields still win when filled.
+- Works and studio photos carry their alt text on the `<img>` (Google Images); the buttons keep their
+  own names for screen readers.
+- JSON-LD: `alternateName` Podcast.az / Podkast az / Podcast az on the organization and the website.
+- Live admin (test.podkast.az): home and about descriptions with "podkast (podcast)", works
+  description "podkastlardan (podcast)", booking title "Podkast studiyası rezervasiyası — onlayn".
+
 ## Open questions for the client (PLAN.md §17)
 
 1. Domain: podkast.az (logo) or podkast.az (©)?

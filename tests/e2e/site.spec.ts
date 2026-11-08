@@ -82,7 +82,7 @@ test("@site a studio's decors page: breadcrumb Ana səhifə > Studiya 1 > Dekorl
   expect((await page.goto("/studiyalar/studiya-1"))?.status()).toBe(200);
   await expect(page.locator("h1")).toContainText("Dekorlar");
   await expect(page.getByRole("navigation", { name: "Naviqasiya" }).locator("li")).toHaveText(["Ana səhifə", "Studiya 1", "Dekorlar"]);
-  await expect(page).toHaveTitle("Studiya 1 — Dekorlar | Podkast.az");
+  await expect(page).toHaveTitle("Studiya 1 — podkast studiyası və dekorlar | Podkast.az");
 });
 
 test("@site sitemap lists the studios' decors pages", async ({ request }) => {

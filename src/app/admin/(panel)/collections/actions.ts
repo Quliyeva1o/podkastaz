@@ -5,11 +5,9 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { db } from "@/db";
 import { collectionItems } from "@/db/schema";
-import { locales } from "@/i18n/config";
 import { requireUser } from "@/lib/auth";
 import { invalidateTags } from "@/lib/cache/tags";
 import { collections, collectionTag, isCollectionName, type CollectionDefinition, type CollectionName } from "@/collections/registry";
-import { slugColumn } from "@/collections/queries";
 import { isValidSlug, slugify } from "@/collections/slug";
 import { emptyObject, objectSchema } from "@/sections/fields";
 import { pageTag } from "@/sections/pages";
@@ -62,29 +60,23 @@ export async function saveItemAction(_prev: ActionResult | null, formData: FormD
   const invalid = def.validate?.(parsed.data);
   if (invalid) return { ok: false, error: invalid };
 
-  // Empty slug → generated from that language's title (or the AZ title).
-  const slugs = Object.fromEntries(
-    locales.map((l) => {
-      const given = String(formData.get(`slug.${l}`) ?? "").trim();
-      return [l, given ? slugify(given) : slugify(data.title[l] || data.title.az || "")];
-    }),
-  ) as Record<(typeof locales)[number], string>;
-  for (const l of locales) {
-    if (!isValidSlug(slugs[l])) return { ok: false, error: `${l.toUpperCase()} slug yanlışdır` };
-    const [clash] = await db
-      .select({ id: collectionItems.id })
-      .from(collectionItems)
-      .where(and(eq(collectionItems.collection, name), eq(slugColumn[l], slugs[l]), ne(collectionItems.id, id)))
-      .limit(1);
-    if (clash) return { ok: false, error: `${l.toUpperCase()} slug artıq istifadə olunur: ${slugs[l]}` };
-  }
+  // One slug for every language; empty → generated from the AZ title.
+  const given = String(formData.get("slug") ?? "").trim();
+  const slug = given ? slugify(given) : slugify(data.title.az || "");
+  if (!isValidSlug(slug)) return { ok: false, error: "Slug yanlışdır" };
+  const [clash] = await db
+    .select({ id: collectionItems.id })
+    .from(collectionItems)
+    .where(and(eq(collectionItems.collection, name), eq(collectionItems.slugAz, slug), ne(collectionItems.id, id)))
+    .limit(1);
+  if (clash) return { ok: false, error: `Slug artıq istifadə olunur: ${slug}` };
 
   const publishedAtRaw = String(formData.get("publishedAt") ?? "");
   await db
     .update(collectionItems)
     .set({
       data: parsed.data,
-      slugAz: slugs.az,
+      slugAz: slug,
       published: formData.get("published") === "on",
       ...(publishedAtRaw ? { publishedAt: new Date(publishedAtRaw) } : {}),
     })

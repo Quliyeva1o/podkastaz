@@ -1,4 +1,4 @@
-import type { Locale } from "@/i18n/config";
+import { locales, type Locale } from "@/i18n/config";
 import { siteName, siteUrl } from "@/lib/seo";
 import { tx } from "@/sections/helpers";
 import type { BusinessData, ContactsData } from "@/sections/types";
@@ -17,9 +17,12 @@ export function JsonLd({ graph }: { graph: Json[] }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />;
 }
 
+/** Other spellings people search the brand by ("podcast" with c). */
+const alternateName = ["Podcast.az", "Podkast az", "Podcast az"];
+
 export const orgId = `${siteUrl}/#organization`;
 const websiteId = `${siteUrl}/#website`;
-const inLanguage: Record<Locale, string> = { az: "az-AZ" };
+const inLanguage: Record<Locale, string> = { az: "az-AZ", en: "en" };
 const weekdays = { Mo: "Monday", Tu: "Tuesday", We: "Wednesday", Th: "Thursday", Fr: "Friday", Sa: "Saturday", Su: "Sunday" };
 
 /** "Mo-Fr 10:00-20:00" → OpeningHoursSpecification. */
@@ -47,6 +50,7 @@ export function siteGraph(lang: Locale, contacts?: ContactsData, business?: Busi
     "@type": ["LocalBusiness", "ProfessionalService"],
     "@id": orgId,
     name: siteName,
+    alternateName,
     legalName: business?.legalName || undefined,
     url: siteUrl,
     logo: `${siteUrl}/icon.png`,
@@ -68,7 +72,7 @@ export function siteGraph(lang: Locale, contacts?: ContactsData, business?: Busi
       "@type": "ContactPoint",
       telephone,
       contactType: "customer service",
-      availableLanguage: ["az"],
+      availableLanguage: [...locales],
     })),
     // Only real profile links (Figma placeholders like "https://facebook.com" are skipped).
     sameAs: contacts?.socials.map((s) => s.url).filter((u) => /^https?:\/\/[^/]+\/.+/.test(u)),
@@ -78,6 +82,7 @@ export function siteGraph(lang: Locale, contacts?: ContactsData, business?: Busi
     "@id": websiteId,
     url: siteUrl,
     name: siteName,
+    alternateName,
     inLanguage: inLanguage[lang],
     publisher: { "@id": orgId },
   };

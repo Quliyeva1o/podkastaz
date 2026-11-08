@@ -53,8 +53,8 @@ export async function StudioListSection({ data, lang }: SectionProps<StudioListD
                     lang={lang}
                     sizes="(min-width: 1024px) 53vw, 100vw"
                     priority={si === 0}
-                    // The panel button already carries the decor name.
-                    alt=""
+                    // For image search; the panel button's own name (the decor) is what screen readers read.
+                    alt={tx(media[it.image!].alt, lang) || it.name}
                     className="absolute inset-0 size-full object-cover"
                   />
                 ),

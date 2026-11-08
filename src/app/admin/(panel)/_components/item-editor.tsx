@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState, type ReactNode } from "react";
-import { locales, type Locale, type Localized } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 import type { Field } from "@/sections/fields";
 import { saveItemAction } from "../collections/actions";
 import type { ActionResult } from "../pages/actions";
@@ -17,7 +17,7 @@ export function ItemEditor({
   id,
   fields,
   initialData,
-  slugs,
+  slug,
   published,
   publishedAt,
   aside,
@@ -26,7 +26,7 @@ export function ItemEditor({
   id: string;
   fields: Field[];
   initialData: Record<string, unknown>;
-  slugs: Localized;
+  slug: string;
   published: boolean;
   publishedAt: string;
   aside?: ReactNode;
@@ -52,18 +52,16 @@ export function ItemEditor({
               <LangTabs lang={lang} onChange={setLang} missing={missingLocales(fields, data)} />
               <div className="flex flex-col gap-5">
                 <FieldsEditor fields={title} value={data} onChange={setData} lang={lang} />
-                {/* All three slug inputs stay in the form (inactive ones hidden), so every language is saved. */}
-                {locales.map((l) => (
-                  <label key={l} className={l === lang ? "block" : "hidden"}>
-                    <span className={labelClass}>Slug ({l.toUpperCase()})</span>
-                    <input
-                      name={`slug.${l}`}
-                      defaultValue={slugs[l].startsWith("new-") ? "" : slugs[l]}
-                      placeholder="boş qalsa başlıqdan yaranır"
-                      className={`${inputClass} bg-cms-bg`}
-                    />
-                  </label>
-                ))}
+                {/* One slug for every language. */}
+                <label className="block">
+                  <span className={labelClass}>Slug</span>
+                  <input
+                    name="slug"
+                    defaultValue={slug.startsWith("new-") ? "" : slug}
+                    placeholder="boş qalsa başlıqdan yaranır"
+                    className={`${inputClass} bg-cms-bg`}
+                  />
+                </label>
                 <FieldsEditor fields={content} value={data} onChange={setData} lang={lang} />
 
                 {meta.length > 0 && (

@@ -65,7 +65,8 @@ export async function WorksGallerySection({ data, lang, page }: SectionProps<Wor
                     lang={lang}
                     sizes="(min-width: 1024px) 45vw, 100vw"
                     priority={i < 2 || i === items.length - 1}
-                    alt=""
+                    // For image search; the play button's own name is what screen readers read.
+                    alt={tx(cover.alt, lang) || tx(w.data.title, lang)}
                     className="absolute inset-0 size-full object-cover"
                   />
                 ),
@@ -89,7 +90,8 @@ export async function WorksGallerySection({ data, lang, page }: SectionProps<Wor
                       lang={lang}
                       sizes="(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 100vw"
                       priority={i < 3}
-                      alt=""
+                      // For image search; the button's label (the same text) is what screen readers read.
+                      alt={tx(cover.alt, lang) || tx(w.data.title, lang)}
                       className={cx("absolute inset-0 size-full object-cover", zoomImage)}
                     />
                   ),

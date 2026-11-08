@@ -20,6 +20,28 @@ type Json = Record<string, unknown>;
 
 const abs = (path?: string) => (path ? siteUrl + path : undefined);
 const image = (m?: MediaItem) => abs(coverUrl(m));
+/** Names of the schema.org lists, per language. */
+const names: Record<Locale, Record<"services" | "offers" | "studios" | "gallery" | "contact" | "about" | "city", string>> = {
+  az: {
+    services: "Xidmətlər",
+    offers: "podkast paketləri",
+    studios: "Studiyalar",
+    gallery: "İşlərimiz — şəkillər",
+    contact: "Əlaqə",
+    about: "Haqqımızda",
+    city: "Bakı",
+  },
+  en: {
+    services: "Services",
+    offers: "podcast packages",
+    studios: "Studios",
+    gallery: "Our work — photos",
+    contact: "Contact",
+    about: "About us",
+    city: "Baku",
+  },
+};
+
 const ids = (list: (string | null | undefined)[]) => list.filter((id): id is string => Boolean(id));
 
 export async function pageGraph(route: RouteKey, lang: Locale): Promise<Json[]> {
@@ -32,7 +54,7 @@ export async function pageGraph(route: RouteKey, lang: Locale): Promise<Json[]> 
         {
           "@type": "ItemList",
           "@id": `${url}#services`,
-          name: "Xidmətlər",
+          name: names[lang].services,
           itemListElement: items.map((s, i) => ({
             "@type": "ListItem",
             position: i + 1,
@@ -43,7 +65,7 @@ export async function pageGraph(route: RouteKey, lang: Locale): Promise<Json[]> 
               serviceType: tx(s.data.title, lang),
               image: image(media[s.data.cover ?? ""]),
               provider: { "@id": orgId },
-              areaServed: { "@type": "City", name: "Bakı" },
+              areaServed: { "@type": "City", name: names[lang].city },
             },
           })),
         },
@@ -65,7 +87,7 @@ export async function pageGraph(route: RouteKey, lang: Locale): Promise<Json[]> 
         {
           "@type": "OfferCatalog",
           "@id": `${siteUrl}${href("packages", lang)}#offers`,
-          name: `${siteName} — podkast paketləri`,
+          name: `${siteName} — ${names[lang].offers}`,
           itemListElement: [
             ...packages.map((p) =>
               offer(
@@ -86,7 +108,7 @@ export async function pageGraph(route: RouteKey, lang: Locale): Promise<Json[]> 
         {
           "@type": "ItemList",
           "@id": `${url}#studios`,
-          name: "Studiyalar",
+          name: names[lang].studios,
           itemListElement: list.map((s, i) => ({ "@type": "ListItem", position: i + 1, item: place(s, lang, media) })),
         },
       ];
@@ -102,7 +124,7 @@ export async function pageGraph(route: RouteKey, lang: Locale): Promise<Json[]> 
             "@type": "ImageGallery",
             "@id": `${url}#gallery`,
             url,
-            name: "İşlərimiz — şəkillər",
+            name: names[lang].gallery,
             image: items
               .filter((w) => media[w.data.cover ?? ""]?.mime.startsWith("image/"))
               .map((w) => {
@@ -140,9 +162,9 @@ export async function pageGraph(route: RouteKey, lang: Locale): Promise<Json[]> 
       ];
     }
     case "contact":
-      return [{ "@type": "ContactPage", "@id": `${url}#page`, url, name: "Əlaqə", about: { "@id": orgId } }];
+      return [{ "@type": "ContactPage", "@id": `${url}#page`, url, name: names[lang].contact, about: { "@id": orgId } }];
     case "about":
-      return [{ "@type": "AboutPage", "@id": `${url}#page`, url, name: "Haqqımızda", about: { "@id": orgId } }];
+      return [{ "@type": "AboutPage", "@id": `${url}#page`, url, name: names[lang].about, about: { "@id": orgId } }];
     default:
       return [];
   }
@@ -157,7 +179,7 @@ export function place(s: { studio: Studio; decors: Decor[] }, lang: Locale, medi
     name: `${siteName} — ${tx(s.studio.name, lang)}`,
     url,
     description: tx(s.studio.description, lang) || undefined,
-    address: { "@type": "PostalAddress", streetAddress: tx(s.studio.address, lang) || undefined, addressLocality: "Bakı", addressCountry: "AZ" },
+    address: { "@type": "PostalAddress", streetAddress: tx(s.studio.address, lang) || undefined, addressLocality: names[lang].city, addressCountry: "AZ" },
     photo: ids([s.studio.cover, ...s.decors.map((d) => d.cover)])
       .map((id) => image(media[id]))
       .filter(Boolean)

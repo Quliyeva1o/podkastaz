@@ -32,7 +32,7 @@ export function SeoForm({ pageKey, seo }: { pageKey: string; seo: PageSeo }) {
           <LangTabs lang={lang} onChange={setLang} missing={missing} />
           {(["title", "description"] as const).map((name) =>
             locales.map((l) => {
-              const value = values[name][l];
+              const value = values[name][l] ?? "";
               const set = (v: string) =>
                 setValues({ ...values, [name]: { ...values[name], [l]: v } });
               return (

@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { after } from "next/server";
 import { z } from "zod";
 import { db } from "@/db";
+import { defaultLocale, locales } from "@/i18n/config";
 import { bookingEvents, bookings, decors } from "@/db/schema";
 import { clientIp, filledTooFast, hashIp, verifyTurnstile } from "@/lib/forms/spam";
 import { notifyAdmin, notifyCustomer } from "./emails";
@@ -27,6 +28,7 @@ const schema = z.object({
   accuracy: z.literal("on"),
   terms: z.literal("on"),
   source: z.enum(["decor", "direct"]).optional().default("direct"),
+  locale: z.enum(locales).catch(defaultLocale),
   // Honeypot: real visitors never see or fill this field.
   website: z.string().max(0).optional(),
 });
@@ -100,6 +102,7 @@ export async function createBooking(_prev: BookingState, formData: FormData): Pr
           phone: d.phone,
           email: d.email,
           source: d.source,
+          lang: d.locale,
           ipHash,
         })
         .returning();

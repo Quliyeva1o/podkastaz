@@ -33,7 +33,7 @@ export async function PackageListSection({ data, lang }: SectionProps<PackageLis
                     <span className="text-16 leading-[1.5] tracking-tight desktop:text-20">{currency}</span>
                   </p>
                 </div>
-                <ButtonLink href={`${request}?paket=${p.slugs[lang]}`} className="h-10" aria-label={`${tx(data.cta, lang)}: ${tx(p.data.title, lang)}`}>
+                <ButtonLink href={`${request}?paket=${p.slug}`} className="h-10" aria-label={`${tx(data.cta, lang)}: ${tx(p.data.title, lang)}`}>
                   {tx(data.cta, lang)}
                 </ButtonLink>
               </div>

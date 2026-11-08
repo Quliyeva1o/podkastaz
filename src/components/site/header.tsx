@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Locale } from "@/i18n/config";
+import { localeNames, type Locale } from "@/i18n/config";
 import { href } from "@/i18n/routes";
 import type { MediaItem } from "@/lib/content/queries";
 import { linkHref, tx } from "@/sections/helpers";
@@ -24,6 +24,7 @@ export function Header({
   media,
   theme,
   activeTarget,
+  languages,
 }: {
   data: HeaderData;
   menu: MenuData;
@@ -33,6 +34,8 @@ export function Header({
   theme: HeaderTheme;
   /** Link target of the current page, marked in the menu. */
   activeTarget: string;
+  /** The same page in every language (language switcher). */
+  languages: { lang: Locale; href: string }[];
 }) {
   const dark = theme === "dark";
   const logo = media[(dark ? data.logo : data.logoDark) ?? ""] ?? media[data.logo ?? ""];
@@ -57,31 +60,56 @@ export function Header({
           )}
         </Link>
 
-        <MenuOverlay
-          openLabel={tx(labels?.menuOpen, lang) || "Menyu"}
-          closeLabel={tx(labels?.menuClose, lang) || "Bağla"}
-          buttonClassName={dark ? "text-white" : "text-neutral-950"}
-          icon={<MenuIcon className="size-10" />}
-          current={activeTarget}
-          fullWidth={dark}
-          nav={menu.nav.map(({ link }) => ({ label: tx(link.label, lang), href: linkHref(link, lang), target: link.target }))}
-          booking={{
-            title: tx(menu.bookingTitle, lang),
-            text: tx(menu.bookingText, lang),
-            href: linkHref(menu.bookingLink, lang),
-            background: media[menu.bookingBackground ?? ""] && (
-              <Picture
-                media={media[menu.bookingBackground ?? ""]}
-                lang={lang}
-                sizes="(min-width: 1024px) 22vw, 100vw"
-                alt=""
-                className="absolute inset-0 size-full object-cover"
-              />
-            ),
-          }}
-          contact={{ title: tx(menu.contactTitle, lang), text: tx(menu.contactText, lang), href: linkHref(menu.contactLink, lang) }}
-          legal={[menu.privacy, menu.terms].map((l) => ({ label: tx(l.label, lang), href: linkHref(l, lang) }))}
-        />
+        <div className="flex items-center gap-4 desktop:gap-6">
+          {/* Language switcher: a placeholder until the designer draws one (not in Figma). */}
+          <nav aria-label="Language" className={cx("flex items-center gap-2 text-14 leading-none font-semibold desktop:text-16", dark && "hero-in")}>
+            {languages.map((l, i) => (
+              <span key={l.lang} className="flex items-center gap-2">
+                {i > 0 && <span aria-hidden className={dark ? "text-white/40" : "text-neutral-300"}>/</span>}
+                {l.lang === lang ? (
+                  <span aria-current="true" className={dark ? "text-white" : "text-neutral-950"}>
+                    {localeNames[l.lang]}
+                  </span>
+                ) : (
+                  <Link
+                    href={l.href}
+                    hrefLang={l.lang}
+                    lang={l.lang}
+                    className={cx("transition-colors", dark ? "text-white/60 hover:text-white" : "text-neutral-400 hover:text-neutral-950")}
+                  >
+                    {localeNames[l.lang]}
+                  </Link>
+                )}
+              </span>
+            ))}
+          </nav>
+
+          <MenuOverlay
+            openLabel={tx(labels?.menuOpen, lang) || (lang === "en" ? "Menu" : "Menyu")}
+            closeLabel={tx(labels?.menuClose, lang) || (lang === "en" ? "Close" : "Bağla")}
+            buttonClassName={dark ? "text-white" : "text-neutral-950"}
+            icon={<MenuIcon className="size-10" />}
+            current={activeTarget}
+            fullWidth={dark}
+            nav={menu.nav.map(({ link }) => ({ label: tx(link.label, lang), href: linkHref(link, lang), target: link.target }))}
+            booking={{
+              title: tx(menu.bookingTitle, lang),
+              text: tx(menu.bookingText, lang),
+              href: linkHref(menu.bookingLink, lang),
+              background: media[menu.bookingBackground ?? ""] && (
+                <Picture
+                  media={media[menu.bookingBackground ?? ""]}
+                  lang={lang}
+                  sizes="(min-width: 1024px) 22vw, 100vw"
+                  alt=""
+                  className="absolute inset-0 size-full object-cover"
+                />
+              ),
+            }}
+            contact={{ title: tx(menu.contactTitle, lang), text: tx(menu.contactText, lang), href: linkHref(menu.contactLink, lang) }}
+            legal={[menu.privacy, menu.terms].map((l) => ({ label: tx(l.label, lang), href: linkHref(l, lang) }))}
+          />
+        </div>
       </div>
     </header>
   );

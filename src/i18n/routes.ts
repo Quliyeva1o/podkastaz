@@ -5,18 +5,18 @@ import { defaultLocale, hasLocale, locales, type Locale, type Localized } from "
  * the localized path is what appears in the public URL (may have several segments).
  */
 export const staticRoutes = {
-  home: { az: "" },
-  about: { az: "haqqimizda" },
-  services: { az: "xidmetler" },
-  studios: { az: "studiyalar" },
-  packages: { az: "paketler" },
-  packageRequest: { az: "paketler/muraciet" },
-  works: { az: "islerimiz" },
-  worksVideos: { az: "islerimiz/videolar" },
-  booking: { az: "rezervasiya" },
-  contact: { az: "elaqe" },
-  terms: { az: "istifadeci-qaydalari" },
-  privacy: { az: "mexfilik-siyaseti" },
+  home: { az: "", en: "" },
+  about: { az: "haqqimizda", en: "about" },
+  services: { az: "xidmetler", en: "services" },
+  studios: { az: "studiyalar", en: "studios" },
+  packages: { az: "paketler", en: "packages" },
+  packageRequest: { az: "paketler/muraciet", en: "packages/request" },
+  works: { az: "islerimiz", en: "works" },
+  worksVideos: { az: "islerimiz/videolar", en: "works/videos" },
+  booking: { az: "rezervasiya", en: "booking" },
+  contact: { az: "elaqe", en: "contact" },
+  terms: { az: "istifadeci-qaydalari", en: "terms" },
+  privacy: { az: "mexfilik-siyaseti", en: "privacy-policy" },
 } as const satisfies Record<string, Localized>;
 
 /** Internal folder of each route under `app/[lang]/` (nested where the URL is nested). */
@@ -47,11 +47,11 @@ export function href(route: RouteKey, locale: Locale, itemSlug?: string): string
   return "/" + parts.join("/");
 }
 
-/** Public URLs of one page in every language — used for hreflang. */
-export function alternates(route: RouteKey, itemSlugs?: Partial<Localized>): Localized {
+/** Public URLs of one page in every language — used for hreflang. A missing slug uses the AZ one. */
+export function alternates(route: RouteKey, itemSlugs?: Partial<Localized>): Record<Locale, string> {
   return Object.fromEntries(
-    locales.map((l) => [l, href(route, l, itemSlugs?.[l])]),
-  ) as Localized;
+    locales.map((l) => [l, href(route, l, itemSlugs?.[l] ?? itemSlugs?.az)]),
+  ) as Record<Locale, string>;
 }
 
 export type ResolvedPath =

@@ -15,6 +15,7 @@
     "test:e2e": "playwright test",
     "db:seed-content": "node --env-file-if-exists=.env.local --import tsx scripts/seed-content.mts",
     "db:seed-collections": "node --env-file-if-exists=.env.local --import tsx scripts/seed-collections.mts",
+    "i18n:fill-en": "node --env-file-if-exists=.env.local --import tsx scripts/i18n/fill-en.mts",
     "check:launch": "node --env-file-if-exists=.env.local --import tsx scripts/deploy/check-launch.mts",
     "db:reset-content": "node --env-file-if-exists=.env.local --import tsx scripts/reset-content.mts",
     "figma:references": "node --env-file-if-exists=.env.local --import tsx scripts/figma/export-references.mts",

@@ -2,6 +2,7 @@ import { BackgroundVideo } from "@/components/background-video";
 import { Picture } from "@/components/picture";
 import { SocialLinks } from "@/components/site/social-links";
 import { ButtonLink } from "@/components/site/ui";
+import type { Locale } from "@/i18n/config";
 import type { MediaItem } from "@/lib/content/queries";
 import { linkHref, tx } from "../helpers";
 import type { ContactsData, HeroData, SectionProps } from "../types";
@@ -54,7 +55,7 @@ export function HeroSection({ data, lang, media, contacts }: SectionProps<HeroDa
   );
 }
 
-function Background({ media, poster, mobile, lang }: { media?: MediaItem; poster?: MediaItem; mobile?: MediaItem; lang: "az" }) {
+function Background({ media, poster, mobile, lang }: { media?: MediaItem; poster?: MediaItem; mobile?: MediaItem; lang: Locale }) {
   if (!media) return null;
   return (
     // Mobile: the lower 325/574 of the screen, cropped like Figma (x 27–88% of the photo), fixed to

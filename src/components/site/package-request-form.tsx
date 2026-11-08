@@ -82,6 +82,7 @@ export function PackageRequestForm({ packages, addons, labels, lang, links, init
   return (
     <>
       <form ref={form} action={action} onSubmit={keepFormSubmit(action)} className="grid grid-cols-1 gap-[5.625rem] desktop:grid-cols-2 desktop:gap-20">
+        <input type="hidden" name="locale" value={lang} />
         <input type="hidden" name="startedAt" value={startedAt} />
         <div aria-hidden className="absolute -left-[9999px]">
           <input type="text" name="website" tabIndex={-1} autoComplete="off" />

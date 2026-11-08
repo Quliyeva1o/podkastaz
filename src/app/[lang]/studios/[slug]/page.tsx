@@ -22,6 +22,23 @@ async function load(lang: Locale, slug: string) {
   return getStudioBySlug(decodeURIComponent(slug));
 }
 
+/** Adds the closing call to action only while the description still fits a snippet (≤155). */
+const withCta = (text: string, cta: string) => (text.length + cta.length + 1 <= 155 ? `${text} ${cta}` : text);
+
+/** Fallback SEO texts of a studio page, e.g. "Studiya 1 — podkast studiyası və dekorlar". */
+const seoText: Record<Locale, { title: (name: string) => string; description: (name: string, address: string, decors: string[]) => string }> = {
+  az: {
+    title: (name) => `${name} — podkast studiyası və dekorlar`,
+    description: (name, address, decors) =>
+      withCta(`${name}${address ? ` (${address})` : ""}: podkast (podcast) studiyası, dekorlar — ${decors.join(", ")}.`, "Onlayn rezervasiya edin."),
+  },
+  en: {
+    title: (name) => `${name} — podcast studio and sets`,
+    description: (name, address, decors) =>
+      withCta(`${name}${address ? ` (${address})` : ""}: podcast studio, sets — ${decors.join(", ")}.`, "Book online."),
+  },
+};
+
 /** The decors template's title ("Dekorlar"), shown after the studio name in the breadcrumb. */
 async function decorsTitle(lang: Locale) {
   const header = (await getPageContent("decors")).sections.find((s) => s.type === "pageHeader")?.data as PageHeaderData | undefined;
@@ -39,14 +56,16 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/studios/[s
   return itemMetadata("studios", l, {
     cover,
     slugs: { az: found.studio.slugAz },
-    title: tx(seo.seoTitle, l) || `${tx(found.studio.name, l)} — ${await decorsTitle(l)}`,
-    // Fallback: "Studiya 1 (Bakı) podkast studiyası: Həkimlər üçün, Marketoloqlar üçün … dekorları. Onlayn rezervasiya."
+    // Own title and description per studio (the short text is the same on every studio, so it is
+    // not used here). The admin's SEO fields win when filled.
+    title: tx(seo.seoTitle, l) || seoText[l].title(tx(found.studio.name, l)),
     description:
       tx(seo.seoDescription, l) ||
-      tx(found.studio.description, l) ||
-      `${tx(found.studio.name, l)}${tx(found.studio.address, l) ? ` (${tx(found.studio.address, l)})` : ""} podkast studiyası: ${found.decors
-        .map((d) => tx(d.shortName, l) || tx(d.name, l))
-        .join(", ")} dekorları. Dekoru seçin və onlayn rezervasiya edin.`,
+      seoText[l].description(
+        tx(found.studio.name, l),
+        tx(found.studio.address, l),
+        found.decors.map((d) => tx(d.shortName, l) || tx(d.name, l)),
+      ),
   });
 }
 
@@ -63,6 +82,7 @@ export default async function StudioDecorsPage({ params }: PageProps<"/[lang]/st
     <SiteFrame
       route="studios"
       lang={lang}
+      itemSlug={found.studio.slugAz}
       graph={[place(found, lang, media)]}
       trail={[
         { name: tx(found.studio.name, lang), path: href("studios", lang) },
