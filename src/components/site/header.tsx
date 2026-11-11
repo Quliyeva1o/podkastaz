@@ -61,27 +61,27 @@ export function Header({
         </Link>
 
         <div className="flex items-center gap-4 desktop:gap-6">
-          {/* Language switcher: a placeholder until the designer draws one (not in Figma). */}
-          <nav aria-label="Language" className={cx("flex items-center gap-2 text-14 leading-none font-semibold desktop:text-16", dark && "hero-in")}>
-            {languages.map((l, i) => (
-              <span key={l.lang} className="flex items-center gap-2">
-                {i > 0 && <span aria-hidden className={dark ? "text-white/40" : "text-neutral-300"}>/</span>}
-                {l.lang === lang ? (
-                  <span aria-current="true" className={dark ? "text-white" : "text-neutral-950"}>
-                    {localeNames[l.lang]}
-                  </span>
-                ) : (
-                  <Link
-                    href={l.href}
-                    hrefLang={l.lang}
-                    lang={l.lang}
-                    className={cx("transition-colors", dark ? "text-white/60 hover:text-white" : "text-neutral-400 hover:text-neutral-950")}
-                  >
-                    {localeNames[l.lang]}
-                  </Link>
-                )}
-              </span>
-            ))}
+          {/* Language switcher (Figma 214:929): 40×36 cells; the current language underlined, the others at half opacity. */}
+          <nav aria-label="Language" className={cx("flex items-center", dark && "hero-in")}>
+            {languages.map((l) => {
+              const cell = "relative flex h-9 w-10 items-center justify-center rounded-[0.375rem] text-14 leading-[1.5] font-medium";
+              return l.lang === lang ? (
+                <span key={l.lang} aria-current="true" className={cx(cell, dark ? "text-white" : "text-neutral-950")}>
+                  {localeNames[l.lang]}
+                  <span aria-hidden className="absolute inset-x-[0.774rem] bottom-[0.196rem] h-px bg-current" />
+                </span>
+              ) : (
+                <Link
+                  key={l.lang}
+                  href={l.href}
+                  hrefLang={l.lang}
+                  lang={l.lang}
+                  className={cx(cell, "opacity-50 transition-opacity hover:opacity-100", dark ? "text-white" : "text-neutral-700")}
+                >
+                  {localeNames[l.lang]}
+                </Link>
+              );
+            })}
           </nav>
 
           <MenuOverlay
