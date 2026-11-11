@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { localeNames, type Locale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 import { href } from "@/i18n/routes";
 import type { MediaItem } from "@/lib/content/queries";
 import { linkHref, tx } from "@/sections/helpers";
 import type { HeaderData, LabelsData, MenuData } from "@/sections/types";
 import { Picture } from "../picture";
 import { MenuIcon } from "./icons";
+import { LanguageSwitcher } from "./language-switcher";
 import { MenuOverlay } from "./menu-overlay";
 import { cx } from "./ui";
 
@@ -61,28 +62,8 @@ export function Header({
         </Link>
 
         <div className="flex items-center gap-4 desktop:gap-6">
-          {/* Language switcher (Figma 214:929): 40×36 cells; the current language underlined, the others at half opacity. */}
-          <nav aria-label="Language" className={cx("flex items-center", dark && "hero-in")}>
-            {languages.map((l) => {
-              const cell = "relative flex h-9 w-10 items-center justify-center rounded-[0.375rem] text-14 leading-[1.5] font-medium";
-              return l.lang === lang ? (
-                <span key={l.lang} aria-current="true" className={cx(cell, dark ? "text-white" : "text-neutral-950")}>
-                  {localeNames[l.lang]}
-                  <span aria-hidden className="absolute inset-x-[0.774rem] bottom-[0.196rem] h-px bg-current" />
-                </span>
-              ) : (
-                <Link
-                  key={l.lang}
-                  href={l.href}
-                  hrefLang={l.lang}
-                  lang={l.lang}
-                  className={cx(cell, "opacity-50 transition-opacity hover:opacity-100", dark ? "text-white" : "text-neutral-700")}
-                >
-                  {localeNames[l.lang]}
-                </Link>
-              );
-            })}
-          </nav>
+          {/* On mobile the switcher lives in the menu, beside its close button. */}
+          <LanguageSwitcher lang={lang} languages={languages} light={dark} className={cx("max-desktop:hidden", dark && "hero-in")} />
 
           <MenuOverlay
             openLabel={tx(labels?.menuOpen, lang) || (lang === "en" ? "Menu" : "Menyu")}
@@ -91,6 +72,7 @@ export function Header({
             icon={<MenuIcon className="size-10" />}
             current={activeTarget}
             fullWidth={dark}
+            languages={<LanguageSwitcher lang={lang} languages={languages} light large />}
             nav={menu.nav.map(({ link }) => ({ label: tx(link.label, lang), href: linkHref(link, lang), target: link.target }))}
             booking={{
               title: tx(menu.bookingTitle, lang),

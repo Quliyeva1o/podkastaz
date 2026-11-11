@@ -22,6 +22,7 @@ export function MenuOverlay({
   icon,
   current,
   fullWidth,
+  languages,
   nav,
   booking,
   contact,
@@ -34,6 +35,8 @@ export function MenuOverlay({
   current: string;
   /** Home page: edge to edge like its header, so the close button sits where the menu button was. */
   fullWidth?: boolean;
+  /** Language switcher, shown beside the close button on mobile (the desktop header has its own). */
+  languages?: ReactNode;
   nav: NavItem[];
   booking: Card & { background?: ReactNode };
   contact: Card;
@@ -82,18 +85,22 @@ export function MenuOverlay({
             aria-label={openLabel}
             className="menu-overlay fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-black text-white"
           >
-            <div style={{ "--menu-links": nav.length } as React.CSSProperties} className={cx("menu-nav relative flex min-h-full flex-col px-4 pt-17.5 pb-5 desktop:grid desktop:grid-cols-[1fr_auto] desktop:grid-rows-[1fr_auto] desktop:px-15 desktop:pb-15.25", fullWidth ? "w-full" : "container-page")}>
-              <button
-                ref={closeButton}
-                type="button"
-                aria-label={closeLabel}
-                onClick={close}
-                className="absolute top-4 right-4 flex size-10 items-center justify-center desktop:top-7.5 desktop:right-15"
-              >
-                <X aria-hidden className="size-[2.1875rem]" />
-              </button>
+            <div style={{ "--menu-links": nav.length } as React.CSSProperties} className={cx("menu-nav relative flex min-h-full flex-col px-[16px] pt-[80.5px] pb-[20px] desktop:grid desktop:grid-cols-[1fr_auto] desktop:grid-rows-[1fr_auto] desktop:px-15 desktop:pb-15.25", fullWidth ? "w-full" : "container-page")}>
+              {/* Mobile (Figma, in px like the whole mobile menu): a 44 px row at the top right, the language switcher 10 px left of the close button. */}
+              <div className="absolute top-[16px] right-[16px] flex h-[44px] items-center gap-[10px] desktop:top-7.5 desktop:right-15 desktop:h-10 desktop:gap-2.5">
+                {languages && (
+                  // Switching language closes the menu like the other links.
+                  <div className="desktop:hidden" onClick={(e) => (e.target as HTMLElement).closest("a") && close()}>
+                    {languages}
+                  </div>
+                )}
+                <button ref={closeButton} type="button" aria-label={closeLabel} onClick={close} className="flex size-[40px] items-center justify-center desktop:size-10">
+                  {/* Figma's cross is 24 px in the 40 px box on mobile. */}
+                  <X aria-hidden className="size-[40px] desktop:size-[2.1875rem]" />
+                </button>
+              </div>
 
-              <nav aria-label={openLabel} className="desktop:col-start-1 desktop:row-start-1">
+              <nav aria-label={openLabel} className="menu-links desktop:col-start-1 desktop:row-start-1">
                 <ul className="flex flex-col">
                   {nav.map((item, i) => (
                     <li key={item.target} className="menu-rise" style={{ "--i": i } as React.CSSProperties}>
@@ -110,18 +117,18 @@ export function MenuOverlay({
                 </ul>
               </nav>
 
-              <div className="mt-[1.9375rem] flex flex-col gap-2.5 desktop:col-start-2 desktop:row-span-2 desktop:row-start-1 desktop:mt-0 desktop:flex-row desktop:gap-7.5 desktop:self-end">
+              <div className="mt-[38.5px] flex flex-col gap-[10px] desktop:col-start-2 desktop:row-span-2 desktop:row-start-1 desktop:mt-0 desktop:flex-row desktop:gap-7.5 desktop:self-end">
                 <MenuCard card={booking} icon={CalendarCheck} onNavigate={close} className="bg-primary-600" index={nav.length}>
                   {booking.background}
                 </MenuCard>
                 <MenuCard card={contact} icon={Envelope} onNavigate={close} className="bg-white/10" index={nav.length + 1} />
               </div>
 
-              <p className="menu-rise mt-[1.8125rem] flex items-center gap-2.5 font-roboto text-14 leading-none desktop:col-start-1 desktop:row-start-2 desktop:mt-10 desktop:gap-4 desktop:text-18">
+              <p className="menu-rise mt-[24.9px] flex items-center gap-[10px] font-roboto text-[14px] leading-none desktop:col-start-1 desktop:row-start-2 desktop:mt-10 desktop:gap-4 desktop:text-18">
                 {legal.map((l, i) => (
                   <span key={l.href} className="contents">
                     {i > 0 && (
-                      <span aria-hidden className="text-18">
+                      <span aria-hidden className="text-[18px] desktop:text-18">
                         /
                       </span>
                     )}
@@ -160,8 +167,8 @@ function MenuCard({
       onClick={onNavigate}
       style={{ "--i": index } as React.CSSProperties}
       className={cx(
-        // Mobile: Figma makes the cards 292 wide (4px past the 16px margin on the right).
-        "menu-rise group/card relative flex w-[18.25rem] items-start tablet:w-auto gap-2.5 overflow-hidden rounded-[0.375rem] p-3 desktop:h-[19.5625rem] desktop:w-[19.21875rem] desktop:flex-col desktop:justify-between desktop:gap-7.5 desktop:px-5 desktop:py-7.5",
+        // Mobile: as wide as the menu between its 16px margins, on every phone width.
+        "menu-rise group/card relative flex w-full items-start gap-[10px] overflow-hidden rounded-[6px] p-[12px] desktop:h-[19.5625rem] desktop:rounded-[0.375rem] desktop:w-[19.21875rem] desktop:flex-col desktop:justify-between desktop:gap-7.5 desktop:px-5 desktop:py-7.5",
         className,
       )}
     >
@@ -171,10 +178,11 @@ function MenuCard({
           {children}
         </span>
       )}
-      <Icon aria-hidden weight="duotone" className="relative size-[1.875rem] shrink-0 desktop:size-16" />
-      <span className="relative flex flex-1 flex-col gap-1 desktop:w-full desktop:flex-none desktop:gap-2.5">
-        <span className="text-16 leading-[1.15] font-semibold tracking-tight desktop:text-24">{card.title}</span>
-        <span className="text-14 leading-[1.5] tracking-tight desktop:text-16">{card.text}</span>
+      <Icon aria-hidden weight="duotone" className="relative size-[30px] shrink-0 desktop:size-16" />
+      <span className="relative flex flex-1 flex-col gap-[4px] desktop:w-full desktop:flex-none desktop:gap-2.5">
+        {/* 18 px, Figma's rounded 115 %: the 574 px menu fits without a scroll. */}
+        <span className="text-[16px] leading-[18px] font-semibold tracking-tight desktop:text-24 desktop:leading-[1.15]">{card.title}</span>
+        <span className="text-[14px] leading-[1.5] tracking-tight desktop:text-16">{card.text}</span>
       </span>
       <span
         aria-hidden
